@@ -1,0 +1,125 @@
+---
+- name: Connect to remote server and install Docker
+  hosts: localserver
+  gather_facts: yes
+  become: true
+
+  tasks:
+    - name: Check Distribution
+      debug: msg="{{ ansible_distribution }}"
+
+    - name: Check User
+      debug: msg="{{ ansible_user }}"
+
+    - name: Exit with error if not Ubuntu
+      fail:
+          msg: "Remote system is not Ubuntu"
+      when: not ansible_distribution == "Ubuntu"
+
+    - name: Check if Docker is installed
+      shell: which docker
+      ignore_errors: true
+      register: docker_check
+
+    - name: Check if Docker Compose is installed
+      shell: which docker-compose
+      ignore_errors: true
+      register: docker_compose_check
+    - name: Create the /mnt/data directory
+      file:
+        path: /mnt/data
+        state: directory
+        mode: '0775'
+
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install wget
+      apt:
+        name: wget
+        state: present
+
+    - name: Install Python3
+      apt:
+        name: python3
+        state: present
+
+    - name: Install Docker dependencies
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
+        state: present
+        update_cache: yes
+      when: docker_check.rc != 0
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      when: docker_check.rc != 0
+
+    - name: Add repository docker
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+      when: docker_check.rc != 0
+
+    - name: Install docker
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+        update_cache: yes
+      when: docker_check.rc != 0
+
+    - name: Install docker-compose
+      get_url:
+        url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: '755'
+      when: docker_compose_check.rc != 0
+
+    - name: Install pip3
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install Python Docker library
+      pip:
+        name: docker
+        state: present
+
+    - name: Install Docker Compose Python Library
+      pip:
+        name: docker-compose
+        state: present
+
+    - name: Adding users to docker group
+      user:
+        name: '{{ ansible_user }}'
+        groups: docker
+        append: yes
+      register: user_group
+      when: docker_check.rc != 0
+
+    - name: Reboot the system
+      reboot:
+        reboot_timeout: 600
+        pre_reboot_delay: 0
+        post_reboot_delay: 15
+      when: user_group.changed
+
+    - name: Create the Docker Network network
+      docker_network:
+        name: inethi-bridge-traefik
+        driver: bridge
+        attachable: yes
+

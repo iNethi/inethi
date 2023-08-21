@@ -7,5 +7,6 @@ This repo makes use of Ansible and Python to install Docker containers. Please r
 ```
 ./preinstallation.sh
 ```
+This should install Python 3, pip3, python ansible runner, Ansible, OpenSSH server and sshpass.
 
 ## Installation
