@@ -1,6 +1,7 @@
 import sys
 import ansible_runner
 import pathlib
+import yaml
 
 
 def my_status_handler(data, runner_config):
@@ -22,9 +23,14 @@ def write_to_inventory(ip, user, password, inventory_path):
                 f"ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_become_pass='{password}'\n")
 
 
+def save_ip_to_config(ip, config_path):
+    with open(config_path, 'w') as f:
+        yaml.dump({'ip_address': ip}, f)
+
+
 def run_playbook(playbook_name, playbook_dir_path, inventory_path):
     playbook_path = f"{playbook_dir_path}/{playbook_name}.yml"
-    r = ansible_runner.run(private_data_dir=inventory_path, playbook=playbook_path, inventory=inventory_path,
+    r = ansible_runner.run(private_data_dir="./", playbook=playbook_path, inventory=inventory_path,
                            status_handler=my_status_handler, quiet=False, event_handler=my_event_handler)
 
     # Check if playbook run was successful
@@ -35,20 +41,23 @@ def run_playbook(playbook_name, playbook_dir_path, inventory_path):
 
 def main():
     abs_path = pathlib.Path(__file__).parent.resolve()
-    choices = ['jellyfin', 'nextcloud', 'splash-screen', 'radiusdesk', 'wordpress', 'updater', 'keycloak']
+    choices = ['jellyfin', 'nextcloud', 'splash-screen', 'radiusdesk', 'wordpress', 'dnsmasq']
+    # choices = ['jellyfin', 'nextcloud', 'splash-screen', 'radiusdesk', 'wordpress', 'maintain', 'keycloak']
     traefik = 'traefik'
     test_server = "test_server_connection"
     system_requirements = "system_requirements"
     playbook_dir_path = f"{abs_path}/playbooks"
-    inventory_path = f"{abs_path}/inventory"
+    inventory_path = f"{abs_path}/playbooks/inventory"
+    config_path = f"{abs_path}/playbooks/config.yml"
 
     # Prompt user for IP, username, and password
     ip = input("Enter your IP address: ")
     user = input("Enter your username: ")
     password = input("Enter your password: ")
 
-    # Write to inventory file
+    # Write to variables to file
     write_to_inventory(ip, user, password, inventory_path)
+    save_ip_to_config(ip, config_path)
 
     # Run initial playbooks
     run_playbook(test_server, playbook_dir_path, inventory_path)

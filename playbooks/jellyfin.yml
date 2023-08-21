@@ -35,11 +35,11 @@
           TZ: "UTC"
           UMASK_SET: "022"
         volumes:
-          - "{{ NEXTCLOUD_RSHARE_VOLUME }}:/mnt/Rshare"
-          - "{{ NEXTCLOUD_RVIDEO_VOLUME }}:/mnt/Rvideo"
-          - "{{ NEXTCLOUD_RPHOTO_VOLUME }}:/mnt/Rphoto"
+          - "{{ nextcloud_rshare_volume }}:/mnt/Rshare"
+          - "{{ nextcloud_rvideo_volume }}:/mnt/Rvideo"
+          - "{{ nextcloud_rphoto_volume }}:/mnt/Rphoto"
           - "{{ NEXTCLOUD_RMUSIC_VOLUME }}:/mnt/Rmusic"
-          - "{{ JELLYFIN_VOLUME }}/config:/config"
+          - "{{ nextcloud_rmusic_volume }}/config:/config"
         restart_policy: unless-stopped
         labels:
           traefik.enable: "true"

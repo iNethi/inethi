@@ -1,0 +1,2 @@
+[accessLog]
+filePath = "/mnt/data/traefikssl/access.log"

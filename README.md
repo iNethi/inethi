@@ -34,4 +34,7 @@ nextcloud.inethilocal.net
 traefik.inethilocal.net
 keycloak.inethilocal.net
 jellyfin.inethilocal.net
+wordpress.inethilocal.net
+maintain.inethilocal.net
+radiusdesk.inethilocal.net
 ```

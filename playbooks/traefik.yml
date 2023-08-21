@@ -11,6 +11,12 @@
     traefik_api_service: "api@internal"
     traefik_entrypoint: "websecure"
     inethi_network: "inethi-bridge-traefik"
+    elasticsearch_volume: "/mnt/data/elasticsearch"
+    logstash_volume: "/mnt/data/logstash"
+    kibana_volume: "/mnt/data/kibana"
+    ELASTICSEARCH_API_RULE_HOST: "elasticsearch"
+    LOGSTASH_API_RULE_HOST: "logstash"
+    KIBANA_API_RULE_HOST: "kibana"
 
   tasks:
     - name: Create directory for traefikssl volume
@@ -18,6 +24,14 @@
         path: "{{ traefikssl_volume }}/letsencrypt"
         state: directory
         mode: '0755'
+    - name: Copy files to Server
+      copy:
+        src: resources/elastic-stack
+        dest: "{{ traefikssl_volume }}"
+    - name: Copy files to Server
+      copy:
+        src: resources/traefik
+        dest: "{{ traefikssl_volume }}"
     - name: Download acme.json file
       ansible.builtin.get_url:
         url: "https://splash.inethicloud.net/acme.json"
@@ -51,6 +65,7 @@
         volumes:
           - "{{ traefikssl_volume }}/letsencrypt:/letsencrypt"
           - "/var/run/docker.sock:/var/run/docker.sock:ro"
+          - "{{ traefikssl_volume }}/traefik/traefik.toml:/etc/traefik/traefik.toml"
         labels:
           traefik.enable: "true"
           traefik.http.routers.traefik.rule: "Host(`{{ traefik_api_rule_host }}.{{ inethiDN }}`)"
@@ -58,5 +73,67 @@
           traefik.http.routers.traefik.entrypoints: "{{ traefik_entrypoint }}"
           traefik.http.routers.traefik.tls.certresolver: "letsencrypt"
 
+        networks:
+          - name: "{{ inethi_network }}"
+
+    - name: Create directory for Elasticsearch volume
+      file:
+        path: "{{ elasticsearch_volume }}"
+        state: directory
+        mode: '0755'
+
+    - name: Create directory for Logstash volume
+      file:
+        path: "{{ logstash_volume }}"
+        state: directory
+        mode: '0755'
+
+    - name: Create directory for Kibana volume
+      file:
+        path: "{{ kibana_volume }}"
+        state: directory
+        mode: '0755'
+
+    - name: Deploy Elasticsearch container
+      docker_container:
+        name: elasticsearch
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+        env:
+          discovery.type: "single-node"
+        volumes:
+          - "{{ elasticsearch_volume }}:/usr/share/elasticsearch/data"
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.elasticsearch.rule: "Host(`{{ ELASTICSEARCH_API_RULE_HOST }}.{{ inethiDN }}`)"
+          traefik.http.routers.elasticsearch.entrypoints: "{{ traefik_entrypoint}}"
+        networks:
+          - name: "{{ inethi_network }}"
+
+    - name: Deploy Logstash container
+      docker_container:
+        name: logstash
+        image: docker.elastic.co/logstash/logstash:7.10.0
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.logstash.rule: "Host(`{{ LOGSTASH_API_RULE_HOST }}.{{ inethiDN }}`)"
+          traefik.http.routers.logstash.entrypoints: "{{ traefik_entrypoint}}"
+        volumes:
+          - "{{ logstash_volume }}:/usr/share/logstash/data"
+          - "{{ traefikssl_volume }}/elastic-stack/logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
+        networks:
+          - name: "{{ inethi_network }}"
+
+    - name: Deploy Kibana container
+      docker_container:
+        name: kibana
+        image: docker.elastic.co/kibana/kibana:7.10.0
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.kibana.rule: "Host(`{{ KIBANA_API_RULE_HOST }}.{{ inethiDN }}`)"
+          traefik.http.routers.kibana.entrypoints: "{{ traefik_entrypoint}}"
+        env:
+          ELASTICSEARCH_URL: "https://elasticsearch.inethilocal.net"
+        volumes:
+          - "{{ kibana_volume }}:/usr/share/kibana/data"
         networks:
           - name: "{{ inethi_network }}"
