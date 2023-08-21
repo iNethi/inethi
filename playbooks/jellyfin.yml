@@ -38,7 +38,6 @@
           - "{{ nextcloud_rshare_volume }}:/mnt/Rshare"
           - "{{ nextcloud_rvideo_volume }}:/mnt/Rvideo"
           - "{{ nextcloud_rphoto_volume }}:/mnt/Rphoto"
-          - "{{ NEXTCLOUD_RMUSIC_VOLUME }}:/mnt/Rmusic"
           - "{{ nextcloud_rmusic_volume }}/config:/config"
         restart_policy: unless-stopped
         labels:

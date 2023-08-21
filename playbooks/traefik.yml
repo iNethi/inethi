@@ -26,10 +26,6 @@
         mode: '0755'
     - name: Copy files to Server
       copy:
-        src: resources/elastic-stack
-        dest: "{{ traefikssl_volume }}"
-    - name: Copy files to Server
-      copy:
         src: resources/traefik
         dest: "{{ traefikssl_volume }}"
     - name: Download acme.json file
@@ -43,22 +39,6 @@
         image: traefik:v2.5
         restart_policy: unless-stopped
         state: started
-        command:
-          - "--api.dashboard=true"
-          - "--api.insecure=true"
-          - "--providers.docker=true"
-          - "--certificatesresolvers.letsencrypt.acme.dnschallenge=true"
-          - "--certificatesresolvers.letsencrypt.acme.dnschallenge.provider=route53"
-          - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-          - "--entrypoints.web.address=:80"
-          - "--entrypoints.websecure.address=:443"
-          - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-          - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-          - "--entrypoints.websecure.http.tls=true"
-          - "--entrypoints.websecure.http.tls.certResolver=letsencrypt"
-          - "--entrypoints.websecure.http.tls.domains[0].main={{ inethiDN }}"
-          - "--entrypoints.websecure.http.tls.domains[0].sans=*.{{ inethiDN }}"
-          - "--serversTransport.insecureSkipVerify=true"
         ports:
           - "80:80"
           - "443:443"
@@ -93,6 +73,10 @@
         path: "{{ kibana_volume }}"
         state: directory
         mode: '0755'
+    - name: Copy logstash to server
+      copy:
+        src: resources/elastic-stack
+        dest: "{{ logstash_volume }}"
 
     - name: Deploy Elasticsearch container
       docker_container:
@@ -119,7 +103,7 @@
           traefik.http.routers.logstash.entrypoints: "{{ traefik_entrypoint}}"
         volumes:
           - "{{ logstash_volume }}:/usr/share/logstash/data"
-          - "{{ traefikssl_volume }}/elastic-stack/logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
+          - "{{ logstash_volume }}/elastic-stack/logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
         networks:
           - name: "{{ inethi_network }}"
 

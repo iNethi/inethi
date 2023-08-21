@@ -23,7 +23,7 @@
           server=1.0.0.1
           server=1.1.1.1
           strict-order
-          address=/inethilocal.net/{{ CRED_IP_ADDRESS }}
+          address=/inethilocal.net/{{ ip_address }}
         dest: "{{ DNSMASQ_VOLUME }}/dnsmasq.conf"
 
     - name: Deploy DNSMasq container
