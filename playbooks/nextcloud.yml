@@ -17,6 +17,7 @@
     inethi_dn: "inethilocal.net"
     traefik_entrypoint: "websecure"
     INETHI_NETWORK: "inethi-bridge-traefik"
+    CONF_MASTER_PASSWORD: 'iNethi2023#'
 
   tasks:
     - name: Ensure Nextcloud directories exist

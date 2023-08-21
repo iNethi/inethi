@@ -77,11 +77,16 @@
       copy:
         src: resources/elastic-stack
         dest: "{{ logstash_volume }}"
+    - name: Set permissions for elastic-stack directory
+      file:
+        path: "/mnt/data/logstash/"
+        mode: '0777'
+        recurse: yes
 
     - name: Deploy Elasticsearch container
       docker_container:
         name: elasticsearch
-        image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+        image: docker.elastic.co/elasticsearch/elasticsearch:latest
         env:
           discovery.type: "single-node"
         volumes:
@@ -96,7 +101,7 @@
     - name: Deploy Logstash container
       docker_container:
         name: logstash
-        image: docker.elastic.co/logstash/logstash:7.10.0
+        image: docker.elastic.co/logstash/logstash:latest
         labels:
           traefik.enable: "true"
           traefik.http.routers.logstash.rule: "Host(`{{ LOGSTASH_API_RULE_HOST }}.{{ inethiDN }}`)"
@@ -110,7 +115,7 @@
     - name: Deploy Kibana container
       docker_container:
         name: kibana
-        image: docker.elastic.co/kibana/kibana:7.10.0
+        image: docker.elastic.co/kibana/kibana:latest
         labels:
           traefik.enable: "true"
           traefik.http.routers.kibana.rule: "Host(`{{ KIBANA_API_RULE_HOST }}.{{ inethiDN }}`)"
