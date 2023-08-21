@@ -4,10 +4,10 @@
   gather_facts: no
 
   vars:
-    NEXTCLOUD_RSHARE_VOLUME: "/mnt/data/Rshare"
-    NEXTCLOUD_RVIDEO_VOLUME: "/mnt/data/Rvideo"
-    NEXTCLOUD_RPHOTO_VOLUME: "/mnt/data/Rvideo"
-    NEXTCLOUD_RMUSIC_VOLUME: "/mnt/data/Rvideo"
+    nextcloud_rshare_volume: "/mnt/data/share/Rshare"
+    nextcloud_rvideo_volume: "/mnt/data/share/Rvideo"
+    nextcloud_rphoto_volume: "/mnt/data/share/Rphoto"
+    nextcloud_rmusic_volume: "/mnt/data/share/Rmusic"
     JELLYFIN_VOLUME: "/mnt/data/jellyfin"
     TRAEFIK_API_RULE_HOST: "jellyfin"
     inethi_dn: "inethilocal.net"
@@ -15,6 +15,16 @@
     INETHI_NETWORK: "inethi-bridge-traefik"
 
   tasks:
+    - name: Ensure Nextcloud directories exist
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: 'o+w'
+      loop:
+        - "{{ nextcloud_rshare_volume }}"
+        - "{{ nextcloud_rvideo_volume }}"
+        - "{{ nextcloud_rphoto_volume }}"
+        - "{{ nextcloud_rmusic_volume }}"
     - name: Start Jellyfin container
       docker_container:
         name: inethi-jellyfin
