@@ -21,3 +21,17 @@ To install
 ```
 python3 main.py   
 ```
+
+## Post Installation
+Defaults:
+1. Usernames: `inethi`
+2. Passwords: `iNethi2023#`
+3. Mounted folders: `/mnt/data`
+4. Default URLS:
+```
+splash.inethilocal.net
+nextcloud.inethilocal.net
+traefik.inethilocal.net
+keycloak.inethilocal.net
+jellyfin.inethilocal.net
+```
