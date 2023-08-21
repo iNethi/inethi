@@ -17,6 +17,7 @@
     inethiDN: "inethilocal.net"
     TRAEFIK_ENTRYPOINT: "websecure"
     INETHI_NETWORK: "inethi-bridge-traefik"
+    CONF_MASTER_PASSWORD: "iNethi2023#"
 
   tasks:
     - name: Deploy MariaDB
