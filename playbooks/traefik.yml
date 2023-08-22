@@ -50,7 +50,7 @@
           - "443:443"
         volumes:
           - "{{ traefikssl_volume }}/letsencrypt:/letsencrypt"
-          - "/mnt/data/logs/access.log:/var/log/traefik/access.log"
+          - "/mnt/data/logs/:/var/log/traefik/"
           - "/var/run/docker.sock:/var/run/docker.sock:ro"
           - "{{ traefikssl_volume }}/traefik/traefik.toml:/etc/traefik/traefik.toml"
         labels:
@@ -83,7 +83,7 @@
     - name: Copy logstash conf to server
       copy:
         src: resources/elastic-stack
-        dest: "{{ logstash_volume }}"
+        dest: "{{ traefikssl_volume }}"
     - name: Set permissions for elastic-stack directory
       file:
         path: "/mnt/data/logstash/"
@@ -119,13 +119,13 @@
 #        seconds: 500
     - name: Update Logstash configuration with Elasticsearch credentials
       lineinfile:
-        path: "{{ logstash_volume }}/elastic-stack/logstash.conf"
+        path: "{{ traefikssl_volume }}/elastic-stack/logstash.conf"
         insertafter: 'hosts => \["https://elasticsearch.inethilocal.net"\]'
         line: '    user => "logstash_system"'
 
     - name: Add password to Logstash configuration
       lineinfile:
-        path: "{{ logstash_volume }}/elastic-stack/logstash.conf"
+        path: "{{ traefikssl_volume }}/elastic-stack/logstash.conf"
         insertafter: 'user => "logstash_system"'
         line: '    password => "{{ logstash_system_password }}"'
 
@@ -140,7 +140,7 @@
           traefik.http.routers.logstash.entrypoints: "{{ traefik_entrypoint}}"
         volumes:
           - "{{ logstash_volume }}:/usr/share/logstash/data"
-          - "{{ logstash_volume }}/elastic-stack/logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
+          - "{{ traefikssl_volume }}/elastic-stack/logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
         networks:
           - name: "{{ inethi_network }}"
 
