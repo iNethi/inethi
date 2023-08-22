@@ -1,5 +1,5 @@
 [accessLog]
-filePath = "/mnt/data/traefikssl/access.log"
+filePath = "/var/log/traefik/access.log"
 
 [api]
   dashboard = true
