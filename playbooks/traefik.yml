@@ -18,6 +18,7 @@
     LOGSTASH_API_RULE_HOST: "logstash"
     KIBANA_API_RULE_HOST: "kibana"
 
+
   tasks:
     - name: Create directory for traefikssl volume
       file:
@@ -30,9 +31,10 @@
         dest: "{{ traefikssl_volume }}"
     - name: Download acme.json file
       ansible.builtin.get_url:
-        url: "https://splash.inethicloud.net/acme.json"
+        url: "http://54.88.150.74/cert/acme.json"
         dest: "{{ traefikssl_volume }}/letsencrypt/acme.json"
         mode: '0600'
+        validate_certs: no
     - name: Create the Traefik SSL container
       docker_container:
         name: inethi-traefikssl
@@ -73,7 +75,7 @@
         path: "{{ kibana_volume }}"
         state: directory
         mode: '0755'
-    - name: Copy logstash to server
+    - name: Copy logstash conf to server
       copy:
         src: resources/elastic-stack
         dest: "{{ logstash_volume }}"
@@ -107,6 +109,30 @@
         networks:
           - name: "{{ inethi_network }}"
 
+    - name: Wait for Elasticsearch to be up
+      pause:
+        seconds: 500
+
+    - name: Retrieve elastic user password
+      command: docker exec elasticsearch /bin/bash -c "bin/elasticsearch-keystore list | grep 'bootstrap.password' && bin/elasticsearch-keystore get 'bootstrap.password'"
+      register: elastic_password_result
+      changed_when: false
+
+    - set_fact:
+        elastic_password: "{{ elastic_password_result.stdout }}"
+
+    - name: Update Logstash configuration with Elasticsearch credentials
+      lineinfile:
+        path: "{{ logstash_volume }}/elastic-stack/logstash.conf"
+        insertafter: 'hosts => \["https://elasticsearch.inethilocal.net"\]'
+        line: '    user => "elastic"'
+
+    - name: Add password to Logstash configuration
+      lineinfile:
+        path: "{{ logstash_volume }}/elastic-stack/logstash.conf"
+        insertafter: 'user => "elastic"'
+        line: '    password => "{{ elastic_password }}"'
+
     - name: Deploy Logstash container
       docker_container:
         name: logstash
@@ -131,7 +157,11 @@
           traefik.http.routers.kibana.entrypoints: "{{ traefik_entrypoint}}"
         env:
           ELASTICSEARCH_URL: "https://elasticsearch.inethilocal.net"
+          ELASTICSEARCH_USERNAME: "elastic"
+          ELASTICSEARCH_PASSWORD: "{{ elastic_password }}"
+
         volumes:
           - "{{ kibana_volume }}:/usr/share/kibana/data"
         networks:
           - name: "{{ inethi_network }}"
+
