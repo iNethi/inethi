@@ -5,22 +5,15 @@
   gather_facts: no
 
   vars:
-    elastic_password: "GandcQmH2fZzu0xVtPJd"
-    kibana_system_password: "OJbM2hxlMcncWtPcMwBE"
-    kibana_password: "OJbM2hxlMcncWtPcMwBE"
-    logstash_system_password: "6SDHLjNOBXChAjLLaJ23"
     traefikssl_volume: "/mnt/data/traefikssl"
+    grafana_volume: "/mnt/data/grafana"
+    prometheus_volume: "/mnt/data/prometheus"
     inethiDN: "inethilocal.net"
     traefik_api_rule_host: "traefik"
     traefik_api_service: "api@internal"
     traefik_entrypoint: "websecure"
     inethi_network: "inethi-bridge-traefik"
-    elasticsearch_volume: "/mnt/data/elasticsearch"
-    logstash_volume: "/mnt/data/logstash"
-    kibana_volume: "/mnt/data/kibana"
-    ELASTICSEARCH_API_RULE_HOST: "elasticsearch"
-    LOGSTASH_API_RULE_HOST: "logstash"
-    KIBANA_API_RULE_HOST: "kibana"
+
 
 
   tasks:
@@ -29,10 +22,24 @@
         path: "{{ traefikssl_volume }}/letsencrypt"
         state: directory
         mode: '0755'
-    - name: Copy files to Server
+    - name: Create directory for prometheus volume
+      file:
+        path: "{{ grafana_volume }}"
+        state: directory
+        mode: '0777'
+    - name: Create directory for prometheus volume
+      file:
+        path: "{{ prometheus_volume }}/prometheus-config"
+        state: directory
+        mode: '0777'
+    - name: Copy traefik toml to Server
       copy:
         src: resources/traefik
         dest: "{{ traefikssl_volume }}"
+    - name: Copy prometheus yml to Server
+      copy:
+        src: resources/prometheus/prometheus.yml
+        dest: "{{ prometheus_volume }}/prometheus-config/"
     - name: Download acme.json file
       ansible.builtin.get_url:
         url: "http://54.88.150.74/cert/acme.json"
@@ -50,7 +57,6 @@
           - "443:443"
         volumes:
           - "{{ traefikssl_volume }}/letsencrypt:/letsencrypt"
-          - "/mnt/data/logs/:/var/log/traefik/"
           - "/var/run/docker.sock:/var/run/docker.sock:ro"
           - "{{ traefikssl_volume }}/traefik/traefik.toml:/etc/traefik/traefik.toml"
         labels:
@@ -62,103 +68,40 @@
 
         networks:
           - name: "{{ inethi_network }}"
-
-    - name: Create directory for Elasticsearch volume
-      file:
-        path: "{{ elasticsearch_volume }}"
-        state: directory
-        mode: '0755'
-
-    - name: Create directory for Logstash volume
-      file:
-        path: "{{ logstash_volume }}"
-        state: directory
-        mode: '0755'
-
-    - name: Create directory for Kibana volume
-      file:
-        path: "{{ kibana_volume }}"
-        state: directory
-        mode: '0755'
-    - name: Copy logstash conf to server
-      copy:
-        src: resources/elastic-stack
-        dest: "{{ traefikssl_volume }}"
-    - name: Set permissions for elastic-stack directory
-      file:
-        path: "/mnt/data/logstash/"
-        mode: '0777'
-        recurse: yes
-    - name: Set permissions for kibana directory
-      file:
-        path: "{{ kibana_volume }}"
-        mode: '0777'
-        recurse: yes
-    - name: Set permissions for elastic directory
-      file:
-        path: "{{ elasticsearch_volume }}"
-        mode: '0777'
-        recurse: yes
-    - name: Deploy Elasticsearch container
+    - name: Create the Grafana container
       docker_container:
-        name: elasticsearch
-        image: docker.elastic.co/elasticsearch/elasticsearch:8.9.1
+        name: inethi-grafana
+        image: grafana/grafana:latest
+        restart_policy: unless-stopped
+        state: started
         env:
-          discovery.type: "single-node"
+          GF_SECURITY_ADMIN_USER: admin
+          GF_SECURITY_ADMIN_PASSWORD: admin
         volumes:
-          - "{{ elasticsearch_volume }}:/usr/share/elasticsearch/data"
+          - "{{ grafana_volume }}:/var/lib/grafana"
         labels:
           traefik.enable: "true"
-          traefik.http.routers.elasticsearch.rule: "Host(`{{ ELASTICSEARCH_API_RULE_HOST }}.{{ inethiDN }}`)"
-          traefik.http.routers.elasticsearch.entrypoints: "{{ traefik_entrypoint}}"
+          traefik.http.routers.grafana.rule: "Host(`grafana.{{ inethiDN }}`)"
+          traefik.http.routers.grafana.entrypoints: "{{ traefik_entrypoint }}"
         networks:
           - name: "{{ inethi_network }}"
 
-#    - name: Wait for Elasticsearch to be up
-#      pause:
-#        seconds: 500
-    - name: Update Logstash configuration with Elasticsearch credentials
-      lineinfile:
-        path: "{{ traefikssl_volume }}/elastic-stack/logstash.conf"
-        insertafter: 'hosts => \["https://elasticsearch.inethilocal.net"\]'
-        line: '    user => "logstash_system"'
-
-    - name: Add password to Logstash configuration
-      lineinfile:
-        path: "{{ traefikssl_volume }}/elastic-stack/logstash.conf"
-        insertafter: 'user => "logstash_system"'
-        line: '    password => "{{ logstash_system_password }}"'
-
-
-    - name: Deploy Logstash container
+    - name: Create the Prometheus container
       docker_container:
-        name: logstash
-        image: docker.elastic.co/logstash/logstash:8.9.1
+        name: inethi-prometheus
+        image: prom/prometheus:latest
+        restart_policy: unless-stopped
+        state: started
+        volumes:
+          - "{{ prometheus_volume }}:/prometheus"
+          - "{{ prometheus_volume }}/prometheus-config:/etc/prometheus"
+        command:
+          - '--config.file=/etc/prometheus/prometheus.yml'
+          - '--storage.tsdb.path=/prometheus'
         labels:
           traefik.enable: "true"
-          traefik.http.routers.logstash.rule: "Host(`{{ LOGSTASH_API_RULE_HOST }}.{{ inethiDN }}`)"
-          traefik.http.routers.logstash.entrypoints: "{{ traefik_entrypoint}}"
-        volumes:
-          - "{{ logstash_volume }}:/usr/share/logstash/data"
-          - "{{ traefikssl_volume }}/elastic-stack/logstash.conf:/usr/share/logstash/pipeline/logstash.conf"
-        networks:
-          - name: "{{ inethi_network }}"
-
-    - name: Deploy Kibana container
-      docker_container:
-        name: kibana
-        image: docker.elastic.co/kibana/kibana:8.9.1
-        labels:
-          traefik.enable: "true"
-          traefik.http.routers.kibana.rule: "Host(`{{ KIBANA_API_RULE_HOST }}.{{ inethiDN }}`)"
-          traefik.http.routers.kibana.entrypoints: "{{ traefik_entrypoint}}"
-        env:
-          ELASTICSEARCH_URL: "https://elasticsearch.inethilocal.net"
-          ELASTICSEARCH_USERNAME: "kibana_system"
-          ELASTICSEARCH_PASSWORD: "{{ kibana_system_password }}"
-
-        volumes:
-          - "{{ kibana_volume }}:/usr/share/kibana/data"
+          traefik.http.routers.prometheus.rule: "Host(`prometheus.{{ inethiDN }}`)"
+          traefik.http.routers.prometheus.entrypoints: "{{ traefik_entrypoint }}"
         networks:
           - name: "{{ inethi_network }}"
 
