@@ -34,3 +34,7 @@ python3 main.py
 Navigate [here](./configuring-services/README.md) in the repo to find out details on how to configure your iNethi 
 instance.
 
+## Testing a New Playbook
+To test a new playbook you want to add you can run `python3 test_playbook.py`. However, **you need to have run the full
+installation process at least once and edit the .env file**. Your username, IP address and password must be added to the
+.env file
