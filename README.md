@@ -10,9 +10,12 @@ This repo makes use of Ansible and Python to install Docker containers. Please r
 This should install Python 3, pip3, python ansible runner, Ansible, OpenSSH server and sshpass.
 
 ## Installation
-If you would like to override any variables used in the playbooks you can add them [here](./playbooks/config.yml).
+These steps should work on Ubuntu and Mac... if you encounter errors with the pre-installation steps please manually 
+install the following on the machine you are running the Python script from:
+` Python 3, pip3, the Python requirements in the requirements.txt file, Ansible,
+OpenSSH server and sshpass `.
 
-To install 
+To install: 
 1. run the pre-installation script on your host machine:
 ```
 ./preinstallation.sh
@@ -23,18 +26,11 @@ python3 main.py
 ```
 
 ## Post Installation
-Defaults:
-1. Usernames: `inethi`
-2. Passwords: `iNethi2023#`
-3. Mounted folders: `/mnt/data`
-4. Default URLS:
-```
-splash.inethilocal.net
-nextcloud.inethilocal.net
-traefik.inethilocal.net
-keycloak.inethilocal.net
-jellyfin.inethilocal.net
-wordpress.inethilocal.net
-maintain.inethilocal.net
-radiusdesk.inethilocal.net
-```
+### Defaults
+- Usernames: `inethi`
+- Passwords: `iNethi2023#`
+- Mounted folders: `/mnt/data/*`
+### Post Installation Instructions
+Navigate [here](./configuring-services/README.md) in the repo to find out details on how to configure your iNethi 
+instance.
+
