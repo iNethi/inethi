@@ -1,0 +1,12 @@
+ansible-runner==2.3.3
+docutils==0.20.1
+importlib-metadata==6.2.1
+lockfile==0.12.2
+packaging==23.1
+pexpect==4.8.0
+ptyprocess==0.7.0
+python-daemon==3.0.1
+python-dotenv==1.0.0
+PyYAML==6.0.1
+six==1.16.0
+zipp==3.16.2
