@@ -50,7 +50,7 @@ def main():
     print(f"You are using IP address {ip}, Username {user} and Password {password} to connect to the target server.")
 
     abs_path = pathlib.Path(__file__).parent.resolve()
-    test_playbook_name = 'wordpress'
+    test_playbook_name = 'keycloak'
     test_server = "test_server_connection"
     playbook_dir_path = f"{abs_path}/playbooks"
     inventory_path = f"{abs_path}/playbooks/inventory"

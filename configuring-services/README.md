@@ -39,3 +39,18 @@ Select prometheus as the source and the only thing to add in the subsequent step
 enter the official Traefik dashboards ID: `17346`, click load next to the text input. On the next page use the 
 Prometheus datasource you created in the last step as the data source and then click import. Your dashboard will show 
 up.
+
+## Keycloak
+Set up clients to use the update and management portals:
+1. Log into keycloak via the admin console at `keycloak.inethilocal.net` using the username `inethi` and password 
+`iNethi2023#`.
+![Screenshot showing location of admin console](./keycloak/screenshots/login-admin.png)
+
+2. Navigate to the Client settings in your Master realm. Click on `Create` button and import the 
+[management portal config file](./keycloak/mange.json).
+
+![Screenshot showing location client roles](./keycloak/screenshots/create-client-add.png)
+
+![Screenshot showing location of upload](./keycloak/screenshots/create-client-upload.png)
+3. Once this is done follow the same process to upload the 
+[update portal config file](./keycloak/update.json).
