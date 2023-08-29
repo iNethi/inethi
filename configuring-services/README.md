@@ -54,3 +54,4 @@ Set up clients to use the update and management portals:
 ![Screenshot showing location of upload](./keycloak/screenshots/create-client-upload.png)
 3. Once this is done follow the same process to upload the 
 [update portal config file](./keycloak/update.json).
+4. Change JWT related details to make your keycloak instance unique to you.
