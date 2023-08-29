@@ -35,6 +35,9 @@
           - "{{ MARIADB_MOUNT }}:/var/lib/mysql"
         networks:
           - name: "{{ INETHI_NETWORK }}"
+    - name: Wait for 60 seconds
+      pause:
+        seconds: 60
 
     - name: Deploy WordPress
       docker_container:
