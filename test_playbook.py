@@ -47,9 +47,10 @@ def main():
     ip = os.getenv("ip")
     user = os.getenv("user")
     password = os.getenv("password")
+    print(f"You are using IP address {ip}, Username {user} and Password {password} to connect to the target server.")
 
     abs_path = pathlib.Path(__file__).parent.resolve()
-    traefik = 'traefik'
+    test_playbook_name = 'wordpress'
     test_server = "test_server_connection"
     playbook_dir_path = f"{abs_path}/playbooks"
     inventory_path = f"{abs_path}/playbooks/inventory"
@@ -62,7 +63,7 @@ def main():
     # Run initial playbooks
     run_playbook(test_server, playbook_dir_path, inventory_path)
 
-    run_playbook(traefik, playbook_dir_path, inventory_path)
+    run_playbook(test_playbook_name, playbook_dir_path, inventory_path)
 
 
 if __name__ == '__main__':
