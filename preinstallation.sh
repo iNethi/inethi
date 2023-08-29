@@ -155,7 +155,11 @@ fi
 
 echo "Installing Python Requirements"
 pip3 install -r requirements.txt || exit 1
-
 echo
+
+echo "Installing Ansible Community collection via Ansilbe Galaxy"
+ansible-galaxy collection install community.general || exit 1
+echo
+
 echo "Pre-installation complete..."
 sleep 2
