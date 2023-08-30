@@ -73,22 +73,24 @@ def main():
     for idx, choice in enumerate(choices, 1):
         print(f"{idx}. {choice}")
 
-    selected_indexes = input("Enter the numbers of the services you want to install then press enter ("
-                             "comma-separated... eg: 1,2,3): ").split(',')
+    while True:
+        try:
+            selected_indexes = input("Enter the numbers of the services you want to install (comma-separated): ").split(
+                ',')
+            selected_services = [choices[int(idx) - 1] for idx in selected_indexes]
+            break
+        except IndexError:
+            print("Error: One or more of the service numbers you provided are out of range. Please try again.")
+        except ValueError:
+            print(
+                "Error: Invalid input detected. Please provide a comma-separated list of service numbers in base 10 "
+                "format.")
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}. Please try again.")
 
-    try:
-        selected_services = [choices[int(idx) - 1] for idx in selected_indexes]
-        for service in selected_services:
-
-            run_playbook(service, playbook_dir_path, inventory_path)
-    except Exception as e:
-        print("Unable to run installations... Did you enter your choices correctly?")
-        print("")
-        print("##########")
-        print("LOGS:")
-        print("The error that was caught: ", e)
-        print("##########")
-
+        # Run playbooks for selected services
+    for service in selected_services:
+        run_playbook(service, playbook_dir_path, inventory_path)
 
 
 if __name__ == '__main__':

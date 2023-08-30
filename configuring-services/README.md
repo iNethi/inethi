@@ -15,13 +15,13 @@ can navigate to these URLs and test if they are working. Sometimes you need to d
 
 The rest of the rules:
 ```
-10.2.0.10 splash.inethilocal.net
-10.2.0.10 nextcloud.inethilocal.net
-10.2.0.10 keycloak.inethilocal.net
 10.2.0.10 jellyfin.inethilocal.net
-10.2.0.10 wordpress.inethilocal.net
-10.2.0.10 maintain.inethilocal.net
+10.2.0.10 keycloak.inethilocal.net
+10.2.0.10 nextcloud.inethilocal.net
 10.2.0.10 radiusdesk.inethilocal.net
+10.2.0.10 splash.inethilocal.net
+10.2.0.10 wordpress.inethilocal.net
+
 ```
 ## Grafana, Prometheus and Traefik
 Once you have run the Python build script Traefik, Grafana and Prometheus will automatically be installed and 
