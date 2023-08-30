@@ -56,6 +56,7 @@
         image: jboss/keycloak:16.1.1
         name: inethi-keycloak
         restart_policy: unless-stopped
+        state: started
         volumes:
           - "{{ keycloak_volume }}/secret-question.ftl:/opt/jboss/keycloak/themes/base/login/secret-question.ftl"
           - "{{ keycloak_volume }}/secret-question-config.ftl:/opt/jboss/keycloak/themes/base/login/secret-question-config.ftl"

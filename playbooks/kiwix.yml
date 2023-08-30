@@ -1,0 +1,42 @@
+---
+- name: Deploy Kiwix-serve
+  hosts: localserver
+  become: true
+  gather_facts: yes
+  vars:
+    kiwix_volume: /mnt/data/kiwix-serve
+    kiwix_rule: "content"
+    inethi_dn: "inethilocal.net"
+    traefik_entrypoint: "websecure"
+    inethi_network: "inethi-bridge-traefik"
+    command: "wikipedia_en_100_mini_2023-08.zim"
+
+  tasks:
+    - name: Create directory for kiwix_volume
+      file:
+        path: "{{ kiwix_volume }}"
+        state: directory
+        mode: '0755'
+    - name: Copy zim files to Server
+      copy:
+        src: resources/zim/wikipedia_en_100_mini_2023-08.zim
+        dest: "{{ kiwix_volume }}"
+
+    - name: Deploy Docker Compose using Ansible
+      docker_container:
+        image: ghcr.io/kiwix/kiwix-serve:3.5.0
+        name: inethi-kiwix-serve
+        state: started
+        restart_policy: unless-stopped
+        volumes:
+          - "{{ kiwix_volume }}:/data"
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.kiwix-content.rule: "Host(`{{ kiwix_rule }}.{{ inethi_dn }}`)"
+          traefik.http.routers.kiwix-content.entrypoints: "{{ traefik_entrypoint }}"
+          traefik.http.services.kiwix-content.loadbalancer.server.port: "8080"
+        command:
+          "{{ command }}"
+
+        networks:
+          - name: "{{ inethi_network }}"
