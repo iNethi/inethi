@@ -35,6 +35,7 @@
       docker_container:
         name: inethi-nextcloud-mysql
         image: mysql:latest
+        state: started
         command: "--transaction-isolation=READ-COMMITTED --binlog-format=ROW"
         env:
           MYSQL_ROOT_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
@@ -51,6 +52,7 @@
       docker_container:
         name: inethi-nextcloud
         image: nextcloud
+        state: started
         links:
           - "inethi-nextcloud-mysql:mysql"
         volumes:

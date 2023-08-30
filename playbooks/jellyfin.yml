@@ -29,6 +29,7 @@
       docker_container:
         name: inethi-jellyfin
         image: linuxserver/jellyfin
+        state: started
         env:
           PUID: "1000"
           PGID: "1000"

@@ -29,6 +29,7 @@
     - name: Deploy DNSMasq container
       docker_container:
         name: inethi-dnsmasq
+        state: started
         restart_policy: unless-stopped
         image: jpillora/dnsmasq:latest
         ports:
