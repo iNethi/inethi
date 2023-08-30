@@ -15,6 +15,7 @@ can navigate to these URLs and test if they are working. Sometimes you need to d
 
 The rest of the rules:
 ```
+10.2.0.10 classroom.inethilocal.net
 10.2.0.10 content.inethilocal.net
 10.2.0.10 jellyfin.inethilocal.net
 10.2.0.10 keycloak.inethilocal.net

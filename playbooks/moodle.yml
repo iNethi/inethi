@@ -1,0 +1,71 @@
+- name: Deploy Moodle stack
+  hosts: localserver
+  become: true
+  gather_facts: no
+
+  vars:
+    mysql_root_password: "iNethi2023#"
+    mysql_password: "iNethi2023#"
+    moodle_volume: "/mnt/data/moodle"
+    mariadb_volume: "/mnt/data/moodle-mariadb"
+    traefik_api_rule_moodle: "classroom"
+    inethi_dn: "inethilocal.net"
+    traefik_entrypoint: "websecure"
+    INETHI_NETWORK: "inethi-bridge-traefik"
+    CONF_MASTER_PASSWORD: 'iNethi2023#'
+    MOODLE_USERNAME: "inethi"
+
+  tasks:
+    - name: Create directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0777'
+      with_items:
+        - "{{ moodle_volume }}"
+        - "{{ mariadb_volume }}"
+    - name: Start mariadb container for Moodle
+      docker_container:
+        name: inethi-moodle-mariadb
+        image: docker.io/bitnami/mariadb:10.5
+        state: started
+        restart_policy: unless-stopped
+        env:
+          ALLOW_EMPTY_PASSWORD: "yes"
+          MARIADB_USER: "bn_moodle"
+          MARIADB_DATABASE: "bitnami_moodle"
+          MARIADB_CHARACTER_SET: "utf8mb4"
+          MARIADB_COLLATE: "utf8mb4_unicode_ci"
+        volumes:
+          - '{{ mariadb_volume }}:/bitnami/mariadb'
+        networks:
+          - name: "{{ INETHI_NETWORK }}"
+    - name: Wait (3 mins) for Moodle Database
+      pause:
+        seconds: 180
+    - name: Start Moodle container
+      docker_container:
+        name: inethi-moodle
+        image: docker.io/bitnami/moodle:3
+        state: started
+        restart_policy: unless-stopped
+        env:
+          ALLOW_EMPTY_PASSWORD: "yes"
+          MOODLE_DATABASE_HOST: "inethi-moodle-mariadb"
+          MOODLE_DATABASE_USER: "bn_moodle"
+          MOODLE_DATABASE_NAME: "bitnami_moodle"
+          MOODLE_USERNAME: "{{ MOODLE_USERNAME }}"
+          MOODLE_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
+        volumes:
+          - '{{ mariadb_volume }}/moodle:/bitnami/moodle'
+          - '{{ mariadb_volume }}/moodledata:/bitnami/moodledata'
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.moodle.rule: "Host(`{{ traefik_api_rule_moodle }}.{{ inethi_dn }}`)"
+          traefik.http.routers.moodle.entrypoints: "{{ traefik_entrypoint }}"
+        networks:
+          - name: "{{ INETHI_NETWORK }}"
+
+    - name: Wait (3 mins) for Moodle
+      pause:
+        seconds: 120
