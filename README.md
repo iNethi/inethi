@@ -7,7 +7,7 @@ This repo makes use of Ansible and Python to install Docker containers. Please r
 ```
 ./preinstallation.sh
 ```
-This should install Python 3, pip3, python ansible runner, Ansible, OpenSSH server and sshpass.
+This should install Python 3, pip3, the Python requirements in the requirements.txt file, Ansible, OpenSSH server and sshpass.
 
 ## Installation
 These steps should work on Ubuntu and Mac... if you encounter errors with the pre-installation steps please manually 
@@ -24,6 +24,7 @@ To install:
 python3 main.py   
 ```
 
+**remember to use pip3 and python3.**
 ## Post Installation
 ### Defaults
 - Usernames: `inethi`
