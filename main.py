@@ -16,11 +16,16 @@ def my_event_handler(data):
             print(event_data['name'])
 
 
-def write_to_inventory(ip, user, password, inventory_path):
+def write_to_inventory(ip, user, auth_type, auth_value, inventory_path):
     with open(inventory_path, 'w') as f:
-        f.write(f"[localserver]\n")
-        f.write(f"{ip} ansible_user='{user}' ansible_password='{password}' "
-                f"ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_become_pass='{password}'\n")
+        f.write("[localserver]\n")
+        if auth_type == 'password':
+            f.write(f"{ip} ansible_user='{user}' ansible_password='{auth_value}' "
+                    f"ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_become_pass='{auth_value}'\n")
+        elif auth_type == 'key':
+            f.write(f"{ip} ansible_user='{user}' ansible_ssh_private_key_file='{auth_value}' "
+                    f"ansible_ssh_common_args='-o StrictHostKeyChecking=no'\n")
+
 
 
 def save_ip_to_config(ip, config_path):
@@ -53,10 +58,19 @@ def main():
     # Prompt user for IP, username, and password
     ip = input("Enter your IP address: ")
     user = input("Enter your username: ")
-    password = input("Enter your password: ")
 
+    auth_type = input("Are you using password or key-based authentication? (password/key): ").strip().lower()
+    if auth_type == 'password':
+        password = input("Enter your password: ")
+        auth_value = password
+    elif auth_type == 'key':
+        key_path = input("Enter the absolute path to your SSH key: ")
+        auth_value = key_path
+    else:
+        print("Invalid authentication type. Exiting.")
+        sys.exit(1)
     # Write to variables to file
-    write_to_inventory(ip, user, password, inventory_path)
+    write_to_inventory(ip, user, auth_type, auth_value, inventory_path)
     save_ip_to_config(ip, config_path)
 
     skip_setup = input(
