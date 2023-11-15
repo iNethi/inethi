@@ -15,16 +15,12 @@
         mode: '0777'
       with_items:
         - "{{ TEMP_MNT }}"
+        - - "{{ AZURACAST_MNT }}"
 
     - name: Copy files to Server
       copy:
         src: "{{ playbook_dir }}/resources/azuracast/"
         dest: "{{ TEMP_MNT }}/"
-
-    - name: Set executable permissions on build file
-      file:
-        path: "{{ TEMP_MNT }}/docker.sh"
-        mode: '+x'
 
     - name: build the container
       command: "docker-compose -f {{ TEMP_MNT }}/docker-compose.yml up -d"

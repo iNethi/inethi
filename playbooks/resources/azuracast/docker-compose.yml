@@ -14,16 +14,16 @@ services:
             PUID: '${AZURACAST_PUID:-1000}'
             PGID: '${AZURACAST_PGID:-1000}'
         volumes:
-            - 'www_uploads:/var/azuracast/uploads'
-            - 'station_data:/var/azuracast/stations'
-            - 'shoutcast2_install:/var/azuracast/servers/shoutcast2'
-            - 'stereo_tool_install:/var/azuracast/servers/stereo_tool'
-            - 'geolite_install:/var/azuracast/geoip'
-            - 'sftpgo_data:/var/azuracast/sftpgo/persist'
-            - 'backups:/var/azuracast/backups'
-            - 'acme:/var/azuracast/acme'
-            - 'db_data:/var/lib/mysql'
-        restart: always
+            - '${UPLOADS_VOLUME}:/var/azuracast/uploads'
+            - '${STATION_VOLUME}:/var/azuracast/stations'
+            - '${SHOUT2CAST_VOLUME}:/var/azuracast/servers/shoutcast2'
+            - '${STEREO_TOOL_VOLUME}:/var/azuracast/servers/stereo_tool'
+            - '${GEOLITE_VOLUME}:/var/azuracast/geoip'
+            - '${SFTPGO_VOLUME}:/var/azuracast/sftpgo/persist'
+            - '${BACKUP_VOLUME}:/var/azuracast/backups'
+            - '${ACME_VOLUME}:/var/azuracast/acme'
+            - '${DB_VOLUME}:/var/lib/mysql'
+        restart: unless-stopped
         ulimits:
             nofile:
                 soft: 65536
@@ -40,14 +40,4 @@ networks:
   default:
     external:
       name: "inethi-bridge-traefik"
-volumes:
-    db_data: {}
-    acme: {}
-    shoutcast2_install: {}
-    stereo_tool_install: {}
-    geolite_install: {}
-    sftpgo_data: {}
-    station_data: {}
-    www_uploads: {}
-    backups: {}
 
