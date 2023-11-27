@@ -1,6 +1,5 @@
-# iNethi
-This repo contains code you can use to set up an iNethi docker network. This is intended for Ubuntu x86 architecture.
-Alternatively you can use our GUI installer [here](https://github.com/iNethi/gui-installer).
+# iNethi Dev
+This is the developer repo containing the latest work yet to be integrated into the main iNethi repo. Please use the [terminal-based iNethi repo](https://github.com/iNethi/inethi) or [GUI installer](https://github.com/iNethi/gui-installer) to build your iNethi instance. Alternatively to contribute to iNethi submit a PR here.
 
 ## Pre-installation
 This repo makes use of Ansible and Python to install Docker containers. Please run the pre-installation script:
