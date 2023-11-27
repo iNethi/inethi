@@ -33,7 +33,7 @@ The following steps are the manual steps you need to take to configure the dashb
 1. Navigate to `prometheus.inethilocal.net`. Navigate to the targets page to check if the endpoints are up, do this
 using the menu: status -> targets and check that the prometheus and traefik endpoint are up.
 2. Navigate to `grafana.inethilocal.net`. Use the default user and password to login which is `admin` and `admin`.
-change the password when promted. 
+change the password when promoted. 
 3. Once you are at the homepage, navigate to the data source page and add a new source.
 Select prometheus as the source and the only thing to add in the subsequent steps is the prometheus server URL which is
 `http://inethi-prometheus:9090`

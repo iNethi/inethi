@@ -65,6 +65,8 @@
           traefik.http.routers.traefik.service: "{{ traefik_api_service }}"
           traefik.http.routers.traefik.entrypoints: "{{ traefik_entrypoint }}"
           traefik.http.routers.traefik.tls.certresolver: "letsencrypt"
+          traefik.http.routers.traefik.middlewares: "myauth"
+          traefik.http.middlewares.myauth.basicauth.users: "inethi:$apr1$6gxwmd1y$8qPLSFQA83QDp820T6RxR0"
 
         networks:
           - name: "{{ inethi_network }}"
