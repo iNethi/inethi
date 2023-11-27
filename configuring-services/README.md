@@ -49,6 +49,7 @@ password `iNethi2023#`.
 ![Screenshot showing location of admin console](./keycloak/screenshots/login-admin.png)
 Set up clients to use the update and management portals:
 ### Import Real Settings
-Navigate to Manage -> Import and upload the [Master Realm JSON file](./keycloak/master-realm.json). This will enable
-user registration and keycloak login for the update and management portals.
+Navigate to Manage -> Import and upload the [Master Realm JSON file](./keycloak/master-realm.json). Choose the skip option for imports that 
+already exist. This will enable user registration and keycloak login for the update and management portals.
 ![Screenshot showing location of import](./keycloak/screenshots/realm-import.png)
+![Screenshot showing the skip option when importing](./keycloak/screenshots/skip-exisiting.png)
