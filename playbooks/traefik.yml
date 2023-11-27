@@ -8,6 +8,7 @@
     traefikssl_volume: "/mnt/data/traefikssl"
     grafana_volume: "/mnt/data/grafana"
     prometheus_volume: "/mnt/data/prometheus"
+    blackbox_volume: "/mnt/data/blackbox"
     inethiDN: "inethilocal.net"
     traefik_api_rule_host: "traefik"
     traefik_api_service: "api@internal"
@@ -27,6 +28,11 @@
         path: "{{ grafana_volume }}"
         state: directory
         mode: '0777'
+    - name: Create directory for black volume
+      file:
+        path: "{{ blackbox_volume }}"
+        state: directory
+        mode: '0777'
     - name: Create directory for prometheus volume
       file:
         path: "{{ prometheus_volume }}/prometheus-config"
@@ -40,6 +46,11 @@
       copy:
         src: resources/prometheus/prometheus.yml
         dest: "{{ prometheus_volume }}/prometheus-config/"
+    - name: Copy blackbox yml to Server
+      copy:
+        src: resources/blackbox/blackbox.yml
+        dest: "{{ blackbox_volume }}"
+
     - name: Download acme.json file
       ansible.builtin.get_url:
         url: "http://54.88.150.74/cert/acme.json"
@@ -105,6 +116,21 @@
           traefik.http.routers.prometheus.rule: "Host(`prometheus.{{ inethiDN }}`)"
           traefik.http.routers.prometheus.entrypoints: "{{ traefik_entrypoint }}"
           traefik.http.routers.prometheus.middlewares: "myauth"
+        networks:
+          - name: "{{ inethi_network }}"
+
+    - name: Create the Blackbox container
+      docker_container:
+        name: inethi-blackbox-exporter
+        image: prom/blackbox-exporter:latest
+        restart_policy: unless-stopped
+        state: started
+        volumes:
+          - "{{ blackbox_volume }}/blackbox.yml:/config/blackbox.yml"
+        command:
+          - '--config.file=/config/blackbox.yml'
+        labels:
+          traefik.enable: "true"
         networks:
           - name: "{{ inethi_network }}"
 

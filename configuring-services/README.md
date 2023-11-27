@@ -40,7 +40,7 @@ Select prometheus as the source and the only thing to add in the subsequent step
 4. Add a dashboard from the home page/menu navigate to dashboards, add a new dashboard. Use the `import` option and
 enter the official Traefik dashboards ID: `17346`, click load next to the text input. On the next page use the 
 Prometheus datasource you created in the last step as the data source and then click import. Your dashboard will show 
-up.
+up. You can also add a blackbox dashboard to monitor access point up time `18674`
 
 ## Keycloak
 ### Logging in
