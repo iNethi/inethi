@@ -6,7 +6,7 @@ services:
       context: ./
       dockerfile: Dockerfile-build-radiusdesk
       args:
-        radiusdesk_volume: ${RADIUSDESK_VOLUME}
+        radiusdesk_volume: /mnt/data/radius_desk
     container_name: inethi-radiusdesk
 
     environment:
@@ -18,8 +18,8 @@ services:
 
     labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.radiusdesk.rule=Host(`${TRAEFIK_API_RULE_HOST}.${inethiDN}`)"
-        - "traefik.http.routers.radiusdesk.entrypoints=${TRAEFIK_ENTRYPOINT}"
+        - "traefik.http.routers.radiusdesk.rule=Host(`radiusdesk.inethilocal.net`)"
+        - "traefik.http.routers.radiusdesk.entrypoints=websecure"
 
     depends_on:
       - "rdmariadb"
@@ -40,9 +40,9 @@ services:
       - "MARDIADB_PASSWORD=rd"
 
     volumes:
-      - ${RADIUSDESK_VOLUME}/db_conf/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
+      - /mnt/data/radius_desk/db_conf/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
       - rd_data:/bitnami/mariadb
-      - ${RADIUSDESK_VOLUME}/db_startup:/tmp
+      - /mnt/data/radius_desk/db_startup:/tmp
 
 volumes:
   rd_data:
@@ -51,7 +51,7 @@ volumes:
 networks:
   default:
     external:
-      name: "${INETHI_NETWORK}"
+      name: "inethi-bridge-traefik"
 
 
 
