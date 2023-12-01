@@ -111,6 +111,7 @@
         command:
           - '--config.file=/etc/prometheus/prometheus.yml'
           - '--storage.tsdb.path=/prometheus'
+          - '--web.enable-lifecycle'
         labels:
           traefik.enable: "true"
           traefik.http.routers.prometheus.rule: "Host(`prometheus.{{ inethiDN }}`)"

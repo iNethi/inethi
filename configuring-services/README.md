@@ -30,7 +30,8 @@ Once you have run the Python build script Traefik, Grafana and Prometheus will a
 configured. Make sure you have added a route to them in your hosts file or firewall.
 
 The following steps are the manual steps you need to take to configure the dashboard and data sources:
-1. Navigate to `prometheus.inethilocal.net`. Navigate to the targets page to check if the endpoints are up, do this
+1. Navigate to `prometheus.inethilocal.net`. The username and password is the same as the Traefik dashboard's password.
+Default u: inethi, p: iNethi2023#. Navigate to the targets page to check if the endpoints are up, do this
 using the menu: status -> targets and check that the prometheus and traefik endpoint are up.
 2. Navigate to `grafana.inethilocal.net`. Use the default user and password to login which is `admin` and `admin`.
 change the password when promoted. 

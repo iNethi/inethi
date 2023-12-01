@@ -1,6 +1,9 @@
 #!/bin/bash
 
-source ../root.conf
+set -xu
+
+docker network create --attachable -d bridge radiusdesk-bridge
+
 source ./.env
 
 echo Radiusdesk 2-docker system builder v1.0
@@ -20,8 +23,15 @@ mkdir  -p /mnt/data/radiusdesk/db_conf
 chmod -R 777 /mnt/data/radiusdesk
 chmod -R 777 /mnt/data/radiusdesk/db_startup
 chmod -R 777 /mnt/data/radiusdesk/db_conf
-git clone https://github.com/iNethi/rdcore.git
-cp rdcore/cake3/rd_cake/setup/db/rd.sql $RADIUSDESK_VOLUME/db_startup
+
+if [ -d "rdcore" ] 
+then
+    echo "Directory rdcore exists."
+else
+    git clone https://github.com/keeganwhite/rdcore.git
+fi
+
+cp rdcore/cake4/rd_cake/setup/db/rd.sql $RADIUSDESK_VOLUME/db_startup
 cp db_priveleges.sql $RADIUSDESK_VOLUME/db_startup
 cp startup.sh $RADIUSDESK_VOLUME/db_startup
 cp my_custom.cnf $RADIUSDESK_VOLUME/db_conf

@@ -13,7 +13,8 @@ services:
       - "PHP_INI_SCAN_DIR=:/p/gd"
       - "PHP.cgi.fix_pathinfo=1"
       - "PHP_SELF=/index.php"
-    restart: always
+      - "PHP_INI_SCAN_DIR=:/p/sqlite3"
+    restart: unless-stopped
 
     labels:
         - "traefik.enable=true"
@@ -31,7 +32,7 @@ services:
     container_name: inethi-radiusdesk-mariadb
     image: docker.io/bitnami/mariadb:10.5
 
-    restart: always
+    restart: unless-stopped
     environment:
       - "ALLOW_EMPTY_PASSWORD=yes"
       - "MARIADB_USER=rd"
