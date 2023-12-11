@@ -1,0 +1,27 @@
+- name: Deploy AP Monitoring System
+  hosts: localserver
+  become: true
+  gather_facts: yes
+
+  vars:
+    AP_MONITORING_VOLUME: "/mnt/data/ap_monitor"
+
+  tasks:
+    - name: Create directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0777'
+      with_items:
+        - "{{ AP_MONITORING_VOLUME }}"
+
+    - name: Clone rdcore git repository
+      git:
+        repo: "https://github.com/iNethi/access-point-monitoring-system.git"
+        dest: "{{ AP_MONITORING_VOLUME }}"
+        clone: yes
+
+    - name: Run build script
+      shell: ./build.sh
+      args:
+          chdir: "{{ AP_MONITORING_VOLUME }}"

@@ -49,6 +49,7 @@ def main():
     choices = ['azuracast', 'jellyfin', 'keycloak', 'nextcloud','radiusdesk', 'splash-screen', 'wordpress']
     # choices = ['dnsmasq', 'jellyfin', 'keycloak', 'nextcloud', 'splash-screen', 'radiusdesk', 'wordpress']
     traefik = 'traefik'
+    ap_monitor = 'ap_monitor'
     test_server = "test_server_connection"
     system_requirements = "system_requirements"
     playbook_dir_path = f"{abs_path}/playbooks"
@@ -81,6 +82,7 @@ def main():
         run_playbook(test_server, playbook_dir_path, inventory_path)
         run_playbook(system_requirements, playbook_dir_path, inventory_path)
         run_playbook(traefik, playbook_dir_path, inventory_path)
+        run_playbook(ap_monitor, playbook_dir_path, inventory_path)
 
     # Prompt user to select services to install
     print("Select services to install:")
