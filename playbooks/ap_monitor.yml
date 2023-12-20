@@ -15,7 +15,7 @@
       with_items:
         - "{{ AP_MONITORING_VOLUME }}"
 
-    - name: Clone rdcore git repository
+    - name: Clone access point git repository
       git:
         repo: "https://github.com/iNethi/access-point-monitoring-system.git"
         dest: "{{ AP_MONITORING_VOLUME }}"
