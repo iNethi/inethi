@@ -25,7 +25,7 @@ The rest of the rules:
 10.2.0.10 wordpress.inethilocal.net
 
 ```
-## Grafana, Prometheus and Traefik
+## Grafana, Prometheus, BlackBox Exporter, AP Monitoring and Traefik
 Once you have run the Python build script Traefik, Grafana and Prometheus will automatically be installed and 
 configured. Make sure you have added a route to them in your hosts file or firewall.
 
@@ -42,6 +42,9 @@ Select prometheus as the source and the only thing to add in the subsequent step
 enter the official Traefik dashboards ID: `17346`, click load next to the text input. On the next page use the 
 Prometheus datasource you created in the last step as the data source and then click import. Your dashboard will show 
 up. You can also add a blackbox dashboard to monitor access point up time `18674`
+5. Add the custom nack box monitor for network devices by dragging the json file in the [grafana folder](./grafana) into
+the import dashboard section. You also need to install the Polystat plugin for the dashboard to work.
+6. Navigate to the AP monitoring system and add you APs.
 
 ## Keycloak
 ### Logging in
