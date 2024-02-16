@@ -58,7 +58,7 @@
         state: absent
 
     - name: Build RadiusDesk Database
-      command: "docker-compose -f /mnt/data/radius_desk/docker-compose.yml up -d rdmariadb"
+      command: "docker compose -f /mnt/data/radius_desk/docker-compose.yml up -d rdmariadb"
 
     - name: Set permissions on startup.sh
       file:
@@ -69,7 +69,7 @@
       shell: "docker exec -u 0 -it inethi-radiusdesk-mariadb /tmp/startup.sh"
 
     - name: Build RadiusDesk
-      command: "docker-compose -f /mnt/data/radius_desk/docker-compose.yml build"
+      command: "docker compose -f /mnt/data/radius_desk/docker-compose.yml build"
 
     - name: Run RadiusDesk
-      command: "docker-compose -f /mnt/data/radius_desk/docker-compose.yml up -d radiusdesk"
+      command: "docker compose -f /mnt/data/radius_desk/docker-compose.yml up -d radiusdesk"
