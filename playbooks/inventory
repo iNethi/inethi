@@ -1,2 +1,2 @@
 [localserver]
-3.214.99.37 ansible_user='ubuntu' ansible_ssh_private_key_file='/Users/davidjohnson/keys/inethicloud_key.pem' ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+10.10.255.223 ansible_user='inethi' ansible_password='iNethi#2023' ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_become_pass='iNethi#2023'

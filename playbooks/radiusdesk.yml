@@ -5,7 +5,7 @@
 
   vars:
     TRAEFIK_API_RULE_HOST: "radiusdesk"
-    inethi_dn: "inethicloud.net"
+    inethi_dn: "inethilocal.net"
     TRAEFIK_ENTRYPOINT: "websecure"
     INETHI_NETWORK: "inethi-bridge-traefik"
     RADIUSDESK_VOLUME: "/mnt/data/radius_desk"
