@@ -25,7 +25,7 @@ FROM jtreminio/php:8.1
     COPY ./default /etc/nginx/sites-enabled/
     COPY ./disable_strict_mode.cnf /etc/mysql/conf.d/
 
-    RUN cd /var/www && git clone https://github.com/keeganwhite/rdcore.git
+    RUN cd /var/www && git clone https://github.com/iNethi/rdcore.git --single-branch --branch updated-version
 
     RUN mkdir -p /var/www/html
     RUN ln -s /var/www/rdcore/rd /var/www/html/rd
