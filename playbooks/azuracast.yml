@@ -23,7 +23,7 @@
         dest: "{{ TEMP_MNT }}/"
 
     - name: build the container
-      command: "docker-compose -f {{ TEMP_MNT }}/docker-compose.yml up -d"
+      command: "docker compose -f {{ TEMP_MNT }}/docker-compose.yml up -d"
 
     - name: Delete TEMP_MNT directory
       file:
