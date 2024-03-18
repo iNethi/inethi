@@ -68,32 +68,30 @@
       args:
         executable: /bin/bash
 
-
-
-#    - name: Create Postgres container for Keycloak
-#      docker_container:
-#        name: inethi-keycloak-postgres
-#        image: docker.io/bitnami/postgresql
-#        restart_policy: unless-stopped
-#        env:
-#          POSTGRESQL_DATABASE: "keycloak"
-#          POSTGRESQL_USERNAME: "{{ KEYCLOAK_ADMIN_USER }}"
-#          POSTGRESQL_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
-#        volumes:
-#          - "{{ POSTGRES_VOLUME }}:/bitnami/postgresql"
-#        labels:
-#          traefik.enable: "true"
-#          traefik.http.routers.postgres-keycloak.rule: "Host(`{{ POSTGRES_KEYCLOAK_TRAEFIK_API_RULE }}.{{ inethiDN }}`)"
-#          traefik.http.routers.postgres-keycloak.entrypoints: "{{ TRAEFIK_ENTRYPOINT }}"
-#        networks:
-#          - name: "{{ INETHI_NETWORK }}"
-#    - name: Wait (1 min) for Keycloak Database
-#      pause:
-#        seconds: 60
+    - name: Create Postgres container for Keycloak
+      docker_container:
+        name: inethi-keycloak-postgres
+        image: docker.io/bitnami/postgresql
+        restart_policy: unless-stopped
+        env:
+          POSTGRESQL_DATABASE: "keycloak"
+          POSTGRESQL_USERNAME: "{{ KEYCLOAK_ADMIN_USER }}"
+          POSTGRESQL_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
+        volumes:
+          - "{{ POSTGRES_VOLUME }}:/bitnami/postgresql"
+        labels:
+          traefik.enable: "true"
+          traefik.http.routers.postgres-keycloak.rule: "Host(`{{ POSTGRES_KEYCLOAK_TRAEFIK_API_RULE }}.{{ inethiDN }}`)"
+          traefik.http.routers.postgres-keycloak.entrypoints: "{{ TRAEFIK_ENTRYPOINT }}"
+        networks:
+          - name: "{{ INETHI_NETWORK }}"
+    - name: Wait (3 min) for Keycloak Database
+      pause:
+        seconds: 180
 
     - name: Create Keycloak container
       docker_container:
-        image: quay.io/keycloak/keycloak:latest
+        image: quay.io/keycloak/keycloak:24.0.1
         name: inethi-keycloak
         restart_policy: unless-stopped
         state: started

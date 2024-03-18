@@ -15,7 +15,7 @@
         mode: '0777'
       with_items:
         - "{{ TEMP_MNT }}"
-        - - "{{ AZURACAST_MNT }}"
+        - "{{ AZURACAST_MNT }}"
 
     - name: Copy files to Server
       copy:
@@ -24,8 +24,29 @@
 
     - name: build the container
       command: "docker compose -f {{ TEMP_MNT }}/docker-compose.yml up -d"
+    - name: Wait (3 min) for the Radio to be initialised
+      pause:
+        seconds: 180
 
     - name: Delete TEMP_MNT directory
       file:
         path: "{{ TEMP_MNT }}"
         state: absent
+
+    - name: Set permissions on AzuraCast directory
+      ansible.builtin.file:
+        path: "{{ AZURACAST_MNT }}"
+        state: directory
+        recurse: yes
+        mode: '0777'
+
+    - name: Restart AzuraCast container
+      ansible.builtin.command:
+        cmd: "docker restart inethi-radio"
+
+    - name: Wait (3 min) for the Radio to be up
+      pause:
+        seconds: 180
+
+
+

@@ -1,7 +1,7 @@
 services:
     web:
         container_name: inethi-radio
-        image: 'ghcr.io/azuracast/azuracast:${AZURACAST_VERSION:-latest}'
+        image: 'ghcr.io/azuracast/azuracast:latest'
         env_file: azuracast.env
         environment:
             LANG: '${LANG:-en_US.UTF-8}'
