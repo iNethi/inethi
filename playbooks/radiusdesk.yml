@@ -32,7 +32,7 @@
 
     - name: Clone rdcore git repository
       git:
-        repo: "https://github.com/iNethi/rdcore.git"
+        repo: "https://github.com/keeganwhite/rdcore.git"
         dest: "/mnt/data/rdcore"
         clone: yes
 
@@ -42,7 +42,7 @@
         dest: "{{ RADIUSDESK_VOLUME }}/db_startup/"
         remote_src: yes
       with_items:
-        - "/mnt/data/rdcore/cake3/rd_cake/setup/db/rd.sql"
+        - "/mnt/data/rdcore/cake4/rd_cake/setup/db/rd.sql"
         - "{{ RADIUSDESK_VOLUME }}/db_priveleges.sql"
         - "{{ RADIUSDESK_VOLUME }}/startup.sh"
 
@@ -58,7 +58,7 @@
         state: absent
 
     - name: Build RadiusDesk Database
-      command: "docker-compose -f /mnt/data/radius_desk/docker-compose.yml up -d rdmariadb"
+      command: "docker compose -f /mnt/data/radius_desk/docker-compose.yml up -d rdmariadb"
 
     - name: Set permissions on startup.sh
       file:
@@ -69,7 +69,7 @@
       shell: "docker exec -u 0 -it inethi-radiusdesk-mariadb /tmp/startup.sh"
 
     - name: Build RadiusDesk
-      command: "docker-compose -f /mnt/data/radius_desk/docker-compose.yml build"
+      command: "docker compose -f /mnt/data/radius_desk/docker-compose.yml build"
 
     - name: Run RadiusDesk
-      command: "docker-compose -f /mnt/data/radius_desk/docker-compose.yml up -d radiusdesk"
+      command: "docker compose -f /mnt/data/radius_desk/docker-compose.yml up -d radiusdesk"

@@ -158,4 +158,4 @@ pip3 install -r requirements.txt || exit 1
 echo
 
 echo "Pre-installation complete..."
-sleep 2
+sleep 3

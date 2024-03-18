@@ -1,4 +1,4 @@
-FROM jtreminio/php:7.4
+FROM jtreminio/php:8.1
     # We start with a nice php docker container that has all plugins we need including fpm and cli
 
     # Arguments we can take
@@ -25,39 +25,33 @@ FROM jtreminio/php:7.4
     COPY ./default /etc/nginx/sites-enabled/
     COPY ./disable_strict_mode.cnf /etc/mysql/conf.d/
 
-    RUN cd /var/www && git clone https://github.com/iNethi/rdcore.git
+    RUN cd /var/www && git clone https://github.com/iNethi/rdcore.git --single-branch --branch updated-version
 
     RUN mkdir -p /var/www/html
-
     RUN ln -s /var/www/rdcore/rd /var/www/html/rd
-    RUN ln -s /var/www/rdcore/cake3 /var/www/html/cake3
+    RUN ln -s /var/www/rdcore/cake4 /var/www/html/cake4
+    #If backward compatibility is required for older firmware of MESHdesk
+    RUN ln -s /var/www/rdcore/cake4 /var/www/html/cake3
     RUN ln -s /var/www/rdcore/login /var/www/html/login
     RUN ln -s /var/www/rdcore/AmpConf/build/production/AmpConf /var/www/html/conf_dev
     RUN ln -s /var/www/rdcore/login/rd_client/build/production/AmpConf /var/www/html/usage
-    RUN ln -s /var/www/rdcore/cake3/rd_cake/setup/scripts/reporting /var/www/html/reporting
-
+    RUN ln -s /var/www/rdcore/cake4/rd_cake/setup/scripts/reporting /var/www/html/reporting
+    
     # Create requried directories
-    RUN mkdir -p /var/www/html/cake3/rd_cake/logs
-    RUN mkdir -p /var/wwwb/html/cake3/rd_cake/webroot/files/imagecache
-    RUN mkdir -p /var/www/html/cake3/rd_cake/tmp
-
+    RUN mkdir -p /var/www/html/cake4/rd_cake/logs
+    RUN mkdir -p /var/www/html/cake4/rd_cake/webroot/files/imagecache
+    RUN mkdir -p /var/www/html/cake4/rd_cake/tmp
+    
     # Set permissions
-    RUN chown -R www-data. /var/www/html/cake3/rd_cake/tmp
-    RUN chown -R www-data. /var/www/html/cake3/rd_cake/logs
-    RUN chown -R www-data. /var/www/html/cake3/rd_cake/webroot/img/realms
-    RUN chown -R www-data. /var/www/html/cake3/rd_cake/webroot/img/dynamic_details
-    RUN chown -R www-data. /var/www/html/cake3/rd_cake/webroot/img/dynamic_photos
-    RUN chown -R www-data. /var/www/html/cake3/rd_cake/webroot/img/access_providers
-    RUN chown -R www-data. /var/www/html/cake3/rd_cake/webroot/img/hardwares
-    RUN chown -R www-data. /var/www/html/cake3/rd_cake/webroot/files/imagecache
-
-    # Install Java ExtJS library
-    RUN svn checkout svn://svn.code.sf.net/p/radiusdesk/code/extjs /
-    RUN mv /ext-6-2-sencha_cmd.tar.gz /var/www/rdcore/rd
-    RUN rm /ext-*
-    RUN cd /var/www/rdcore/rd && tar -xzvf ext-6-2-sencha_cmd.tar.gz
-    RUN rm /var/www/rdcore/rd/*.gz
-
+    RUN chown -R www-data. /var/www/html/cake4/rd_cake/tmp
+    RUN chown -R www-data. /var/www/html/cake4/rd_cake/logs
+    RUN chown -R www-data. /var/www/html/cake4/rd_cake/webroot/img/realms
+    RUN chown -R www-data. /var/www/html/cake4/rd_cake/webroot/img/dynamic_details
+    RUN chown -R www-data. /var/www/html/cake4/rd_cake/webroot/img/dynamic_photos
+    RUN chown -R www-data. /var/www/html/cake4/rd_cake/webroot/img/access_providers
+    RUN chown -R www-data. /var/www/html/cake4/rd_cake/webroot/img/hardwares
+    RUN chown -R www-data. /var/www/html/cake4/rd_cake/webroot/files/imagecache
+    
     ## Setup environment variables 
 
     # PHP environment - these are unique to the Docker hub image jtreminio/php
@@ -70,9 +64,9 @@ FROM jtreminio/php:7.4
     #COPY ./startup.sh /
 
     # Setup Cron jobs
-    RUN cp /var/www/html/cake3/rd_cake/setup/cron/cron3 /etc/cron.d/
-    RUN chmod 0644 /etc/cron.d/cron3
-    RUN crontab /etc/cron.d/cron3
+    RUN cp /var/www/html/cake4/rd_cake/setup/cron/cron4 /etc/cron.d/
+    RUN chmod 0644 /etc/cron.d/cron4
+    RUN crontab /etc/cron.d/cron4
 
     # configure php-fpm
     RUN mkdir -p /var/log/php-fpm
@@ -83,7 +77,7 @@ FROM jtreminio/php:7.4
 
     RUN mv /etc/freeradius /etc/freeradius.orig
     RUN mkdir -p /etc/freeradius
-    RUN tar xzf /var/www/html/cake3/rd_cake/setup/radius/freeradius-3-radiusdesk.tar.gz --one-top-level=/etc/freeradius/
+    RUN tar xzf /var/www/html/cake4/rd_cake/setup/radius/freeradius-3-radiusdesk.tar.gz --one-top-level=/etc/freeradius/
     RUN mv /etc/freeradius/freeradius /etc/freeradius/3.0
     RUN chown -R freerad. /etc/freeradius/3.0/
 
@@ -103,23 +97,16 @@ FROM jtreminio/php:7.4
     COPY ./php.ini /etc/php/php.ini
 
     # Fix the configs to point to external database
-    RUN sed  -i  "s/'host' => 'localhost'/'host' => 'rdmariadb'/g"  /var/www/html/cake3/rd_cake/vendor/cakephp/cakephp/src/Database/Driver/Mysql.php
-    RUN sed  -i  "s/'password' => ''/'password' => 'rd'/g"  /var/www/html/cake3/rd_cake/vendor/cakephp/cakephp/src/Database/Driver/Mysql.php
-    RUN sed  -i  "s/'database' => 'cake'/'database' => 'rd'/g"  /var/www/html/cake3/rd_cake/vendor/cakephp/cakephp/src/Database/Driver/Mysql.php
-    RUN sed  -i  "s/'host' => 'localhost'/'host' => 'rdmariadb'/g" /var/www/html/cake3/rd_cake/config/app.php
-
-    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake3/rd_cake/setup/scripts/reporting/reporting.php
-    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake3/rd_cake/setup/scripts/reporting/flows_wip.php
-    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake3/rd_cake/setup/scripts/reporting/process_flows.php
-    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake3/rd_cake/setup/scripts/reporting/process_report.php
-    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake3/rd_cake/setup/scripts/reporting/reporting_wip.php 
-    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake3/rd_cake/setup/scripts/reporting/send_remote_syslog.php
+    RUN sed  -i  "s/'host' => 'localhost'/'host' => 'rdmariadb'/g" /var/www/html/cake4/rd_cake/config/app_local.php
+    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake4/rd_cake/setup/scripts/reporting/reporting.php
+    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake4/rd_cake/setup/scripts/reporting/flows_wip.php
+    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake4/rd_cake/setup/scripts/reporting/process_flows.php
+    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake4/rd_cake/setup/scripts/reporting/process_report.php
+    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake4/rd_cake/setup/scripts/reporting/reporting_wip.php 
+    RUN sed  -i  "s/\$servername = \"localhost\";/\$servername = \"rdmariadb\";/g"  /var/www/rdcore/cake4/rd_cake/setup/scripts/reporting/send_remote_syslog.php
 
     # Fix the Freeradius config to point to our new database
     RUN sed  -i 's/server = \"localhost\"/server = \"rdmariadb\"/g'  /etc/freeradius/3.0/mods-available/sql
-
-    # Set the Radius shared secret
-    RUN sed  -i 's/FreeRADIUS-Client-Secret = \"testing123\"/FreeRADIUS-Client-Secret = \"inethi4u\"/g'  /etc/freeradius/3.0/sites-enabled/dynamic-clients
 
     # Copy files from production to root www
     RUN cp -R /var/www/html/rd/build/production/Rd/* /var/www/html/
@@ -131,4 +118,6 @@ FROM jtreminio/php:7.4
     EXPOSE 80/tcp
     EXPOSE 1812/udp
     EXPOSE 1813/udp
+
+
 

@@ -27,7 +27,6 @@ def write_to_inventory(ip, user, auth_type, auth_value, inventory_path):
                     f"ansible_ssh_common_args='-o StrictHostKeyChecking=no'\n")
 
 
-
 def save_ip_to_config(ip, config_path):
     with open(config_path, 'w') as f:
         yaml.dump({'ip_address': ip}, f)
@@ -46,9 +45,10 @@ def run_playbook(playbook_name, playbook_dir_path, inventory_path):
 
 def main():
     abs_path = pathlib.Path(__file__).parent.resolve()
-    choices = ['azuracast', 'jellyfin', 'keycloak', 'nextcloud', 'splash-screen', 'wordpress']
+    choices = ['jellyfin', 'keycloak', 'kiwix', 'moodle', 'nextcloud', 'radiusdesk', 'splash-screen', 'wordpress']
     # choices = ['dnsmasq', 'jellyfin', 'keycloak', 'nextcloud', 'splash-screen', 'radiusdesk', 'wordpress']
     traefik = 'traefik'
+    ap_monitor = 'ap_monitor'
     test_server = "test_server_connection"
     system_requirements = "system_requirements"
     playbook_dir_path = f"{abs_path}/playbooks"

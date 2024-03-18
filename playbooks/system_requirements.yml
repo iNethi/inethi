@@ -17,76 +17,66 @@
       when: not ansible_distribution == "Ubuntu"
 
     - name: Check if Docker is installed
-      shell: which docker
-      ignore_errors: true
-      register: docker_check
+      command: docker --version
+      register: docker_installed
+      ignore_errors: yes
 
-    - name: Check if Docker Compose is installed
-      shell: which docker-compose
-      ignore_errors: true
-      register: docker_compose_check
-    - name: Create the /mnt/data directory
-      file:
-        path: /mnt/data
-        state: directory
-        mode: '0775'
+    - name: Install Docker and Docker Compose
+      block:
+        - name: Install required packages
+          apt:
+            name: "{{ packages }}"
+            state: latest
+            update_cache: yes
+          vars:
+            packages:
+              - apt-transport-https
+              - ca-certificates
+              - curl
+              - gnupg
+              - lsb-release
 
-    - name: Update apt cache
-      apt:
-        update_cache: yes
-      when: ansible_distribution == "Ubuntu"
+        - name: Add Docker’s official GPG key
+          apt_key:
+            url: https://download.docker.com/linux/ubuntu/gpg
+            state: present
 
-    - name: Install wget
-      apt:
-        name: wget
-        state: present
+        - name: Set up the stable repository
+          apt_repository:
+            repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+            state: present
 
-    - name: Install Python3
-      apt:
-        name: python3
-        state: present
+        - name: Install Docker Engine
+          apt:
+            name: "{{ packages }}"
+            state: latest
+            update_cache: yes
+          vars:
+            packages:
+              - docker-ce
+              - docker-ce-cli
+              - containerd.io
+              - docker-buildx-plugin
+              - docker-compose-plugin
+        - name: Ensure docker group exists
+          group:
+            name: docker
+            state: present
 
-    - name: Install Docker dependencies
-      apt:
-        name:
-          - apt-transport-https
-          - ca-certificates
-          - curl
-          - gnupg-agent
-          - software-properties-common
-        state: present
-        update_cache: yes
-      when: docker_check.rc != 0
+        - name: Add user to the docker group
+          user:
+            name: "{{ ansible_user_id }}"
+            groups: docker
+            append: yes
 
-    - name: Add Docker GPG key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-      when: docker_check.rc != 0
+        - name: Reboot the system
+          reboot:
 
-    - name: Add repository docker
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
-        state: present
-      when: docker_check.rc != 0
-
-    - name: Install docker
-      apt:
-        name:
-          - docker-ce
-          - docker-ce-cli
-          - containerd.io
-        state: present
-        update_cache: yes
-      when: docker_check.rc != 0
-
-    - name: Install docker-compose
-      get_url:
-        url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
-        dest: /usr/local/bin/docker-compose
-        mode: '755'
-      when: docker_compose_check.rc != 0
-
+        - name: Wait for system to become reachable
+          wait_for_connection:
+            delay: 10
+            timeout: 300
+      when: docker_installed is failed
     - name: Install pip3
       apt:
         name: python3-pip
@@ -108,7 +98,7 @@
         groups: docker
         append: yes
       register: user_group
-      when: docker_check.rc != 0
+      when: docker_installed.rc != 0
 
     - name: Reboot the system
       reboot:
