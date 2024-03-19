@@ -32,9 +32,11 @@
 
     - name: Clone rdcore git repository
       git:
-        repo: "https://github.com/keeganwhite/rdcore.git"
+        repo: "https://github.com/iNethi/rdcore.git"
         dest: "/mnt/data/rdcore"
+        version: "updated-version"
         clone: yes
+
 
     - name: Copy database setup files
       copy:
