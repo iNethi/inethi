@@ -25,22 +25,26 @@ The rest of the rules:
 10.2.0.10 wordpress.inethilocal.net
 
 ```
-## Grafana, Prometheus and Traefik
+## Grafana, Prometheus, BlackBox Exporter, AP Monitoring and Traefik
 Once you have run the Python build script Traefik, Grafana and Prometheus will automatically be installed and 
 configured. Make sure you have added a route to them in your hosts file or firewall.
 
 The following steps are the manual steps you need to take to configure the dashboard and data sources:
-1. Navigate to `prometheus.inethilocal.net`. Navigate to the targets page to check if the endpoints are up, do this
+1. Navigate to `prometheus.inethilocal.net`. The username and password is the same as the Traefik dashboard's password.
+Default u: inethi, p: iNethi2023#. Navigate to the targets page to check if the endpoints are up, do this
 using the menu: status -> targets and check that the prometheus and traefik endpoint are up.
 2. Navigate to `grafana.inethilocal.net`. Use the default user and password to login which is `admin` and `admin`.
-change the password when promted. 
+change the password when promoted. 
 3. Once you are at the homepage, navigate to the data source page and add a new source.
 Select prometheus as the source and the only thing to add in the subsequent steps is the prometheus server URL which is
 `http://inethi-prometheus:9090`
 4. Add a dashboard from the home page/menu navigate to dashboards, add a new dashboard. Use the `import` option and
 enter the official Traefik dashboards ID: `17346`, click load next to the text input. On the next page use the 
 Prometheus datasource you created in the last step as the data source and then click import. Your dashboard will show 
-up.
+up. You can also add a blackbox dashboard to monitor access point up time `18674`
+5. Add the custom nack box monitor for network devices by dragging the json file in the [grafana folder](./grafana) into
+the import dashboard section. You also need to install the Polystat plugin for the dashboard to work.
+6. Navigate to the AP monitoring system and add you APs.
 
 ## Keycloak
 ### Logging in
@@ -49,6 +53,7 @@ password `iNethi2023#`.
 ![Screenshot showing location of admin console](./keycloak/screenshots/login-admin.png)
 Set up clients to use the update and management portals:
 ### Import Real Settings
-Navigate to Manage -> Import and upload the [Master Realm JSON file](./keycloak/master-realm.json). This will enable
-user registration and keycloak login for the update and management portals.
+Navigate to Manage -> Import and upload the [Master Realm JSON file](./keycloak/master-realm.json). Choose the skip option for imports that 
+already exist. This will enable user registration and keycloak login for the update and management portals.
 ![Screenshot showing location of import](./keycloak/screenshots/realm-import.png)
+![Screenshot showing the skip option when importing](./keycloak/screenshots/skip-exisiting.png)

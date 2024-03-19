@@ -6,72 +6,123 @@
   vars:
     KEYCLOAK_ADMIN_USER: "admin"
     KEYCLOAK_TRAEFIK_API_RULE: "keycloak"
-    MYSQL_KEYCLOAK_TRAEFIK_API_RULE: "mysql-keycloak"
+    POSTGRES_KEYCLOAK_TRAEFIK_API_RULE: "postgres-keycloak"
     KEYCLOAK_USER: "inethi"
-    MYSQLDB_VOLUME: "/mnt/data/keycloak-mysql"
+    POSTGRES_VOLUME: "/mnt/data/keycloak-postgres"
     TRAEFIK_ENTRYPOINT: "websecure"
     inethiDN: "inethilocal.net"
     INETHI_NETWORK: "inethi-bridge-traefik"
     CONF_MASTER_PASSWORD: "iNethi2023#"
     keycloak_volume: "/mnt/data/keycloak"
+    ACME_JSON: "/mnt/data/traefikssl/letsencrypt/acme.json"
+    DOMAIN: "inethilocal.net"
+    CERT_PATH: "/mnt/data/keycloak/certs/tls.crt"
+    KEY_PATH: "/mnt/data/keycloak/certs/tls.key"
+    KEYSTORE_PATH: "/mnt/data/keycloak/certs/"
+    TRUSTSTORE_PATH: "/mnt/data/keycloak/certs/"
+    KEYSTORE_PASSWORD: "iNethi2023#"
+
 
   tasks:
+    - name: Install necessary packages
+      apt:
+        name:
+          - jq
+          - openssl
+          - openjdk-11-jre-headless
+        state: present
+
     - name: Create directory for keycloak volume
       file:
         path: "{{ keycloak_volume }}/"
         state: directory
         mode: '0755'
-    - name: Copy secret question ftl to Server
-      copy:
-        src: resources/keycloak/secret-question.ftl
-        dest: "{{ keycloak_volume }}/"
-    - name: Copy secret question config ftl to Server
-      copy:
-        src: resources/keycloak/secret-question-config.ftl
-        dest: "{{ keycloak_volume }}/"
-    - name: Create MySQL container for Keycloak
+    - name: Create directory for postgress volume
+      file:
+        path: "{{ POSTGRES_VOLUME }}/"
+        state: directory
+        mode: '0777'
+    - name: Create directory for certificates
+      file:
+        path: "{{ keycloak_volume }}/certs"
+        state: directory
+        mode: '0755'
+
+    - name: Extract certificate and key from acme.json
+      shell: |
+        ACME_JSON="/mnt/data/traefikssl/letsencrypt/acme.json"
+        CERT_DIR="/mnt/data/keycloak/certs"
+        DOMAIN="inethilocal.net"
+        
+        jq -r '.letsencrypt.Certificates[] | select(.domain.main == "inethilocal.net") | .certificate' $ACME_JSON | base64 -d > $CERT_DIR/cert.pem
+        jq -r '.letsencrypt.Certificates[] | select(.domain.main == "inethilocal.net") | .key' $ACME_JSON | base64 -d > $CERT_DIR/privkey.pem
+
+      args:
+        executable: /bin/bash
+    - name: Generate keystore from certificate and key
+      shell: |
+        CERT_DIR="/mnt/data/keycloak/certs"
+        KEYSTORE_PASSWORD="iNethi2023#"
+        openssl pkcs12 -export -in $CERT_DIR/cert.pem -inkey $CERT_DIR/privkey.pem -out $CERT_DIR/keystore.p12 -name keycloak -password pass:$KEYSTORE_PASSWORD
+        keytool -importkeystore -deststorepass $KEYSTORE_PASSWORD -destkeypass $KEYSTORE_PASSWORD -destkeystore $CERT_DIR/keystore.jks -srckeystore $CERT_DIR/keystore.p12 -srcstoretype PKCS12 -alias keycloak -srcstorepass $KEYSTORE_PASSWORD -noprompt
+      args:
+        executable: /bin/bash
+
+    - name: Create Postgres container for Keycloak
       docker_container:
-        name: inethi-keycloak-mysql
-        image: mysql:5.7
+        name: inethi-keycloak-postgres
+        image: docker.io/bitnami/postgresql
         restart_policy: unless-stopped
         env:
-          MYSQL_ROOT_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
-          MYSQL_DATABASE: "keycloak"
-          MYSQL_USER: "{{ KEYCLOAK_ADMIN_USER }}"
-          MYSQL_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
+          POSTGRESQL_DATABASE: "keycloak"
+          POSTGRESQL_USERNAME: "{{ KEYCLOAK_ADMIN_USER }}"
+          POSTGRESQL_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
         volumes:
-          - "{{ MYSQLDB_VOLUME }}:/var/lib/mysql"
+          - "{{ POSTGRES_VOLUME }}:/bitnami/postgresql"
         labels:
           traefik.enable: "true"
-          traefik.http.routers.mysql-keycloak.rule: "Host(`{{ MYSQL_KEYCLOAK_TRAEFIK_API_RULE }}.{{ inethiDN }}`)"
-          traefik.http.routers.mysql-keycloak.entrypoints: "{{ TRAEFIK_ENTRYPOINT }}"
+          traefik.http.routers.postgres-keycloak.rule: "Host(`{{ POSTGRES_KEYCLOAK_TRAEFIK_API_RULE }}.{{ inethiDN }}`)"
+          traefik.http.routers.postgres-keycloak.entrypoints: "{{ TRAEFIK_ENTRYPOINT }}"
         networks:
           - name: "{{ INETHI_NETWORK }}"
-    - name: Wait (3 mins) for Keycloak Database
+    - name: Wait (3 min) for Keycloak Database
       pause:
         seconds: 180
 
     - name: Create Keycloak container
       docker_container:
-        image: jboss/keycloak:16.1.1
+        image: quay.io/keycloak/keycloak:24.0.1
         name: inethi-keycloak
         restart_policy: unless-stopped
         state: started
-        volumes:
-          - "{{ keycloak_volume }}/secret-question.ftl:/opt/jboss/keycloak/themes/base/login/secret-question.ftl"
-          - "{{ keycloak_volume }}/secret-question-config.ftl:/opt/jboss/keycloak/themes/base/login/secret-question-config.ftl"
+        command:
+          - start-dev
+          - --verbose
         env:
-          HOSTNAME: "{{ KEYCLOAK_TRAEFIK_API_RULE }}"
           KEYCLOAK_ADMIN: "{{ KEYCLOAK_ADMIN_USER }}"
           KEYCLOAK_ADMIN_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
           KEYCLOAK_USER: "{{ KEYCLOAK_USER }}"
+
           KEYCLOAK_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
-          DB_VENDOR: "MYSQL"
-          DB_ADDR: "inethi-keycloak-mysql"
-          DB_DATABASE: "keycloak"
-          DB_USER: "{{ KEYCLOAK_ADMIN_USER }}"
-          DB_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
-          PROXY_ADDRESS_FORWARDING: "true"
+          KEYCLOAK_DATABASE_VENDOR: "postgresql"
+          KC_DB_URL: " jdbc:postgresql://inethi-keycloak-postgres/keycloak"
+          KEYCLOAK_DATABASE_NAME: "keycloak"
+          KC_DB_USERNAME: "{{ KEYCLOAK_ADMIN_USER }}"
+          KC_DB: 'postgres'
+          KC_DB_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
+
+          KC_HOSTNAME: "{{ KEYCLOAK_TRAEFIK_API_RULE }}.{{ inethiDN }}"
+          KC_HOSTNAME_STRICT: "true"
+          KC_HOSTNAME_STRICT_HTTPS: "true"
+          KC_PROXY: "edge"
+
+          KC_HTTPS_KEY_STORE_FILE: "/opt/keycloak/certs/keystore.jks"
+          KC_HTTPS_KEY_STORE_PASSWORD: "iNethi2023#"
+
+
+        volumes:
+          - "{{ KEYSTORE_PATH }}:/opt/keycloak/certs/"
+
         labels:
           traefik.enable: "true"
           traefik.http.routers.keycloak.rule: "Host(`{{ KEYCLOAK_TRAEFIK_API_RULE }}.{{ inethiDN }}`)"
