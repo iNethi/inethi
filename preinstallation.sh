@@ -125,7 +125,7 @@ if ! command -v sshpass &> /dev/null; then
             echo "Homebrew is not installed. Installing now..."
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         fi
-        brew install https://raw.githubusercontent.com/kadwanev/bigboybrew/master/Library/Formula/sshpass.rb
+        brew install sshpass
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
         if [ -f /etc/os-release ]; then
             . /etc/os-release
