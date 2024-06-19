@@ -157,5 +157,8 @@ echo "Installing Python Requirements"
 pip3 install -r requirements.txt || exit 1
 echo
 
+echo "Installing ansible galaxy requirements"
+ansible-galaxy collection install community.docker --upgrade
+
 echo "Pre-installation complete..."
 sleep 3

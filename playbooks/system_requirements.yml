@@ -92,21 +92,6 @@
         name: docker-compose
         state: present
 
-    - name: Adding users to docker group
-      user:
-        name: '{{ ansible_user }}'
-        groups: docker
-        append: yes
-      register: user_group
-      when: docker_installed.rc != 0
-
-    - name: Reboot the system
-      reboot:
-        reboot_timeout: 600
-        pre_reboot_delay: 0
-        post_reboot_delay: 15
-      when: user_group.changed
-
     - name: Create the Docker Network network
       docker_network:
         name: inethi-bridge-traefik

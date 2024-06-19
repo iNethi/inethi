@@ -48,7 +48,7 @@ the import dashboard section. You also need to install the Polystat plugin for t
 
 ## Keycloak
 ### Logging in
-Log into keycloak via the admin console at https://keycloak.inethilocal.net/auth/ using the username `inethi` and 
+Log into keycloak via the admin console at https://keycloak.inethilocal.net/auth/ using the username `admin` and 
 password `iNethi2023#`.
 ![Screenshot showing location of admin console](./keycloak/screenshots/login-admin.png)
 Set up clients to use the update and management portals:
