@@ -1,0 +1,3 @@
+---
+- name: Create data mount
+  import_tasks: create-data-mount.yml

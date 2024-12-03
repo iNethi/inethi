@@ -1,0 +1,11 @@
+---
+- name: Copy files to Server
+  copy:
+    src: files/
+    dest: "{{ DATA_MOUNT }}/radiusdesk-mariadb"
+
+- name: Set permissions on database volume
+  file:
+    path: "{{ DATA_MOUNT }}/radiusdesk-mariadb"
+    mode: '0777'
+    recurse: yes

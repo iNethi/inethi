@@ -1,0 +1,6 @@
+---
+- name: Create kiwix directory
+  file:
+    path: "{{ DATA_MOUNT }}/kiwix"
+    state: directory
+    mode: '0755'

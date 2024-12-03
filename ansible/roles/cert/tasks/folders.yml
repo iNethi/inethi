@@ -1,0 +1,6 @@
+---
+- name: Create cert updater directory
+  file:
+    path: "{{ DATA_MOUNT }}/cert-update"
+    state: directory
+    mode: '0755'

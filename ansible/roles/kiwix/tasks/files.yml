@@ -1,0 +1,5 @@
+---
+- name: Copy zim files to Server
+  copy:
+    src: wikipedia_en_100_mini_2023-08.zim
+    dest: "{{ DATA_MOUNT }}/kiwix"

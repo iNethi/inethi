@@ -1,0 +1,6 @@
+---
+- name: Set up Nextcloud stack
+  hosts: localserver
+  become: true
+  roles:
+    - nextcloud

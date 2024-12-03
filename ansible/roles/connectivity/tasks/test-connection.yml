@@ -1,0 +1,4 @@
+---
+- name: Connection
+  become: yes
+  debug: msg="Connected"

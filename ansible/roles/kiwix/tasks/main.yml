@@ -1,0 +1,7 @@
+---
+- name: Create kiwix folder
+  import_tasks: folders.yml
+- name: Copy zim file to server
+  import_tasks: files.yml
+- name: start docker container
+  import_tasks: docker.yml

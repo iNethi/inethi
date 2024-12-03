@@ -1,0 +1,7 @@
+---
+- name: Create folders for Splash
+  import_tasks: folders.yml
+- name: Copy files to server
+  import_tasks: files.yml
+- name: Create Splash docker container
+  import_tasks: docker.yml

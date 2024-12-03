@@ -1,0 +1,14 @@
+---
+- name: Create Nextcloud and Share volumes
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0777'
+  loop:
+    - '{{ SHARE_VOLUME }}'
+    - '{{ NEXTCLOUD_RSHARE_VOLUME }}'
+    - '{{ NEXTCLOUD_RVIDEO_VOLUME }}'
+    - '{{ NEXTCLOUD_RPHOTO_VOLUME }}'
+    - '{{ NEXTCLOUD_RMUSIC_VOLUME }}'
+    - '{{ DATA_MOUNT }}/nextcloud/'
+    - '{{ DATA_MOUNT }}/nextcloud-mysql/'

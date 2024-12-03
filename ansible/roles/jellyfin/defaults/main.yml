@@ -1,0 +1,8 @@
+BRIDGE: "inethi-bridge-traefik"
+DATA_MOUNT: "/mnt/data"
+SHARE_VOLUME: "/mnt/data/share"
+INETHI_LOCAL_DOMAIN: "inethilocal.net"
+NEXTCLOUD_RSHARE_VOLUME: "/mnt/data/share/Rshare"
+NEXTCLOUD_RVIDEO_VOLUME: "/mnt/data/share/Rvideo"
+NEXTCLOUD_RPHOTO_VOLUME: "/mnt/data/share/Rphoto"
+NEXTCLOUD_RMUSIC_VOLUME: "/mnt/data/share/Rmusic"

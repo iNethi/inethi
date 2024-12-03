@@ -1,0 +1,6 @@
+---
+- name: Set up Keycloak stack
+  hosts: localserver
+  become: true
+  roles:
+    - keycloak

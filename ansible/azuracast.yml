@@ -1,0 +1,6 @@
+---
+- name: Set up Azuracast stack
+  hosts: localserver
+  become: true
+  roles:
+    - azuracast

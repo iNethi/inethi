@@ -1,0 +1,22 @@
+- name: Create InfluxDB container
+  docker_container:
+    name: inethi-influxdb
+    image: influxdb:1.8.0
+    restart_policy: unless-stopped
+    state: started
+    env:
+      INFLUXDB_DB: prometheus
+      INFLUXDB_ADMIN_USER: "inethi"
+      INFLUXDB_ADMIN_PASSWORD: "iNethi2023#"
+      INFLUXDB_HTTP_BIND_ADDRESS: ":{{ INFLUXDB_PORT }}"
+      INFLUXDB_HTTP_ENABLED: "true"
+      INFLUXDB_HTTP_AUTH_ENABLED: "true"
+    volumes:
+      - "{{ DATA_MOUNT }}/influxdb:/var/lib/influxdb"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.influxdb.rule: "Host(`influxdb.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.influxdb.entrypoints: "websecure"
+      traefik.http.services.influxdb.loadbalancer.server.port: "{{ INFLUXDB_PORT }}"
+    networks:
+      - name: "{{ BRIDGE }}"

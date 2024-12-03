@@ -1,0 +1,9 @@
+---
+- name: Install requirements
+  import_tasks: system-requirements.yml
+- name: Create directories
+  import_tasks: folders.yml
+- name: Generate keystore
+  import_tasks: generate-keystore.yml
+- name: Start Keycloak Docker stack
+  import_tasks: docker.yml

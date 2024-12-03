@@ -1,0 +1,3 @@
+---
+- name: Check remote system version
+  import_tasks: test-version.yml

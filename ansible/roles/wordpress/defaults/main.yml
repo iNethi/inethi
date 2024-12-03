@@ -1,0 +1,7 @@
+BRIDGE: "inethi-bridge-traefik"
+INETHI_LOCAL_DOMAIN: "inethilocal.net"
+DATA_MOUNT: "/mnt/data"
+MARIADB_ROOT_PASSWORD: 'iNethi2023#'
+MARIADB_USER: 'inethi'
+MARIADB_PASSWORD: 'iNethi2023#'
+MARIADB_DATABASE: 'inethi'

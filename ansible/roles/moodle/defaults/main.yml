@@ -1,0 +1,5 @@
+BRIDGE: "inethi-bridge-traefik"
+DATA_MOUNT: "/mnt/data"
+INETHI_LOCAL_DOMAIN: "inethilocal.net"
+MOODLE_USERNAME: 'inethi'
+MOODLE_PASSWORD: 'iNethi2023#'

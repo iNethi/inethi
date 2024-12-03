@@ -1,0 +1,9 @@
+---
+- name: Create Wordpress folders
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0777'
+  loop:
+    - '{{ DATA_MOUNT }}/wordpress'
+    - '{{ DATA_MOUNT }}/wordpress-mariadb'

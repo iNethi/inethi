@@ -1,0 +1,6 @@
+---
+- name: Set up Jellyfin
+  hosts: localserver
+  become: true
+  roles:
+    - jellyfin

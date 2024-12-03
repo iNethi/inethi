@@ -1,0 +1,10 @@
+- name: Create dnsmasq.conf file
+  copy:
+    content: |
+      no-resolv
+      log-queries
+      server=1.0.0.1
+      server=1.1.1.1
+      strict-order
+      address=/{{ INETHI_LOCAL_DOMAIN }}/{{ ansible_default_ipv4.address }}
+    dest: "{{ DATA_MOUNT }}/dnsmasq/dnsmasq.conf"

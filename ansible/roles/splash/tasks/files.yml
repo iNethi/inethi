@@ -1,0 +1,17 @@
+---
+- name: Copy files to Server
+  copy:
+    src: files/
+    dest: "{{ DATA_MOUNT }}/splash"
+
+- name: Copy splash files to Nginx
+  copy:
+    src: "{{ DATA_MOUNT }}/splash/generic-splash"
+    dest: "{{ DATA_MOUNT }}/splash/html/"
+    remote_src: yes
+
+- name: Set permissions on Nginx volume
+  file:
+    path: "{{ DATA_MOUNT }}/splash"
+    mode: '0745'
+    recurse: yes

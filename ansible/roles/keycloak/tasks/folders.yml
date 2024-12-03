@@ -1,0 +1,16 @@
+---
+- name: Create keycloak directory
+  file:
+    path: "{{ DATA_MOUNT }}/keycloak"
+    state: directory
+    mode: '0755'
+- name: Create directory for postgress volume
+  file:
+    path: "{{ DATA_MOUNT }}/keycloak-postrgres"
+    state: directory
+    mode: '0777'
+- name: Create directory for certificates
+  file:
+    path: "{{ DATA_MOUNT }}/keycloak/certs"
+    state: directory
+    mode: '0755'

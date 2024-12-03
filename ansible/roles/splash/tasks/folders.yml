@@ -1,0 +1,9 @@
+---
+- name: Create Splash directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0745'
+  with_items:
+    - "{{ DATA_MOUNT }}/splash"
+    - "{{ DATA_MOUNT }}/splash/html"

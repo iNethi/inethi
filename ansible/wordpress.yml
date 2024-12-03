@@ -1,0 +1,6 @@
+---
+- name: Set up Wordpress
+  hosts: localserver
+  become: true
+  roles:
+    - wordpress

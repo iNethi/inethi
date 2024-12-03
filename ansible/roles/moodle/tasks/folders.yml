@@ -1,0 +1,10 @@
+---
+- name: Create Moodle volumes
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0777'
+  loop:
+    - '{{ DATA_MOUNT }}/moodle'
+    - '{{ DATA_MOUNT }}/moodle_data'
+    - '{{ DATA_MOUNT }}/moodle-mariadb'

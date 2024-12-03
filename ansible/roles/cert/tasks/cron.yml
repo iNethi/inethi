@@ -1,0 +1,12 @@
+- name: Create cronjob for certificate update
+  ansible.builtin.cron:
+    name: "Update certificates and restart containers"
+    minute: "*/30"
+    hour: "*"
+    day: "*"
+    month: "*"
+    weekday: "*"
+    job: "/mnt/data/cert-update/update_certificate.sh"
+    user: root
+    state: present
+

@@ -1,0 +1,7 @@
+---
+- name: Set up dnsmasq
+  hosts: localserver
+  become: true
+  gather_facts: true
+  roles:
+    - dnsmasq

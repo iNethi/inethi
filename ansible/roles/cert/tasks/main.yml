@@ -1,0 +1,8 @@
+- name: Create folder
+  import_tasks: folders.yml
+- name: Ensure packages are present
+  import_tasks: packages.yml
+- name: upload script
+  import_tasks: files.yml
+- name: create cron job every 30 min
+  import_tasks: cron.yml

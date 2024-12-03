@@ -1,0 +1,10 @@
+---
+- name: Install necessary packages
+  apt:
+    name:
+      - jq
+      - curl
+      - openssl
+      - openjdk-11-jre-headless
+    update_cache: yes
+    state: present

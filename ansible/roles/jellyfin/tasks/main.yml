@@ -1,0 +1,5 @@
+---
+- name: Create directories
+  import_tasks: folders.yml
+- name: Create Jellyfin Docker
+  import_tasks: docker.yml

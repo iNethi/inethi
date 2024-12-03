@@ -1,2 +1,0 @@
-[localserver]
-10.10.255.223 ansible_user='inethi' ansible_password='iNethi#2023' ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_become_pass='iNethi#2023'

@@ -1,0 +1,48 @@
+---
+- name: Start database for Wordpress
+  docker_container:
+    name: inethi-wordpress-mariadb
+    image: docker.io/bitnami/mariadb:latest
+    state: started
+    restart_policy: unless-stopped
+    env:
+      MARIADB_ROOT_PASSWORD: "{{ MARIADB_ROOT_PASSWORD }}"
+      MARIADB_USER: "{{ MARIADB_USER }}"
+      MARIADB_PASSWORD: "{{ MARIADB_PASSWORD }}"
+      MARIADB_DATABASE: "{{ MARIADB_DATABASE }}"
+    volumes:
+      - "{{ DATA_MOUNT }}/wordpress-mariadb:/var/lib/mysql"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-u", "root", "-p{{ MARIADB_PASSWORD }}" ]
+      interval: '10s'
+      timeout: '5s'
+      retries: 5
+    networks:
+      - name: "{{ BRIDGE }}"
+- name: Wait for MariaDB container to be healthy
+  docker_container_info:
+    name: inethi-wordpress-mariadb
+  register: mariadb_info
+  until: mariadb_info.container.State.Health.Status == 'healthy'
+  retries: 10
+  delay: 6
+- name: Start Wordpress container
+  docker_container:
+    name: inethi-wordpress
+    image: wordpress:latest
+    state: started
+    restart_policy: unless-stopped
+    env:
+      WORDPRESS_DB_NAME: "{{ MARIADB_DATABASE }}"
+      WORDPRESS_TABLE_PREFIX: "wp_"
+      WORDPRESS_DB_HOST: "inethi-wordpress-mariadb"
+      WORDPRESS_DB_USER: "{{ MARIADB_USER }}"
+      WORDPRESS_DB_PASSWORD: "{{ MARIADB_PASSWORD }}"
+    volumes:
+      - "{{ DATA_MOUNT }}/wordpress:/var/www/html"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.wordpress.rule: "Host(`wordpress.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.wordpress.entrypoints: "websecure"
+    networks:
+      - name: "{{ BRIDGE }}"

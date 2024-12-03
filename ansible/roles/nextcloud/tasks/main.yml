@@ -1,0 +1,5 @@
+---
+- name: Create directories
+  import_tasks: folders.yml
+- name: Create Nextcloud and MySQL Docker
+  import_tasks: docker.yml

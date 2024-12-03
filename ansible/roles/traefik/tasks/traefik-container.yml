@@ -1,0 +1,23 @@
+- name: Create the Traefik SSL container
+  docker_container:
+    name: inethi-traefikssl
+    image: traefik:v2.5
+    restart_policy: unless-stopped
+    state: started
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "{{ DATA_MOUNT }}/traefik/letsencrypt:/letsencrypt"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "{{ DATA_MOUNT }}/traefik/traefik.toml:/etc/traefik/traefik.toml"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.traefik.rule: "Host(`{{ HOST_NAME }}.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.traefik.service: "api@internal"
+      traefik.http.routers.traefik.entrypoints: "websecure"
+      traefik.http.routers.traefik.tls.certresolver: "letsencrypt"
+      traefik.http.routers.traefik.middlewares: "myauth"
+      traefik.http.middlewares.myauth.basicauth.users: "{{ AUTH_COMBINATION }}"
+    networks:
+      - name: "{{ BRIDGE }}"

@@ -1,0 +1,17 @@
+---
+- name: Create Jellyfin and Share volumes
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0777'
+  loop:
+    - '{{ SHARE_VOLUME }}'
+    - '{{ NEXTCLOUD_RSHARE_VOLUME }}'
+    - '{{ NEXTCLOUD_RVIDEO_VOLUME }}'
+    - '{{ NEXTCLOUD_RPHOTO_VOLUME }}'
+    - '{{ NEXTCLOUD_RMUSIC_VOLUME }}'
+    - '{{ DATA_MOUNT }}/jellyfin/'
+    - '{{ DATA_MOUNT }}/jellyfin/config'
+    - '{{ DATA_MOUNT }}/jellyfin/tvseries'
+    - '{{ DATA_MOUNT }}/jellyfin/movies'
+    - '{{ DATA_MOUNT }}/jellyfin/library'

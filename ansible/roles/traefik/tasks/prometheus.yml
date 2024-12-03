@@ -1,0 +1,20 @@
+- name: Create the Prometheus container
+  docker_container:
+    name: inethi-prometheus
+    image: prom/prometheus:latest
+    restart_policy: unless-stopped
+    state: started
+    volumes:
+      - "{{ DATA_MOUNT }}/prometheus:/prometheus"
+      - "{{ DATA_MOUNT }}/prometheus/prometheus-config:/etc/prometheus"
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.prometheus.rule: "Host(`prometheus.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.prometheus.entrypoints: "websecure"
+      traefik.http.routers.prometheus.middlewares: "myauth"
+    networks:
+      - name: "{{ BRIDGE }}"

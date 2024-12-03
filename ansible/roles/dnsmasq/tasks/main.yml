@@ -1,0 +1,7 @@
+---
+- name: Create directories
+  import_tasks: folders.yml
+- name: Create config file
+  import_tasks: conf-file.yml
+- name: Create dnsmasq Docker
+  import_tasks: docker.yml

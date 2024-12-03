@@ -1,0 +1,5 @@
+- name: Upload the certificate update script
+  copy:
+    src: update_certificate.sh
+    dest: "{{ DATA_MOUNT }}/cert-update"
+    mode: '0755'

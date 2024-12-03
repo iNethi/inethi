@@ -1,0 +1,5 @@
+---
+- name: Create directory for data volume
+  file:
+    path: "{{ DATA_MOUNT }}"
+    state: directory

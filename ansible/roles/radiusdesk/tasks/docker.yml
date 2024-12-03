@@ -1,0 +1,56 @@
+- name: Create Docker volumes for Radiusdesk
+  docker_volume:
+    name: rd_data
+    state: present
+
+- name: Start Radiusdesk database Docker Container
+  docker_container:
+    name: rdmariadb
+    image: docker.io/bitnami/mariadb:10.5
+    restart_policy: unless-stopped
+    state: started
+    volumes:
+      - "{{ DATA_MOUNT }}/radiusdesk-mariadb/db_conf/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro"
+      - "{{ DATA_MOUNT }}/radiusdesk-mariadb/db_startup:/docker-entrypoint-initdb.d:ro"
+      - "rd_data:/bitnami/mariadb"
+    env:
+      ALLOW_EMPTY_PASSWORD: 'yes'
+      MARIADB_ROOT_PASSWORD: 'rd'
+      MARIADB_USER: 'rd'
+      MARIADB_PASSWORD: 'rd'
+      MARIADB_DATABASE: 'rd'
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "-prd"]
+      interval: '10s'
+      timeout: '5s'
+      retries: 5
+    networks:
+      - name: "{{ BRIDGE }}"
+
+- name: Wait for MariaDB container to be healthy
+  docker_container_info:
+    name: rdmariadb
+  register: mariadb_info
+  until: mariadb_info.container.State.Health.Status == 'healthy'
+  retries: 10
+  delay: 6
+
+- name: Start Radiusdesk Docker Container
+  docker_container:
+    name: inethi-radiusdesk
+    image: keegan337/radiusdesk:4.0.0
+    restart_policy: unless-stopped
+    state: started
+    env:
+      PHP_INI_SCAN_DIR: ':/p/gd:/p/sqlite3'
+      PHP.cgi.fix_pathinfo: '1'
+      PHP_SELF: '/index.php'
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.radiusdesk.rule: "Host(`radiusdesk.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.radiusdesk.entrypoints: "websecure"
+    networks:
+      - name: "{{ BRIDGE }}"

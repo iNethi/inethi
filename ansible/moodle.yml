@@ -1,0 +1,6 @@
+---
+- name: Set up Moodle stack
+  hosts: localserver
+  become: true
+  roles:
+    - moodle

@@ -1,0 +1,5 @@
+---
+- name: Install Docker and Docker Compose
+  import_tasks: install-docker.yml
+- name: Create Docker bridge
+  import_tasks: create-docker-bridge.yml

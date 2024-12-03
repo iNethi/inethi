@@ -1,0 +1,5 @@
+---
+- name: Set up data mount for iNethi data
+  hosts: localserver
+  roles:
+    - folders

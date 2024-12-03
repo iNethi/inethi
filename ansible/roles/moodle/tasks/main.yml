@@ -1,0 +1,5 @@
+---
+- name: Create directories
+  import_tasks: folders.yml
+- name: Create Mariadb and Moodle docker
+  import_tasks: docker.yml

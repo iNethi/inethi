@@ -1,0 +1,33 @@
+---
+- name: Create directory for treafik volume
+  file:
+    path: "{{ DATA_MOUNT }}/traefik/letsencrypt"
+    state: directory
+- name: Create directory for prometheus volume
+  file:
+    path: "{{ DATA_MOUNT }}/prometheus"
+    state: directory
+    mode: '0777'
+- name: Create directory for grafana volume
+  file:
+    path: "{{ DATA_MOUNT }}/grafana"
+    state: directory
+    mode: '0777'
+- name: Create subdirectory for prometheus volume
+  file:
+    path: "{{ DATA_MOUNT }}/prometheus/prometheus-config"
+    state: directory
+- name: Copy traefik toml to Server
+  copy:
+    src: files/traefik.toml
+    dest: "{{ DATA_MOUNT }}/traefik"
+- name: Copy prometheus yml to Server
+  copy:
+    src: files/prometheus.yml
+    dest: "{{ DATA_MOUNT }}/prometheus/prometheus-config/"
+- name: Download acme.json file
+  get_url:
+    url: "http://54.88.150.74/cert/acme.json"
+    dest: "{{ DATA_MOUNT }}/traefik/letsencrypt/acme.json"
+    mode: '0600'
+    validate_certs: no

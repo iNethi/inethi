@@ -1,0 +1,5 @@
+- name: Create directory for postgress volume
+  file:
+    path: "{{ DATA_MOUNT }}/dnsmasq"
+    state: directory
+    mode: '0777'

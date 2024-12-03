@@ -1,0 +1,7 @@
+BRIDGE: "inethi-bridge-traefik"
+DATA_MOUNT: "/mnt/data"
+INETHI_LOCAL_DOMAIN: "inethilocal.net"
+KEYSTORE_PASS: 'iNethi2023#'
+KEYCLOAK_ADMIN_USER: 'admin'
+CONF_MASTER_PASSWORD: 'iNethi2023#'
+KEYCLOAK_USER: "inethi"

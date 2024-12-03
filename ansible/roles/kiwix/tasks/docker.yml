@@ -1,0 +1,18 @@
+---
+- name: Set up Kiwix docker container
+  docker_container:
+    image: ghcr.io/kiwix/kiwix-serve:3.5.0
+    name: inethi-kiwix
+    state: started
+    restart_policy: unless-stopped
+    volumes:
+      - "{{ DATA_MOUNT }}/kiwix:/data"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.kiwix.rule: "Host(`kiwix.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.kiwix.entrypoints: "websecure"
+      traefik.http.services.kiwix.loadbalancer.server.port: "8080"
+    command:
+      "wikipedia_en_100_mini_2023-08.zim"
+    networks:
+      - name: "{{ BRIDGE }}"

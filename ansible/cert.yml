@@ -1,0 +1,6 @@
+---
+- name: Set up certificate update cron job
+  hosts: localserver
+  become: true
+  roles:
+    - cert

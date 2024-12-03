@@ -1,0 +1,8 @@
+---
+- name: Set up system requirements for iNethi
+  become: true
+  hosts: localserver
+  gather_facts: yes
+  roles:
+    - connectivity
+    - version

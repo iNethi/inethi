@@ -1,0 +1,6 @@
+---
+- name: Set up Splash screen
+  hosts: localserver
+  become: true
+  roles:
+    - splash

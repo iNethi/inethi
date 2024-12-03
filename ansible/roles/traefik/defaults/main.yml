@@ -1,0 +1,8 @@
+BRIDGE: "inethi-bridge-traefik"
+DATA_MOUNT: "/mnt/data"
+HOST_NAME: "traefik"
+INETHI_LOCAL_DOMAIN: "inethilocal.net"
+AUTH_COMBINATION: "inethi:$apr1$2iklmwpd$hzZ/Legjk302FsgX7iG/d."
+GF_SECURITY_ADMIN_USER: 'inethi'
+GF_SECURITY_ADMIN_PASSWORD: 'iNethi2023#'
+INFLUXDB_PORT: "8086"

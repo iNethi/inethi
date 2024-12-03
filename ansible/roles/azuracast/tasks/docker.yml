@@ -1,0 +1,56 @@
+- name: Create Docker volumes for Azuracast
+  docker_volume:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - station_data
+    - backups
+    - db_data
+    - www_uploads
+    - shoutcast2_install
+    - stereo_tool_install
+    - geolite_install
+    - sftpgo_data
+    - acme
+- name: Start Azuracast
+  docker_container:
+    name: inethi-azuracast
+    image: ghcr.io/azuracast/azuracast:latest
+    state: started
+    env:
+      LANG: 'en_US.UTF-8'
+      APPLICATION_ENV: 'production'
+      AZURACAST_SFTP_PORT: '2022'
+      NGINX_TIMEOUT: '1800'
+      LETSENCRYPT_HOST: 'inethilocal.net'
+      LETSENCRYPT_EMAIL: 'david.lloyd.johnson@gmail.com'
+      PUID: '1000'
+      PGID: '1000'
+      SHOW_DETAILED_ERRORS: 'false'
+      MYSQL_HOST: 'localhost'
+      MYSQL_PORT: '3306'
+      MYSQL_USER: 'azuracast'
+      MYSQL_PASSWORD: 'DARQyem9YRHa'
+      MYSQL_DATABASE: 'azuracast'
+      MYSQL_ROOT_PASSWORD: 'FfNXyWyfM2DCmAKpXAjq'
+      REDIS_HOST: 'localhost'
+      REDIS_PORT: '6379'
+      REDIS_DB: '1'
+    ulimits: nofile:65536:65536
+    volumes:
+      - station_data:/var/azuracast/stations
+      - backups:/var/azuracast/backups
+      - db_data:/var/lib/mysql
+      - www_uploads:/var/azuracast/storage/uploads
+      - shoutcast2_install:/var/azuracast/storage/shoutcast2
+      - stereo_tool_install:/var/azuracast/storage/stereo_tool
+      - geolite_install:/var/azuracast/storage/geoip
+      - sftpgo_data:/var/azuracast/storage/sftpgo
+      - acme:/var/azuracast/storage/acme
+    restart_policy: unless-stopped
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.azuracast.rule: "Host(`radio.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.azuracast.entrypoints: "websecure"
+    networks:
+      - name: "{{ BRIDGE }}"

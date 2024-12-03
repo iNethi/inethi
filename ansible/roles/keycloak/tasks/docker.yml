@@ -1,0 +1,61 @@
+- name: Create Postgres container for Keycloak
+  docker_container:
+    name: inethi-keycloak-postgres
+    image: docker.io/bitnami/postgresql
+    restart_policy: unless-stopped
+    env:
+      POSTGRESQL_DATABASE: "keycloak"
+      POSTGRESQL_USERNAME: "{{ KEYCLOAK_ADMIN_USER }}"
+      POSTGRESQL_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
+    volumes:
+      - "{{ DATA_MOUNT }}/keycloak-postrgres:/bitnami/postgresql"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.postgres-keycloak.rule: "Host(`postgres-keycloak.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.postgres-keycloak.entrypoints: "websecure"
+    networks:
+      - name: "{{ BRIDGE }}"
+- name: Wait (3 min) for Keycloak Database
+  pause:
+    seconds: 10
+- name: Create Keycloak container
+  docker_container:
+    image: quay.io/keycloak/keycloak:25.0.6
+    name: inethi-keycloak
+    restart_policy: unless-stopped
+    state: started
+    command:
+      - start
+      - --verbose
+    env:
+      KEYCLOAK_ADMIN: "{{ KEYCLOAK_ADMIN_USER }}"
+      KEYCLOAK_ADMIN_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
+      KEYCLOAK_USER: "{{ KEYCLOAK_USER }}"
+
+      KEYCLOAK_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
+      KEYCLOAK_DATABASE_VENDOR: "postgresql"
+      KC_DB_URL: "jdbc:postgresql://inethi-keycloak-postgres/keycloak"
+      KEYCLOAK_DATABASE_NAME: "keycloak"
+      KC_DB_USERNAME: "{{ KEYCLOAK_ADMIN_USER }}"
+      KC_DB: 'postgres'
+      KC_DB_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
+
+      KC_HOSTNAME: "keycloak.{{ INETHI_LOCAL_DOMAIN }}"
+      KC_HOSTNAME_STRICT: "true"
+      KC_PROXY: "edge"
+
+      KC_HTTPS_KEY_STORE_FILE: "/opt/keycloak/certs/keystore.jks"
+      KC_HTTPS_KEY_STORE_PASSWORD: "{{ KEYSTORE_PASS }}"
+    volumes:
+      - "{{ DATA_MOUNT }}/keycloak/certs/:/opt/keycloak/certs/"
+
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.keycloak.rule: "Host(`keycloak.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.keycloak.entrypoints: "websecure"
+      traefik.http.services.keycloak.loadbalancer.server.port: "8080"
+    networks:
+      - name: "{{ BRIDGE }}"
+- name: Wait (1 min) for Keycloak to be up and initialised
+  pause:
+    seconds: 60

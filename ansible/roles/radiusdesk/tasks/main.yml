@@ -1,0 +1,7 @@
+---
+- name: Create folders for Radiusdesk
+  import_tasks: folders.yml
+- name: Copy files to server
+  import_tasks: files.yml
+- name: Create Radiusdesk and database docker containers
+  import_tasks: docker.yml

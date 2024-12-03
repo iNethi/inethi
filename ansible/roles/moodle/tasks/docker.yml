@@ -1,0 +1,45 @@
+---
+- name: Start Moodle database container
+  docker_container:
+    name: inethi-moodle-mariadb
+    image: docker.io/bitnami/mariadb:latest
+    state: started
+    restart_policy: unless-stopped
+    env:
+      ALLOW_EMPTY_PASSWORD: "yes"
+      MARIADB_USER: "bn_moodle"
+      MARIADB_PASSWORD: "bitnami"
+      MARIADB_DATABASE: 'bitnami_moodle'
+    volumes:
+      - '{{ DATA_MOUNT }}/moodle-mariadb:/bitnami/mariadb'
+    networks:
+      - name: "{{ BRIDGE }}"
+- name: Wait (90 seconds) for Moodle Database
+  pause:
+    seconds: 90
+- name: Start Moodle container
+  docker_container:
+    name: inethi-moodle
+    image: docker.io/bitnami/moodle:4.4.4
+    state: started
+    restart_policy: unless-stopped
+    env:
+      ALLOW_EMPTY_PASSWORD: "yes"
+      MOODLE_DATABASE_HOST: "inethi-moodle-mariadb"
+      MOODLE_DATABASE_USER: "bn_moodle"
+      MOODLE_DATABASE_NAME: "bitnami_moodle"
+      MOODLE_DATABASE_PASSWORD: "bitnami"
+      MOODLE_USERNAME: "{{ MOODLE_USERNAME }}"
+      MOODLE_PASSWORD: "{{ MOODLE_PASSWORD }}"
+    volumes:
+      - '{{ DATA_MOUNT }}/moodle:/bitnami/moodle'
+      - '{{ DATA_MOUNT }}/moodle_data:/bitnami/moodledata'
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.moodle.rule: "Host(`moodle.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.moodle.entrypoints: "websecure"
+    networks:
+      - name: "{{ BRIDGE }}"
+- name: Wait (5 minutes) for Moodle to install
+  pause:
+    seconds: 300

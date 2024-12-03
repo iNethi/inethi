@@ -1,0 +1,9 @@
+---
+- name: Check if Docker is installed
+  command: docker --version
+  register: docker_installed
+- name: Create the Docker network
+  docker_network:
+    name: "{{ BRIDGE }}"
+    driver: bridge
+    attachable: yes

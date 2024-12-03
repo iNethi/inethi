@@ -1,0 +1,8 @@
+---
+- name: Create Radiusdesk database directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0745'
+  with_items:
+    - "{{ DATA_MOUNT }}/radiusdesk-mariadb"

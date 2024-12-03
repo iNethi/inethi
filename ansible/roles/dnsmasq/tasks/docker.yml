@@ -1,0 +1,13 @@
+- name: Deploy dnsmasq container
+  docker_container:
+    name: inethi-dnsmasq
+    state: started
+    restart_policy: unless-stopped
+    image: jpillora/dnsmasq:latest
+    ports:
+      - 54:53/udp
+      - "5380:8080"
+    volumes:
+      - "{{ DATA_MOUNT }}/dnsmasq/dnsmasq.conf:/etc/dnsmasq.conf:ro"
+    networks:
+      - name: "{{ BRIDGE }}"

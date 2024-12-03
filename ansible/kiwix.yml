@@ -1,0 +1,6 @@
+---
+- name: Deploy Kiwix
+  hosts: localserver
+  become: true
+  roles:
+    - kiwix

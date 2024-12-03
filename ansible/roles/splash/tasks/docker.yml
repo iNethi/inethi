@@ -1,0 +1,14 @@
+- name: Start Splash Docker Container
+  docker_container:
+    name: inethi-splash
+    image: nginx:latest
+    restart_policy: unless-stopped
+    state: started
+    volumes:
+      - "{{ DATA_MOUNT }}/splash/html/generic-splash:/usr/share/nginx/html"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.splash.rule: "Host(`splash.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.splash.entrypoints: "websecure"
+    networks:
+      - name: "{{ BRIDGE }}"

@@ -1,0 +1,25 @@
+---
+- name: Start Jellyfin container
+  docker_container:
+    name: inethi-jellyfin
+    image: linuxserver/jellyfin:10.10.3
+    state: started
+    restart_policy: unless-stopped
+    env:
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Africa/Johannesburg"
+    volumes:
+      - "{{ NEXTCLOUD_RSHARE_VOLUME }}:/mnt/Rshare"
+      - "{{ NEXTCLOUD_RVIDEO_VOLUME }}:/mnt/Rvideo"
+      - "{{ NEXTCLOUD_RPHOTO_VOLUME }}:/mnt/Rphoto"
+      - "{{ NEXTCLOUD_RMUSIC_VOLUME }}:/mnt/Rmusic"
+      - "{{ DATA_MOUNT }}/jellyfin/config:/config"
+      - "{{ DATA_MOUNT }}/jellyfin/tvseries:/data/tvshows"
+      - "{{ DATA_MOUNT }}/jellyfin/movies:/data/movies"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.jellyfin.rule: "Host(`jellyfin.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.jellyfin.entrypoints: "websecure"
+    networks:
+      - name: "{{ BRIDGE }}"

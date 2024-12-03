@@ -1,2 +1,5 @@
 .idea
-/artifacts/
+artifacts
+venv
+saved-devices/saved-devices.yml
+ansible/inventory/hosts

@@ -1,0 +1,6 @@
+---
+- name: Set up Traefik Grafana and Prometheus
+  hosts: localserver
+  become: true
+  roles:
+    - traefik

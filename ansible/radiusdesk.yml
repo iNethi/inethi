@@ -1,0 +1,6 @@
+---
+- name: Set up Radiusdesk
+  hosts: localserver
+  become: true
+  roles:
+    - radiusdesk

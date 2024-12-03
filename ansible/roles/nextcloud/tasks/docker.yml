@@ -1,0 +1,35 @@
+---
+- name: Start MySQL container for Nextcloud
+  docker_container:
+    name: inethi-nextcloud-mysql
+    image: mysql:latest
+    state: started
+    command: "--transaction-isolation=READ-COMMITTED --binlog-format=ROW"
+    env:
+      MYSQL_ROOT_PASSWORD: "{{ MYSQL_ROOT_PASS }}"
+      MYSQL_PASSWORD: "{{ MYSQL_PASS }}"
+      MYSQL_DATABASE: "inethi_nextcloud"
+      MYSQL_USER: "inethi"
+    volumes:
+      - "{{ DATA_MOUNT }}/nextcloud-mysql:/var/lib/mysql"
+    restart_policy: unless-stopped
+    networks:
+      - name: "{{ BRIDGE }}"
+- name: Start Nextcloud container
+  docker_container:
+    name: inethi-nextcloud
+    image: nextcloud
+    state: started
+    volumes:
+      - "{{ DATA_MOUNT }}/nextcloud:/var/www/html"
+      - "{{ NEXTCLOUD_RSHARE_VOLUME }}:/mnt/Rshare"
+      - "{{ NEXTCLOUD_RVIDEO_VOLUME }}:/mnt/Rvideo"
+      - "{{ NEXTCLOUD_RPHOTO_VOLUME }}:/mnt/Rphoto"
+      - "{{ NEXTCLOUD_RMUSIC_VOLUME }}:/mnt/Rmusic"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.nextcloud.rule: "Host(`nextcloud.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.nextcloud.entrypoints: "websecure"
+    restart_policy: unless-stopped
+    networks:
+      - name: "{{ BRIDGE }}"

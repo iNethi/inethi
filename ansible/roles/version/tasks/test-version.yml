@@ -1,0 +1,6 @@
+- name: Check Distribution
+  debug: msg="{{ ansible_distribution }}"
+- name: Exit with error if not Ubuntu
+  fail:
+    msg: "ERROR: Remote system is not Ubuntu"
+  when: not ansible_distribution == "Ubuntu"

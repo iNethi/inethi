@@ -1,0 +1,5 @@
+BRIDGE: "inethi-bridge-traefik"
+DATA_MOUNT: "/mnt/data"
+INETHI_LOCAL_DOMAIN: "inethilocal.net"
+CRON_SCHEDULE: "*/30 * * * *"
+UPDATE_SCRIPT: "/mnt/data/cert-update/update_certificate.sh"
