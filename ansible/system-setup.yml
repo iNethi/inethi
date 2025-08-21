@@ -3,5 +3,7 @@
   become: true
   hosts: localserver
   gather_facts: yes
+  vars_files:
+    - vault/production.yml
   roles:
     - docker

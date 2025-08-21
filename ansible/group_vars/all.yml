@@ -1,0 +1,112 @@
+# Global configuration for iNethi platform
+# This file contains all common variables used across roles
+
+# Environment Configuration
+ENVIRONMENT: "production"
+
+# Network Configuration
+BRIDGE: "inethi-bridge-traefik"
+INETHI_LOCAL_DOMAIN: "inethilocal.net"
+
+# Data Storage Configuration
+DATA_MOUNT: "/mnt/data"
+SHARE_VOLUME: "/mnt/data/share"
+
+# Shared Volume Paths (used by multiple services)
+NEXTCLOUD_RSHARE_VOLUME: "/mnt/data/share/Rshare"
+NEXTCLOUD_RVIDEO_VOLUME: "/mnt/data/share/Rvideo"
+NEXTCLOUD_RPHOTO_VOLUME: "/mnt/data/share/Rphoto"
+NEXTCLOUD_RMUSIC_VOLUME: "/mnt/data/share/Rmusic"
+
+# Timezone Configuration
+TIMEZONE: "Africa/Johannesburg"
+
+# User/Group Configuration
+PUID: "1000"
+PGID: "1000"
+
+# Certificate Configuration
+CRON_SCHEDULE: "*/30 * * * *"
+UPDATE_SCRIPT: "/mnt/data/cert-update/update_certificate.sh"
+
+# Traefik Configuration
+HOST_NAME: "traefik"
+INFLUXDB_PORT: "8086"
+
+# Production Security Settings
+LOG_LEVEL: "INFO"
+ENABLE_DEBUG_MODE: false
+SKIP_SSL_VERIFICATION: false
+ENABLE_FIREWALL: true
+ENABLE_SSL_STRICT: true
+ENABLE_MONITORING: true
+ENABLE_LOGGING: true
+
+# Default Service Configuration
+DEFAULT_ADMIN_USER: "inethi"
+DEFAULT_ADMIN_PASSWORD: "{{ vault_default_admin_password }}"
+
+# Database Configuration
+MYSQL_ROOT_PASS: "{{ vault_mysql_root_password }}"
+MYSQL_PASS: "{{ vault_mysql_password }}"
+
+# Keycloak Configuration
+KEYSTORE_PASS: "{{ vault_keystore_password }}"
+KEYCLOAK_ADMIN_USER: "admin"
+CONF_MASTER_PASSWORD: "{{ vault_conf_master_password }}"
+KEYCLOAK_USER: "inethi"
+
+# Moodle Configuration
+MOODLE_USERNAME: "inethi"
+MOODLE_PASSWORD: "{{ vault_moodle_password }}"
+
+# Grafana Configuration
+GF_SECURITY_ADMIN_USER: "inethi"
+GF_SECURITY_ADMIN_PASSWORD: "{{ vault_grafana_admin_password }}"
+
+# Authentication Configuration
+AUTH_COMBINATION: "inethi:{{ vault_auth_combination_hash }}"
+
+# Azuracast Configuration
+AZURACAST_MYSQL_USER: "azuracast"
+AZURACAST_MYSQL_PASSWORD: "{{ vault_azuracast_mysql_password }}"
+AZURACAST_MYSQL_ROOT_PASSWORD: "{{ vault_azuracast_mysql_root_password }}"
+AZURACAST_LETSENCRYPT_EMAIL: "{{ vault_azuracast_letsencrypt_email }}"
+
+# WordPress Configuration
+WORDPRESS_DB_NAME: "wordpress"
+WORDPRESS_DB_USER: "wordpress"
+WORDPRESS_DB_PASSWORD: "{{ vault_wordpress_db_password }}"
+WORDPRESS_DB_ROOT_PASSWORD: "{{ vault_wordpress_db_root_password }}"
+MARIADB_ROOT_PASSWORD: "{{ vault_wordpress_db_root_password }}"
+MARIADB_USER: "inethi"
+MARIADB_PASSWORD: "{{ vault_wordpress_db_password }}"
+MARIADB_DATABASE: "inethi"
+
+# Nextcloud Configuration
+NEXTCLOUD_DB_NAME: "inethi_nextcloud"
+NEXTCLOUD_DB_USER: "inethi"
+
+# RADIUSdesk Configuration
+RADIUSDESK_DB_NAME: "radiusdesk"
+RADIUSDESK_DB_USER: "radiusdesk"
+RADIUSDESK_DB_PASSWORD: "{{ vault_radiusdesk_db_password }}"
+RADIUSDESK_DB_ROOT_PASSWORD: "{{ vault_radiusdesk_db_root_password }}"
+
+# Jellyfin Configuration
+JELLYFIN_CONFIG_PATH: "/mnt/data/jellyfin/config"
+JELLYFIN_TV_PATH: "/mnt/data/jellyfin/tvseries"
+JELLYFIN_MOVIES_PATH: "/mnt/data/jellyfin/movies"
+JELLYFIN_LIBRARY_PATH: "/mnt/data/jellyfin/library"
+
+# Kiwix Configuration
+KIWIX_DATA_PATH: "/mnt/data/kiwix"
+
+# Splash Configuration
+SPLASH_PATH: "/mnt/data/splash"
+
+# Monitoring Configuration
+PROMETHEUS_PATH: "/mnt/data/prometheus"
+GRAFANA_PATH: "/mnt/data/grafana"
+INFLUXDB_PATH: "/mnt/data/influxdb"
+TRAEFIK_PATH: "/mnt/data/traefik"

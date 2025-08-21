@@ -1,8 +1,9 @@
--- MariaDB dump 10.19  Distrib 10.6.16-MariaDB, for debian-linux-gnu (x86_64)
+/*M!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19  Distrib 10.6.22-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: rd
 -- ------------------------------------------------------
--- Server version	10.6.16-MariaDB-0ubuntu0.22.04.1
+-- Server version	10.6.22-MariaDB-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -21,7 +22,7 @@
 
 DROP TABLE IF EXISTS `accel_arrivals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accel_arrivals` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `mac` varchar(255) NOT NULL,
@@ -49,7 +50,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accel_profile_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accel_profile_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `accel_profile_id` int(11) NOT NULL,
@@ -78,7 +79,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accel_profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accel_profiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_id` int(11) NOT NULL,
@@ -105,7 +106,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accel_servers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accel_servers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_id` int(11) NOT NULL,
@@ -140,7 +141,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accel_sessions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accel_sessions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `accel_server_id` int(11) NOT NULL,
@@ -190,7 +191,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `accel_stats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `accel_stats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `accel_server_id` int(11) NOT NULL,
@@ -225,7 +226,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `actions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `actions` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `na_id` int(10) NOT NULL,
@@ -253,7 +254,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `alerts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `alerts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `description` varchar(255) NOT NULL,
@@ -286,7 +287,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_actions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_actions` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `ap_id` int(10) NOT NULL,
@@ -315,7 +316,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_ap_profile_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_ap_profile_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_id` int(11) NOT NULL,
@@ -343,7 +344,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_connection_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_connection_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_id` int(11) DEFAULT NULL,
@@ -371,7 +372,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_loads`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_loads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_id` int(11) DEFAULT NULL,
@@ -403,14 +404,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profile_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profile_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_profile_id` int(11) DEFAULT NULL,
   `name` varchar(128) NOT NULL,
   `hidden` tinyint(1) NOT NULL DEFAULT 0,
   `isolate` tinyint(1) NOT NULL DEFAULT 0,
-  `encryption` enum('none','wep','psk','psk2','wpa','wpa2','ppsk') DEFAULT 'none',
+  `encryption` enum('none','wep','psk','psk2','wpa','wpa2','ppsk','ppsk_no_radius') DEFAULT 'none',
   `special_key` varchar(100) NOT NULL DEFAULT '',
   `auth_server` varchar(255) NOT NULL DEFAULT '',
   `auth_secret` varchar(255) NOT NULL DEFAULT '',
@@ -435,8 +436,10 @@ CREATE TABLE `ap_profile_entries` (
   `ft_pskgenerate_local` tinyint(1) NOT NULL DEFAULT 1,
   `apply_to_all` tinyint(1) NOT NULL DEFAULT 1,
   `realm_id` int(11) DEFAULT NULL,
+  `private_psk_id` int(11) DEFAULT NULL,
+  `passpoint_profile_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -445,6 +448,7 @@ CREATE TABLE `ap_profile_entries` (
 
 LOCK TABLES `ap_profile_entries` WRITE;
 /*!40000 ALTER TABLE `ap_profile_entries` DISABLE KEYS */;
+INSERT INTO `ap_profile_entries` VALUES (31,17,'Dev Guest',0,1,'none','','','',0,'both','2025-08-05 14:54:29','2025-08-05 14:54:29',0,100,'disable',0,'',0,1,100,'12345678',0,NULL,0,'abba',0,1,1,NULL,NULL,NULL),(32,17,'Dev Wireless',0,0,'psk2','12345678','','',0,'both','2025-08-05 14:54:29','2025-08-05 14:54:29',0,100,'disable',0,'',0,1,100,'12345678',0,NULL,0,'abba',0,1,1,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `ap_profile_entries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -454,7 +458,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profile_entry_schedules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profile_entry_schedules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_profile_entry_id` int(11) DEFAULT NULL,
@@ -488,7 +492,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profile_exit_ap_profile_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profile_exit_ap_profile_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_profile_exit_id` int(11) NOT NULL,
@@ -496,7 +500,7 @@ CREATE TABLE `ap_profile_exit_ap_profile_entries` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -505,6 +509,7 @@ CREATE TABLE `ap_profile_exit_ap_profile_entries` (
 
 LOCK TABLES `ap_profile_exit_ap_profile_entries` WRITE;
 /*!40000 ALTER TABLE `ap_profile_exit_ap_profile_entries` DISABLE KEYS */;
+INSERT INTO `ap_profile_exit_ap_profile_entries` VALUES (115,30,31,'2025-08-05 14:54:29','2025-08-05 14:54:29'),(116,31,32,'2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `ap_profile_exit_ap_profile_entries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -514,7 +519,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profile_exit_captive_portals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profile_exit_captive_portals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_profile_exit_id` int(11) NOT NULL,
@@ -544,7 +549,7 @@ CREATE TABLE `ap_profile_exit_captive_portals` (
   `ap_profile_exit_upstream_id` int(11) DEFAULT NULL,
   `softflowd_enabled` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -553,6 +558,7 @@ CREATE TABLE `ap_profile_exit_captive_portals` (
 
 LOCK TABLES `ap_profile_exit_captive_portals` WRITE;
 /*!40000 ALTER TABLE `ap_profile_exit_captive_portals` DISABLE KEYS */;
+INSERT INTO `ap_profile_exit_captive_portals` VALUES (16,30,'192.168.8.220','','testing123','','http://192.168.8.220/cake4/rd_cake/dynamic-details/chilli-browser-detect/','greatsecret','',0,'2025-08-05 14:54:29','2025-08-05 14:54:29',1,0,'',3128,'','','ssid dev\n',0,'','',0,0,0,NULL,0);
 /*!40000 ALTER TABLE `ap_profile_exit_captive_portals` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -562,7 +568,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profile_exit_pppoe_servers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profile_exit_pppoe_servers` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `ap_profile_exit_id` int(11) NOT NULL,
@@ -588,7 +594,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profile_exit_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profile_exit_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_profile_exit_id` int(11) NOT NULL,
@@ -615,7 +621,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profile_exits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profile_exits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_profile_id` int(11) DEFAULT NULL,
@@ -636,8 +642,11 @@ CREATE TABLE `ap_profile_exits` (
   `dns_2` varchar(50) NOT NULL DEFAULT '',
   `apply_firewall_profile` tinyint(1) NOT NULL DEFAULT 0,
   `firewall_profile_id` int(11) NOT NULL DEFAULT 0,
+  `apply_sqm_profile` tinyint(1) NOT NULL DEFAULT 0,
+  `sqm_profile_id` int(11) NOT NULL DEFAULT 0,
+  `collect_network_stats` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -646,6 +655,7 @@ CREATE TABLE `ap_profile_exits` (
 
 LOCK TABLES `ap_profile_exits` WRITE;
 /*!40000 ALTER TABLE `ap_profile_exits` DISABLE KEYS */;
+INSERT INTO `ap_profile_exits` VALUES (30,17,'captive_portal',NULL,1,'19',1,20,'2025-08-05 14:54:29','2025-08-05 14:54:29',NULL,'dhcp','','','','','',0,0,0,0,0),(31,17,'bridge',NULL,0,'',0,NULL,'2025-08-05 14:54:29','2025-08-05 14:54:29',NULL,'dhcp','','','','','',0,0,0,0,0);
 /*!40000 ALTER TABLE `ap_profile_exits` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -655,7 +665,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profile_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profile_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_profile_id` int(11) DEFAULT NULL,
@@ -691,7 +701,7 @@ CREATE TABLE `ap_profile_settings` (
   `vlan_end` int(10) NOT NULL DEFAULT 101,
   `vlan_list` varchar(255) NOT NULL DEFAULT '100',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -700,6 +710,7 @@ CREATE TABLE `ap_profile_settings` (
 
 LOCK TABLES `ap_profile_settings` WRITE;
 /*!40000 ALTER TABLE `ap_profile_settings` DISABLE KEYS */;
+INSERT INTO `ap_profile_settings` VALUES (3,17,'testing123',60,600,'$1$Q42tiMva$KT4JGRF.CGzVNFyNO7XVW1','Africa/Johannesburg','SAST-2','ZA',120,1,1,600,'2025-08-05 14:54:35','2025-08-05 14:54:35','','514','','514','','514',1,'http',60,600,60,0,NULL,0,'range',100,101,'100');
 /*!40000 ALTER TABLE `ap_profile_settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -709,7 +720,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profile_specifics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profile_specifics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_profile_id` int(11) NOT NULL,
@@ -736,7 +747,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_profiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -746,7 +757,7 @@ CREATE TABLE `ap_profiles` (
   `enable_alerts` tinyint(1) NOT NULL DEFAULT 1,
   `enable_overviews` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -755,7 +766,46 @@ CREATE TABLE `ap_profiles` (
 
 LOCK TABLES `ap_profiles` WRITE;
 /*!40000 ALTER TABLE `ap_profiles` DISABLE KEYS */;
+INSERT INTO `ap_profiles` VALUES (17,'Dev',23,'2025-08-05 14:54:29','2025-08-05 14:54:29',1,1);
 /*!40000 ALTER TABLE `ap_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ap_sqm_stats`
+--
+
+DROP TABLE IF EXISTS `ap_sqm_stats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ap_sqm_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ap_id` int(11) DEFAULT NULL,
+  `ap_profile_exit_id` int(11) DEFAULT NULL,
+  `bytes` bigint(20) NOT NULL,
+  `packets` bigint(20) NOT NULL,
+  `drops` bigint(20) NOT NULL,
+  `overlimits` bigint(20) NOT NULL,
+  `backlog` bigint(20) NOT NULL,
+  `qlen` bigint(20) NOT NULL,
+  `memory_used` bigint(20) NOT NULL,
+  `peak_delay_us` bigint(20) NOT NULL,
+  `avg_delay_us` bigint(20) NOT NULL,
+  `base_delay_us` bigint(20) NOT NULL,
+  `way_misses` bigint(20) NOT NULL,
+  `way_indirect_hits` bigint(20) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ap_sqm_stats`
+--
+
+LOCK TABLES `ap_sqm_stats` WRITE;
+/*!40000 ALTER TABLE `ap_sqm_stats` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ap_sqm_stats` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -764,7 +814,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_static_entry_overrides`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_static_entry_overrides` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_id` int(11) NOT NULL,
@@ -787,42 +837,90 @@ LOCK TABLES `ap_static_entry_overrides` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `ap_station_hourlies`
+--
+
+DROP TABLE IF EXISTS `ap_station_hourlies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ap_station_hourlies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ap_id` int(11) DEFAULT NULL,
+  `ap_profile_entry_id` int(11) DEFAULT NULL,
+  `mac_address_id` int(11) DEFAULT NULL,
+  `radio_number` tinyint(3) NOT NULL DEFAULT 0,
+  `frequency_band` enum('two','five_lower','five_upper') DEFAULT 'two',
+  `tx_bytes` bigint(20) NOT NULL,
+  `rx_bytes` bigint(20) NOT NULL,
+  `tx_packets` bigint(20) NOT NULL,
+  `rx_packets` bigint(20) NOT NULL,
+  `signal_avg` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ap_id` (`ap_id`,`ap_profile_entry_id`,`mac_address_id`,`radio_number`,`frequency_band`,`created`),
+  KEY `idx_ap_station_hourlies_mac_address_id` (`mac_address_id`),
+  KEY `idx_ap_station_hourlies_frequency_band` (`frequency_band`),
+  KEY `idx_ap_station_hourlies_date` (`created`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ap_station_hourlies`
+--
+
+LOCK TABLES `ap_station_hourlies` WRITE;
+/*!40000 ALTER TABLE `ap_station_hourlies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ap_station_hourlies` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ap_stations`
 --
 
 DROP TABLE IF EXISTS `ap_stations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_stations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_id` int(11) DEFAULT NULL,
   `ap_profile_entry_id` int(11) DEFAULT NULL,
+  `mac_address_id` int(11) DEFAULT NULL,
   `radio_number` tinyint(3) NOT NULL DEFAULT 0,
   `frequency_band` enum('two','five_lower','five_upper') DEFAULT 'two',
-  `mac` varchar(17) NOT NULL,
   `tx_bytes` bigint(20) NOT NULL,
   `rx_bytes` bigint(20) NOT NULL,
   `tx_packets` bigint(20) NOT NULL,
   `rx_packets` bigint(20) NOT NULL,
   `tx_bitrate` int(11) NOT NULL,
   `rx_bitrate` int(11) NOT NULL,
-  `authenticated` tinyint(2) NOT NULL DEFAULT 1,
-  `authorized` tinyint(2) NOT NULL DEFAULT 1,
-  `tdls_peer` tinyint(2) NOT NULL DEFAULT 1,
-  `preamble` varchar(255) NOT NULL,
   `tx_failed` int(11) NOT NULL,
-  `wmm_wme` tinyint(2) NOT NULL DEFAULT 0,
   `tx_retries` int(11) NOT NULL,
-  `mfp` tinyint(2) NOT NULL DEFAULT 1,
   `signal_now` int(11) NOT NULL,
   `signal_avg` int(11) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
+  `tx_mcs` tinyint(4) DEFAULT NULL,
+  `tx_nss` tinyint(4) DEFAULT NULL,
+  `tx_short_gi` tinyint(1) DEFAULT NULL,
+  `tx_mhz` smallint(6) DEFAULT NULL,
+  `tx_phy` enum('legacy','ht','vht','he','eht') DEFAULT 'legacy',
+  `rx_mcs` tinyint(4) DEFAULT NULL,
+  `rx_short_gi` tinyint(1) DEFAULT NULL,
+  `rx_mhz` smallint(6) DEFAULT NULL,
+  `rx_phy` enum('legacy','ht','vht','he','eht') DEFAULT 'legacy',
+  `noise` int(11) DEFAULT NULL,
+  `connected_time` int(11) DEFAULT NULL,
+  `vlan` tinyint(4) DEFAULT NULL,
+  `wme` tinyint(1) DEFAULT NULL,
+  `mfp` tinyint(1) DEFAULT NULL,
+  `tdls` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_ap_stations_ap_id` (`ap_id`),
   KEY `idx_ap_stations_ap_profile_entry_id` (`ap_profile_entry_id`),
-  KEY `idx_ap_stations_modified` (`modified`)
-) ENGINE=InnoDB AUTO_INCREMENT=583 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  KEY `idx_ap_stations_modified` (`modified`),
+  KEY `idx_ap_mac_address_id` (`mac_address_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -840,7 +938,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_systems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_systems` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_id` int(11) DEFAULT NULL,
@@ -868,7 +966,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_uptm_histories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_uptm_histories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_id` int(11) DEFAULT NULL,
@@ -896,7 +994,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ap_wifi_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ap_wifi_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_id` int(11) DEFAULT NULL,
@@ -923,7 +1021,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `applied_fup_components`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `applied_fup_components` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
@@ -949,7 +1047,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `aps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ap_profile_id` int(11) DEFAULT NULL,
@@ -969,13 +1067,14 @@ CREATE TABLE `aps` (
   `lan_proto` varchar(30) NOT NULL DEFAULT '',
   `lan_ip` varchar(30) NOT NULL DEFAULT '',
   `lan_gw` varchar(30) NOT NULL DEFAULT '',
-  `gateway` enum('none','lan','3g','wifi','wifi_static','wifi_ppp','wifi_pppoe','wan_static','wan_ppp','wan_pppoe') DEFAULT 'none',
+  `gateway` enum('none','lan','3g','wifi','wifi_static','wifi_ppp','wifi_pppoe','wan_static','wan_ppp','wan_pppoe','mwan') DEFAULT 'none',
   `reboot_flag` tinyint(1) NOT NULL DEFAULT 0,
   `tree_tag_id` int(11) DEFAULT NULL,
   `enable_alerts` tinyint(1) NOT NULL DEFAULT 1,
   `enable_overviews` tinyint(1) NOT NULL DEFAULT 1,
   `enable_schedules` tinyint(1) NOT NULL DEFAULT 0,
   `schedule_id` int(11) DEFAULT NULL,
+  `multi_wan_profile_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -995,7 +1094,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ar_mesh_daily_summaries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ar_mesh_daily_summaries` (
   `id` int(11) NOT NULL,
   `mesh_id` int(11) NOT NULL,
@@ -1042,7 +1141,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ar_node_ibss_connections`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ar_node_ibss_connections` (
   `id` int(11) NOT NULL,
   `node_id` int(11) DEFAULT NULL,
@@ -1093,7 +1192,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ar_node_stations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ar_node_stations` (
   `id` int(11) NOT NULL,
   `node_id` int(11) DEFAULT NULL,
@@ -1144,7 +1243,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ar_node_uptm_histories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ar_node_uptm_histories` (
   `id` int(11) NOT NULL,
   `node_id` int(11) DEFAULT NULL,
@@ -1177,7 +1276,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `auto_devices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `auto_devices` (
   `mac` varchar(17) NOT NULL,
   `username` varchar(255) NOT NULL DEFAULT '',
@@ -1200,7 +1299,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `checks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `checks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40) NOT NULL,
@@ -1226,7 +1325,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `client_macs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `client_macs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mac` varchar(17) DEFAULT NULL,
@@ -1252,13 +1351,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cloud_admins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cloud_admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
+  `permissions` enum('admin','view','granular') DEFAULT 'admin',
+  `cloud_wide` tinyint(1) NOT NULL DEFAULT 1,
+  `cmp_permanent_users` tinyint(1) NOT NULL DEFAULT 1,
+  `cmp_vouchers` tinyint(1) NOT NULL DEFAULT 1,
+  `cmp_dynamic_clients` tinyint(1) NOT NULL DEFAULT 1,
+  `cmp_nas` tinyint(1) NOT NULL DEFAULT 1,
+  `cmp_profiles` tinyint(1) NOT NULL DEFAULT 1,
+  `cmp_realms` tinyint(1) NOT NULL DEFAULT 1,
+  `cmp_meshes` tinyint(1) NOT NULL DEFAULT 1,
+  `cmp_ap_profiles` tinyint(1) NOT NULL DEFAULT 1,
+  `cmp_other` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1278,7 +1388,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cloud_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cloud_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_id` int(11) NOT NULL,
@@ -1306,7 +1416,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `clouds`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clouds` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -1317,7 +1427,7 @@ CREATE TABLE `clouds` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1326,6 +1436,7 @@ CREATE TABLE `clouds` (
 
 LOCK TABLES `clouds` WRITE;
 /*!40000 ALTER TABLE `clouds` DISABLE KEYS */;
+INSERT INTO `clouds` VALUES (23,'Dev','',44,NULL,NULL,'2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `clouds` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1335,7 +1446,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `coa_requests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `coa_requests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -1365,7 +1476,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `countries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `countries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -1392,7 +1503,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `data_collector_otps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `data_collector_otps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `data_collector_id` int(11) NOT NULL,
@@ -1419,7 +1530,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `data_collectors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `data_collectors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_detail_id` int(11) DEFAULT NULL,
@@ -1467,7 +1578,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `devices`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `devices` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -1495,7 +1606,8 @@ CREATE TABLE `devices` (
   `profile_id` int(11) DEFAULT NULL,
   `from_date` datetime DEFAULT NULL,
   `to_date` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1514,7 +1626,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_client_macs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_client_macs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_client_id` int(11) DEFAULT NULL,
@@ -1541,7 +1653,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_client_realms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_client_realms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_client_id` int(11) NOT NULL,
@@ -1549,7 +1661,7 @@ CREATE TABLE `dynamic_client_realms` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1558,6 +1670,7 @@ CREATE TABLE `dynamic_client_realms` (
 
 LOCK TABLES `dynamic_client_realms` WRITE;
 /*!40000 ALTER TABLE `dynamic_client_realms` DISABLE KEYS */;
+INSERT INTO `dynamic_client_realms` VALUES (42,36,19,'2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `dynamic_client_realms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1567,7 +1680,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_client_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_client_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_client_id` int(11) NOT NULL,
@@ -1594,7 +1707,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_client_states`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_client_states` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_client_id` char(36) NOT NULL,
@@ -1620,7 +1733,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -1659,7 +1772,7 @@ CREATE TABLE `dynamic_clients` (
   `default_key` varchar(255) NOT NULL DEFAULT '12345678',
   `type` varchar(30) DEFAULT 'other',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1668,6 +1781,7 @@ CREATE TABLE `dynamic_clients` (
 
 LOCK TABLES `dynamic_clients` WRITE;
 /*!40000 ALTER TABLE `dynamic_clients` DISABLE KEYS */;
+INSERT INTO `dynamic_clients` VALUES (36,'MESHdesk_dev_mcp_26','mcp_26','',NULL,'','24','off',1,3600,1,0,NULL,NULL,'logo.png',23,'2025-08-05 14:54:29','2025-08-05 14:54:35',0,1.000,'mb',1,0,0,NULL,'hard',0,1.000,'mb','hard',0,0,NULL,100,'12345678','CoovaMeshdesk');
 /*!40000 ALTER TABLE `dynamic_clients` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1677,7 +1791,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_detail_ctcs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_detail_ctcs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_detail_id` int(11) DEFAULT NULL,
@@ -1729,7 +1843,7 @@ CREATE TABLE `dynamic_detail_ctcs` (
   `ci_email_otp` tinyint(1) NOT NULL DEFAULT 0,
   `permanent_user_id` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1738,6 +1852,7 @@ CREATE TABLE `dynamic_detail_ctcs` (
 
 LOCK TABLES `dynamic_detail_ctcs` WRITE;
 /*!40000 ALTER TABLE `dynamic_detail_ctcs` DISABLE KEYS */;
+INSERT INTO `dynamic_detail_ctcs` VALUES (15,20,1,'click_to_connect','ssid',0,0,0,0,0,0,0,0,0,0,0,'Send Promotional Email',0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,'Send Promotional SMS',0,0,0,0,'Custom One',0,0,'Custom Two',0,0,'Custom Three','2025-08-05 14:54:29','2025-08-05 14:54:29',0,0,0);
 /*!40000 ALTER TABLE `dynamic_detail_ctcs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1747,7 +1862,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_detail_languages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_detail_languages` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -1775,7 +1890,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_detail_mobiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_detail_mobiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_detail_id` int(11) DEFAULT NULL,
@@ -1810,7 +1925,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_detail_prelogins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_detail_prelogins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mac` varchar(64) NOT NULL DEFAULT '',
@@ -1838,7 +1953,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_detail_social_logins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_detail_social_logins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_detail_id` int(11) NOT NULL,
@@ -1873,7 +1988,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_detail_trans_keys`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_detail_trans_keys` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `dynamic_detail_id` int(11) DEFAULT -1,
@@ -1900,7 +2015,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_detail_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_detail_translations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_detail_language_id` int(11) DEFAULT NULL,
@@ -1928,7 +2043,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_details` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -2001,8 +2116,11 @@ CREATE TABLE `dynamic_details` (
   `reg_otp_sms` tinyint(1) NOT NULL DEFAULT 0,
   `reg_otp_email` tinyint(1) NOT NULL DEFAULT 0,
   `permanent_user_id` int(11) NOT NULL DEFAULT 0,
+  `reg_rb_vlan` enum('no_vlan','pre_select','next_available') DEFAULT 'no_vlan',
+  `realm_vlan_id` int(11) DEFAULT NULL,
+  `reg_ppsk` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2011,6 +2129,7 @@ CREATE TABLE `dynamic_details` (
 
 LOCK TABLES `dynamic_details` WRITE;
 /*!40000 ALTER TABLE `dynamic_details` DISABLE KEYS */;
+INSERT INTO `dynamic_details` VALUES (20,'Dev','logo.png','','','','','','','','','','',NULL,NULL,23,0,'',0,'',0,30,0,'','nasid',0,0,'2025-08-05 14:54:29','2025-08-05 14:54:35',1,1,1,'dev',1,120,'Default',0,0,0,NULL,'','','','','',19,48,1,'dev',0,0,0,1,10,'',0,0,0,1,1,'','email',0,'Send Promotional SMS',0,'Send Promotional Email',0,0,0,0,0,'no_vlan',NULL,0);
 /*!40000 ALTER TABLE `dynamic_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2020,7 +2139,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_pages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_pages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_detail_id` int(11) NOT NULL,
@@ -2049,7 +2168,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_pairs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_pairs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -2059,7 +2178,7 @@ CREATE TABLE `dynamic_pairs` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2068,6 +2187,7 @@ CREATE TABLE `dynamic_pairs` (
 
 LOCK TABLES `dynamic_pairs` WRITE;
 /*!40000 ALTER TABLE `dynamic_pairs` DISABLE KEYS */;
+INSERT INTO `dynamic_pairs` VALUES (33,'nasid','mcp_26',1,20,'2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `dynamic_pairs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2077,7 +2197,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_photo_translations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_photo_translations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_detail_language_id` int(11) DEFAULT NULL,
@@ -2105,7 +2225,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `dynamic_photos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `dynamic_photos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_detail_id` int(11) NOT NULL,
@@ -2123,7 +2243,7 @@ CREATE TABLE `dynamic_photos` (
   `include_description` tinyint(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2132,6 +2252,7 @@ CREATE TABLE `dynamic_photos` (
 
 LOCK TABLES `dynamic_photos` WRITE;
 /*!40000 ALTER TABLE `dynamic_photos` DISABLE KEYS */;
+INSERT INTO `dynamic_photos` VALUES (17,20,'Sample Title','Sample Description','','dev.jpg','2025-08-05 14:54:29','2025-08-05 14:54:29',1,'stretch_to_fit','ffffff',10,1,1);
 /*!40000 ALTER TABLE `dynamic_photos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2141,7 +2262,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `email_histories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `email_histories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_id` int(11) NOT NULL,
@@ -2169,7 +2290,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `email_messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `email_messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -2196,7 +2317,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `firewall_apps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `firewall_apps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` char(16) DEFAULT NULL,
@@ -2225,7 +2346,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `firewall_profile_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `firewall_profile_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firewall_profile_id` int(11) DEFAULT NULL,
@@ -2267,7 +2388,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `firewall_profile_entry_firewall_apps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `firewall_profile_entry_firewall_apps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firewall_profile_entry_id` int(11) NOT NULL,
@@ -2293,7 +2414,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `firewall_profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `firewall_profiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` char(64) DEFAULT NULL,
@@ -2319,7 +2440,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `forward_lookups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `forward_lookups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fqdn` varchar(255) NOT NULL,
@@ -2345,7 +2466,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `groups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -2371,7 +2492,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hardware_radios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hardware_radios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `radio_number` tinyint(2) NOT NULL DEFAULT 0,
@@ -2393,7 +2514,7 @@ CREATE TABLE `hardware_radios` (
   `width` enum('20','40','80','160') DEFAULT '20',
   `cell_density` enum('0','1','2','3') DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2402,7 +2523,7 @@ CREATE TABLE `hardware_radios` (
 
 LOCK TABLES `hardware_radios` WRITE;
 /*!40000 ALTER TABLE `hardware_radios` DISABLE KEYS */;
-INSERT INTO `hardware_radios` VALUES (46,0,0,30,0,100,0,100,'',0,1,1,15,'2022-08-10 11:22:50','2022-08-10 11:22:50','2g','n','20','0'),(47,1,0,20,0,100,0,100,'',1,1,0,15,'2022-08-10 11:22:50','2022-08-10 11:22:50','5g','ac','80','0'),(48,0,0,22,0,100,0,100,'',1,1,1,14,'2022-08-11 05:06:16','2022-08-11 05:06:16','2g','n','20','0'),(53,0,0,21,0,100,0,100,'',1,1,0,22,'2022-08-22 10:43:44','2022-08-22 10:43:44','5g','ac','80','0'),(54,1,0,21,0,100,0,100,'',0,1,1,22,'2022-08-22 10:43:44','2022-08-22 10:43:44','2g','n','20','0'),(55,0,0,20,0,100,0,100,'',0,1,1,23,'2022-08-27 09:22:08','2022-08-27 09:22:08','2g','n','20','0'),(56,1,0,20,0,100,0,100,'',1,1,0,23,'2022-08-27 09:22:08','2022-08-27 09:22:08','5g','ac','80','0'),(57,0,0,20,0,100,0,100,'',0,1,1,24,'2022-08-27 09:28:48','2022-08-27 09:28:48','2g','ax','20','0'),(58,1,0,20,0,100,0,100,'',1,1,0,24,'2022-08-27 09:28:48','2022-08-27 09:28:48','5g','ac','80','0'),(59,0,0,23,0,100,0,100,'',0,1,1,25,'2022-08-27 09:31:55','2022-08-27 09:31:55','2g','n','20','0'),(60,1,0,23,0,100,0,100,'',1,1,0,25,'2022-08-27 09:31:55','2022-08-27 09:31:55','5g','n','40','0'),(61,0,0,21,0,100,0,100,'',0,1,1,26,'2022-08-27 09:35:12','2022-08-27 09:35:12','2g','n','20','0'),(62,1,0,21,0,100,0,100,'',1,1,0,26,'2022-08-27 09:35:12','2022-08-27 09:35:12','5g','n','40','0');
+INSERT INTO `hardware_radios` VALUES (48,0,0,22,0,100,0,100,'',1,1,1,14,'2022-08-11 05:06:16','2022-08-11 05:06:16','2g','n','20','0'),(71,0,0,20,0,100,0,100,'',0,1,1,24,'2022-09-15 19:44:02','2022-09-15 19:44:02','2g','ax','20','0'),(72,1,0,20,0,100,0,100,'',1,1,0,24,'2022-09-15 19:44:02','2022-09-15 19:44:02','5g','ax','80','0'),(109,0,0,23,0,100,0,100,'',0,1,1,25,'2023-09-03 19:39:34','2023-09-03 19:39:34','2g','n','20','0'),(110,1,0,23,0,100,0,100,'',1,1,0,25,'2023-09-03 19:39:34','2023-09-03 19:39:34','5g','n','40','0'),(120,0,0,30,0,100,0,100,'',0,1,1,27,'2023-09-03 19:40:50','2023-09-03 19:40:50','2g','n','20','0'),(121,1,0,30,0,100,0,100,'',1,1,0,27,'2023-09-03 19:40:50','2023-09-03 19:40:50','5g','ac','80','0'),(126,0,0,21,0,100,0,100,'',0,1,1,26,'2023-09-05 15:28:16','2023-09-05 15:28:16','2g','n','20','0'),(127,1,0,21,0,100,0,100,'',1,1,0,26,'2023-09-05 15:28:16','2023-09-05 15:28:16','5g','n','40','0'),(135,0,0,21,0,100,0,100,'',1,1,0,22,'2023-10-07 21:41:38','2023-10-07 21:41:38','5g','ac','80','0'),(136,1,0,21,0,100,0,100,'',0,1,1,22,'2023-10-07 21:41:38','2023-10-07 21:41:38','2g','n','20','0'),(139,0,0,25,0,100,0,100,'',1,1,0,40,'2023-10-09 05:22:48','2023-10-09 05:22:48','5g','n','40','0'),(140,1,0,20,0,100,0,100,'',0,1,1,40,'2023-10-09 05:22:48','2023-10-09 05:22:48','2g','n','20','0'),(141,0,0,20,0,100,0,100,'',0,1,1,36,'2023-10-09 06:39:19','2023-10-09 06:39:19','2g','n','20','0'),(142,1,0,17,0,100,0,100,'',0,1,0,36,'2023-10-09 06:39:19','2023-10-09 06:39:19','5g','ac','80','0'),(143,2,0,30,0,100,0,100,'',1,0,0,36,'2023-10-09 06:39:19','2023-10-09 06:39:19','5g','ac','80','0'),(146,0,0,20,0,100,0,100,'',0,1,1,23,'2023-11-11 00:34:26','2023-11-11 00:34:26','2g','n','20','0'),(147,1,0,20,0,100,0,100,'',1,1,0,23,'2023-11-11 00:34:26','2023-11-11 00:34:26','5g','ac','80','0'),(148,0,0,30,0,100,0,100,'',1,1,0,41,'2024-01-26 20:15:13','2024-01-26 20:15:13','5g','ac','80','0'),(149,1,0,27,0,100,0,100,'',0,1,1,41,'2024-01-26 20:15:13','2024-01-26 20:15:13','2g','n','20','0'),(150,0,0,22,0,100,0,100,'',0,1,1,42,'2024-02-08 08:13:49','2024-02-08 08:13:49','2g','n','20','0'),(151,1,0,22,0,100,0,100,'',1,1,0,42,'2024-02-08 08:13:49','2024-02-08 08:13:49','5g','n','40','0'),(156,0,0,30,0,100,0,100,'',0,1,0,15,'2024-02-16 19:42:41','2024-02-16 19:42:41','2g','n','20','0'),(157,1,0,20,0,100,0,100,'',1,1,1,15,'2024-02-16 19:42:41','2024-02-16 19:42:41','5g','ac','80','0'),(171,0,0,22,0,100,0,100,'',1,1,1,45,'2024-10-03 07:19:50','2024-10-03 07:19:50','2g','n','20','0'),(174,0,0,22,0,100,0,100,'',0,1,1,46,'2024-10-22 08:56:36','2024-10-22 08:56:36','2g','n','20','0'),(175,1,0,21,0,100,0,100,'',1,1,0,46,'2024-10-22 08:56:36','2024-10-22 08:56:36','5g','ax','80','0'),(176,0,0,20,0,100,0,100,'',0,1,1,43,'2024-10-25 12:21:32','2024-10-25 12:21:32','2g','ax','20','2'),(177,1,0,24,0,100,0,100,'',1,1,0,43,'2024-10-25 12:21:32','2024-10-25 12:21:32','5g','ax','80','2'),(180,0,0,20,0,100,0,100,'',0,1,1,29,'2024-12-01 13:58:04','2024-12-01 13:58:04','2g','ax','20','0'),(181,1,0,20,0,100,0,100,'',1,1,0,29,'2024-12-01 13:58:04','2024-12-01 13:58:04','5g','ax','80','0'),(190,0,0,20,0,100,0,100,'',0,1,1,50,'2025-03-27 12:48:44','2025-03-27 12:48:44','2g','ax','20','0'),(191,1,0,20,0,100,0,100,'',1,1,0,50,'2025-03-27 12:48:44','2025-03-27 12:48:44','5g','ax','80','0'),(192,0,0,21,0,100,0,100,'',0,1,1,49,'2025-03-28 05:30:56','2025-03-28 05:30:56','2g','ax','20','1'),(193,1,0,22,0,100,0,100,'',1,1,0,49,'2025-03-28 05:30:56','2025-03-28 05:30:56','5g','ax','80','1'),(196,0,0,20,0,100,0,100,'',0,1,1,52,'2025-03-31 03:21:45','2025-03-31 03:21:45','2g','n','20','0'),(197,1,0,20,0,100,0,100,'',1,1,0,52,'2025-03-31 03:21:45','2025-03-31 03:21:45','5g','ac','80','0'),(198,0,0,20,0,100,0,100,'',0,1,1,51,'2025-04-17 13:27:00','2025-04-17 13:27:00','2g','ax','20','0'),(199,1,0,20,0,100,0,100,'',1,1,0,51,'2025-04-17 13:27:00','2025-04-17 13:27:00','5g','ax','80','0'),(202,0,0,30,0,100,0,100,'',0,1,1,35,'2025-05-26 11:57:11','2025-05-26 11:57:11','2g','n','20','0'),(203,1,0,30,0,100,0,100,'',1,1,0,35,'2025-05-26 11:57:11','2025-05-26 11:57:11','5g','ac','80','0'),(206,0,0,20,0,100,0,100,'',0,1,1,54,'2025-06-02 13:44:24','2025-06-02 13:44:24','2g','n','20','0'),(207,1,0,20,0,100,0,100,'',1,1,0,54,'2025-06-02 13:44:24','2025-06-02 13:44:24','5g','ac','80','0');
 /*!40000 ALTER TABLE `hardware_radios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2412,7 +2533,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hardwares`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `hardwares` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -2429,7 +2550,7 @@ CREATE TABLE `hardwares` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2438,7 +2559,7 @@ CREATE TABLE `hardwares` (
 
 LOCK TABLES `hardwares` WRITE;
 /*!40000 ALTER TABLE `hardwares` DISABLE KEYS */;
-INSERT INTO `hardwares` VALUES (14,'Xiaomi 4C 300M','Xiaomi','4C 300M','xiaomi_4c',1,1,'eth0.1','eth0.2',1,'14_xiaomi_4c.png',-1,'2022-08-10 11:19:15','2022-08-11 05:06:16'),(15,'Xiaomi 4A 100M','Xiaomi','4A 100M','xiaomi_4a_100m',1,1,'eth0.1','eth0.2',2,'15_xiaomi_4a_100m.png',-1,'2022-08-10 11:21:42','2022-08-10 11:23:09'),(22,'TP Link EAP225 Outdoor 3','TP Link','EAP225 Outdoor 3','tl_eap225_3_o',1,1,'eth0','',2,'hardware.png',-1,'2022-08-22 10:43:05','2022-08-22 10:43:44'),(23,'Xiaomi 4A 1G','Xiaomi','4A 1G','xiaomi_4a_1g',1,1,'wan','lan1 lan2',2,'hardware.png',-1,'2022-08-27 09:21:07','2022-08-27 09:22:08'),(24,'TOTOLink X5000R','TOTOLink','X5000R','t_x5000r',1,1,'wan','lan1 lan2 lan3 lan4',2,'hardware.png',-1,'2022-08-27 09:27:30','2022-08-27 09:28:48'),(25,'ARUBA AP-105','ARUBA','AP-105','aruba_ap_105',1,1,'eth0','',2,'hardware.png',-1,'2022-08-27 09:29:36','2022-08-27 09:31:55'),(26,'MERAKI MR24','MERAKI','MR24','meraki_mr24',1,1,'eth0','',2,'hardware.png',-1,'2022-08-27 09:33:46','2022-08-27 09:35:12');
+INSERT INTO `hardwares` VALUES (14,'Xiaomi 4C 300M','Xiaomi','4C 300M','xiaomi_4c',1,1,'eth0.1','eth0.2',1,'14_xiaomi_4c.png',-1,'2022-08-10 11:19:15','2022-08-11 05:06:16'),(15,'Xiaomi 4A 100M','Xiaomi','4A 100M','xiaomi_4a_100m',1,1,'eth0.1','eth0.2',2,'15_xiaomi_4a_100m.png',-1,'2022-08-10 11:21:42','2024-02-16 19:42:41'),(22,'TP Link EAP225 Outdoor 3','TP Link','EAP225 Outdoor 3','tl_eap225_3_o',1,1,'eth0','',2,'hardware.png',-1,'2022-08-22 10:43:05','2023-10-07 21:41:38'),(23,'Xiaomi 4A 1G','Xiaomi','4A 1G','xiaomi_4a_1g',1,1,'wan','lan1',2,'hardware.png',-1,'2022-08-27 09:21:07','2023-11-11 00:34:26'),(24,'TOTOLink X5000R','TOTOLink','X5000R','t_x5000r',1,1,'wan','lan1 lan2 lan3 lan4',2,'24_t_x5000r.png',-1,'2022-08-27 09:27:30','2025-03-28 05:37:20'),(25,'ARUBA AP-105','ARUBA','AP-105','aruba_ap_105',1,1,'eth0','',2,'hardware.png',-1,'2022-08-27 09:29:36','2025-08-05 14:04:27'),(26,'MERAKI MR24','MERAKI','MR24','meraki_mr24',1,1,'eth0','',2,'hardware.png',-1,'2022-08-27 09:33:46','2023-09-05 15:28:16'),(27,'Mikrotik hAP ac2','Mikrotik','hAP ac2','mt_hap_ac2',0,1,'eth1','eth0',2,'hardware.png',-1,'2022-09-25 20:18:25','2023-09-03 19:40:50'),(29,'Yuncore AX820','Yuncore','AX820','yc_ax820',1,1,'wan','lan',2,'hardware.png',-1,'2022-10-06 16:35:17','2024-12-01 13:58:04'),(35,'Wally','Wally','swde4029','wally_dr40',1,1,'wan','lan',2,'hardware.png',-1,'2023-04-09 17:48:20','2025-05-26 11:57:11'),(36,'Wavlink HALO Polar','Wavlink','HALO Polar','ws_wn551k1',1,1,'wan','lan1 lan2 lan3 lan4',3,'hardware.png',-1,'2023-05-17 18:47:01','2023-10-09 06:39:19'),(40,'Ubiquiti Unifi Pro','Ubiquiti','Unifi Pro','unifi_ap_pro',1,1,'eth0.1','',2,'hardware.png',-1,'2023-10-09 04:46:32','2023-10-09 05:22:48'),(41,'Ubiquiti Mesh AC','Ubiquiti','Mesh AC','ubnt_mesh_ac',1,1,'eth0','',2,'hardware.png',-1,'2024-01-26 20:13:58','2024-01-26 20:15:13'),(42,'TP Link WDR3500','TP Link','TP Link WDR3500','tl_wdr3500',1,1,'eth1','eth0.1',2,'hardware.png',-1,'2024-02-08 08:13:11','2024-02-08 08:13:49'),(43,'Cudy X6','Cudy','X6','cudy_x6_2',1,1,'wan','lan2 lan3 lan4',2,'43_cudy_x6_2.png',-1,'2024-02-13 18:20:08','2025-02-13 03:09:39'),(44,'VirtualBox VM','VirtualBox ','VM','vbox',0,1,'eth0','eth1',0,'hardware.png',-1,'2024-07-17 12:06:57','2024-07-17 12:06:57'),(45,'Ubiquiti Pico M2','Ubiquiti','Pico M2','pico_m2',1,1,'eth0','eth0',1,'45_pico_m2.png',-1,'2024-10-02 15:29:54','2024-10-03 07:19:50'),(46,'Cudy TR3000v1','Cudy','TR3000v1','cudy_tr3000_1',1,1,'eth0','eth1',2,'hardware.png',-1,'2024-10-22 08:55:51','2024-10-22 08:56:36'),(47,'Mikrotik RBM11G ','Mikrotik','RBM11G','mt_rb_m11g',0,1,'lan','',0,'hardware.png',-1,'2024-12-01 13:56:47','2024-12-01 13:59:47'),(49,'OpenWrt One','OpenWrt','One','openwrt_one',1,1,'eth0','eth1',2,'49_openwrt_one.png',-1,'2025-01-31 03:18:54','2025-03-28 05:31:09'),(50,'Cudy AP3000 Outdoor','Cudy','AP3000 Outdoor','cudy_ap3000_o',1,1,'eth0','',2,'50_cudy_ap3000_o.png',-1,'2025-03-27 12:48:00','2025-03-27 13:12:10'),(51,'Cudy WR3000v1','Cudy','WR3000v1','cudy_wr3000_1',1,1,'wan lan1','lan2 lan3',2,'51_cudy_wr3000_1.png',-1,'2025-03-29 19:41:37','2025-04-17 13:27:00'),(52,'Cudy M1200','Cudy','M1200','cudy_m1200_1',1,1,'eth0.1','eth0.2',2,'hardware.png',-1,'2025-03-31 03:20:50','2025-03-31 03:21:45'),(54,'Cudy TR1200','Cudy','TR1200','cudy_tr1200_1',1,1,'eth0.1','eth0.2',2,'54_cudy_tr1200_1.png',-1,'2025-06-02 06:29:13','2025-07-04 05:34:58');
 /*!40000 ALTER TABLE `hardwares` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2448,7 +2569,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `home_server_pools`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `home_server_pools` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -2475,7 +2596,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `home_servers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `home_servers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` enum('auth','acct','auth+acct','coa') DEFAULT 'auth+acct',
@@ -2508,7 +2629,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `isp_specifics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `isp_specifics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_id` int(11) DEFAULT NULL,
@@ -2539,7 +2660,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `languages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `languages` (
   `id` int(5) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
@@ -2567,20 +2688,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mac_actions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mac_actions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_id` int(11) DEFAULT NULL,
   `mesh_id` int(11) DEFAULT NULL,
   `ap_profile_id` int(11) DEFAULT NULL,
-  `client_mac_id` int(11) DEFAULT NULL,
   `action` enum('block','limit','firewall') DEFAULT 'block',
   `bw_up` int(11) DEFAULT NULL,
   `bw_down` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   `firewall_profile_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `mac_address_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_mac_actions_mac_address_id` (`mac_address_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2594,20 +2716,48 @@ LOCK TABLES `mac_actions` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `mac_addresses`
+--
+
+DROP TABLE IF EXISTS `mac_addresses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mac_addresses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mac` varchar(17) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mac` (`mac`),
+  UNIQUE KEY `idx_mac_unique` (`mac`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mac_addresses`
+--
+
+LOCK TABLES `mac_addresses` WRITE;
+/*!40000 ALTER TABLE `mac_addresses` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mac_addresses` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `mac_aliases`
 --
 
 DROP TABLE IF EXISTS `mac_aliases`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mac_aliases` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mac` char(20) DEFAULT NULL,
   `alias` char(255) DEFAULT NULL,
   `cloud_id` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  PRIMARY KEY (`id`)
+  `mac_address_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_mac_aliases_mac_address_id` (`mac_address_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -2626,7 +2776,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mac_usages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mac_usages` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `mac` varchar(17) NOT NULL,
@@ -2656,7 +2806,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_daily_summaries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_daily_summaries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_id` int(11) NOT NULL,
@@ -2703,7 +2853,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_id` int(11) DEFAULT NULL,
@@ -2711,7 +2861,7 @@ CREATE TABLE `mesh_entries` (
   `hidden` tinyint(1) NOT NULL DEFAULT 0,
   `isolate` tinyint(1) NOT NULL DEFAULT 0,
   `apply_to_all` tinyint(1) NOT NULL DEFAULT 0,
-  `encryption` enum('none','wep','psk','psk2','wpa','wpa2','ppsk') DEFAULT 'none',
+  `encryption` enum('none','wep','psk','psk2','wpa','wpa2','ppsk','ppsk_no_radius') DEFAULT 'none',
   `special_key` varchar(100) NOT NULL DEFAULT '',
   `auth_server` varchar(255) NOT NULL DEFAULT '',
   `auth_secret` varchar(255) NOT NULL DEFAULT '',
@@ -2735,10 +2885,12 @@ CREATE TABLE `mesh_entries` (
   `ft_over_ds` tinyint(1) NOT NULL DEFAULT 0,
   `ft_pskgenerate_local` tinyint(1) NOT NULL DEFAULT 1,
   `realm_id` int(11) DEFAULT NULL,
+  `private_psk_id` int(11) DEFAULT NULL,
+  `passpoint_profile_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_mesh_entries_mesh_id` (`mesh_id`),
   KEY `idx_mesh_entries_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2747,6 +2899,7 @@ CREATE TABLE `mesh_entries` (
 
 LOCK TABLES `mesh_entries` WRITE;
 /*!40000 ALTER TABLE `mesh_entries` DISABLE KEYS */;
+INSERT INTO `mesh_entries` VALUES (26,20,'Dev Guest',0,1,1,'none','','','',0,'2025-08-05 14:54:29','2025-08-05 14:54:29',0,100,'disable',0,'',0,1,'both',100,'12345678',0,NULL,0,'abba',0,1,NULL,NULL,NULL),(27,20,'Dev Wireless',0,0,1,'psk2','12345678','','',0,'2025-08-05 14:54:29','2025-08-05 14:54:29',0,100,'disable',0,'',0,1,'both',100,'12345678',0,NULL,0,'abba',0,1,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `mesh_entries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2756,7 +2909,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_entry_schedules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_entry_schedules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_entry_id` int(11) DEFAULT NULL,
@@ -2790,7 +2943,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_exit_captive_portals`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_exit_captive_portals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_exit_id` int(11) NOT NULL,
@@ -2821,7 +2974,7 @@ CREATE TABLE `mesh_exit_captive_portals` (
   `softflowd_enabled` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idx_mesh_exit_captive_portals_mesh_exit_id` (`mesh_exit_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2830,6 +2983,7 @@ CREATE TABLE `mesh_exit_captive_portals` (
 
 LOCK TABLES `mesh_exit_captive_portals` WRITE;
 /*!40000 ALTER TABLE `mesh_exit_captive_portals` DISABLE KEYS */;
+INSERT INTO `mesh_exit_captive_portals` VALUES (13,26,'192.168.8.220','','testing123','mcp_26','http://192.168.8.220/cake4/rd_cake/dynamic-details/chilli-browser-detect/','greatsecret','',0,'2025-08-05 14:54:29','2025-08-05 14:54:29',1,0,'',3128,'','','ssid dev\n',0,'','',0,0,0,NULL,0);
 /*!40000 ALTER TABLE `mesh_exit_captive_portals` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2839,7 +2993,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_exit_mesh_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_exit_mesh_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_exit_id` int(11) NOT NULL,
@@ -2849,7 +3003,7 @@ CREATE TABLE `mesh_exit_mesh_entries` (
   PRIMARY KEY (`id`),
   KEY `idx_mesh_exit_mesh_entries_mesh_exit_id` (`mesh_exit_id`),
   KEY `idx_mesh_exit_mesh_entries_mesh_entry_id` (`mesh_entry_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=165 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2858,6 +3012,7 @@ CREATE TABLE `mesh_exit_mesh_entries` (
 
 LOCK TABLES `mesh_exit_mesh_entries` WRITE;
 /*!40000 ALTER TABLE `mesh_exit_mesh_entries` DISABLE KEYS */;
+INSERT INTO `mesh_exit_mesh_entries` VALUES (163,26,26,'2025-08-05 14:54:29','2025-08-05 14:54:29'),(164,27,27,'2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `mesh_exit_mesh_entries` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2867,7 +3022,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_exit_pppoe_servers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_exit_pppoe_servers` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `mesh_exit_id` int(11) NOT NULL,
@@ -2893,7 +3048,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_exit_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_exit_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_exit_id` int(11) NOT NULL,
@@ -2920,7 +3075,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_exits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_exits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_id` int(11) DEFAULT NULL,
@@ -2939,9 +3094,12 @@ CREATE TABLE `mesh_exits` (
   `dns_2` varchar(50) NOT NULL DEFAULT '',
   `apply_firewall_profile` tinyint(1) NOT NULL DEFAULT 0,
   `firewall_profile_id` int(11) NOT NULL DEFAULT 0,
+  `apply_sqm_profile` tinyint(1) NOT NULL DEFAULT 0,
+  `sqm_profile_id` int(11) NOT NULL DEFAULT 0,
+  `collect_network_stats` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `idx_mesh_exits_mesh_id` (`mesh_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -2950,6 +3108,7 @@ CREATE TABLE `mesh_exits` (
 
 LOCK TABLES `mesh_exits` WRITE;
 /*!40000 ALTER TABLE `mesh_exits` DISABLE KEYS */;
+INSERT INTO `mesh_exits` VALUES (26,20,'','captive_portal',1,NULL,'2025-08-05 14:54:29','2025-08-05 14:54:29',NULL,'dhcp','','','','','',0,0,0,0,0),(27,20,'','bridge',1,NULL,'2025-08-05 14:54:29','2025-08-05 14:54:29',NULL,'dhcp','','','','','',0,0,0,0,0);
 /*!40000 ALTER TABLE `mesh_exits` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2959,7 +3118,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_id` int(11) DEFAULT NULL,
@@ -2997,7 +3156,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `mesh_specifics`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `mesh_specifics` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_id` int(11) NOT NULL,
@@ -3025,7 +3184,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `meshes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `meshes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -3041,7 +3200,7 @@ CREATE TABLE `meshes` (
   PRIMARY KEY (`id`),
   KEY `idx_meshes_name` (`name`),
   KEY `idx_meshes_modified` (`modified`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3050,7 +3209,144 @@ CREATE TABLE `meshes` (
 
 LOCK TABLES `meshes` WRITE;
 /*!40000 ALTER TABLE `meshes` DISABLE KEYS */;
+INSERT INTO `meshes` VALUES (20,'Dev','02_CA_FE_CA_00_14','02:CA:FE:CA:00:14',23,'2025-08-05 14:54:29','2025-08-05 14:54:29',19,NULL,1,1);
 /*!40000 ALTER TABLE `meshes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mikrotik_pppoe_stats`
+--
+
+DROP TABLE IF EXISTS `mikrotik_pppoe_stats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mikrotik_pppoe_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permanent_user_id` int(11) DEFAULT NULL,
+  `mt_id` varchar(24) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `mtu` int(10) unsigned DEFAULT 0,
+  `actual_mtu` int(10) unsigned DEFAULT 0,
+  `last_link_up_time` varchar(64) NOT NULL,
+  `link_downs` int(10) unsigned DEFAULT 0,
+  `rx_byte` bigint(20) unsigned DEFAULT 0,
+  `tx_byte` bigint(20) unsigned DEFAULT 0,
+  `rx_packet` bigint(20) unsigned DEFAULT 0,
+  `tx_packet` bigint(20) unsigned DEFAULT 0,
+  `rx_drop` int(10) unsigned DEFAULT 0,
+  `tx_drop` int(10) unsigned DEFAULT 0,
+  `tx_queue_drop` int(10) unsigned DEFAULT 0,
+  `rx_error` int(10) unsigned DEFAULT 0,
+  `tx_error` int(10) unsigned DEFAULT 0,
+  `fp_rx_byte` bigint(20) unsigned DEFAULT 0,
+  `fp_tx_byte` bigint(20) unsigned DEFAULT 0,
+  `fp_rx_packet` bigint(20) unsigned DEFAULT 0,
+  `fp_tx_packet` bigint(20) unsigned DEFAULT 0,
+  `dynamic` tinyint(1) NOT NULL DEFAULT 1,
+  `running` tinyint(1) NOT NULL DEFAULT 1,
+  `disabled` tinyint(1) NOT NULL DEFAULT 0,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mikrotik_pppoe_stats`
+--
+
+LOCK TABLES `mikrotik_pppoe_stats` WRITE;
+/*!40000 ALTER TABLE `mikrotik_pppoe_stats` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mikrotik_pppoe_stats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `multi_wan_profiles`
+--
+
+DROP TABLE IF EXISTS `multi_wan_profiles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `multi_wan_profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` char(64) NOT NULL,
+  `cloud_id` int(11) DEFAULT NULL,
+  `last_resort` enum('unreachable','blackhole','default') DEFAULT 'unreachable',
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `multi_wan_profiles`
+--
+
+LOCK TABLES `multi_wan_profiles` WRITE;
+/*!40000 ALTER TABLE `multi_wan_profiles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `multi_wan_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mwan_interface_settings`
+--
+
+DROP TABLE IF EXISTS `mwan_interface_settings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mwan_interface_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mwan_interface_id` int(11) DEFAULT NULL,
+  `grouping` varchar(25) DEFAULT NULL,
+  `type` enum('option','list') DEFAULT 'option',
+  `name` varchar(25) DEFAULT NULL,
+  `value` varchar(40) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mwan_interface_settings`
+--
+
+LOCK TABLES `mwan_interface_settings` WRITE;
+/*!40000 ALTER TABLE `mwan_interface_settings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mwan_interface_settings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `mwan_interfaces`
+--
+
+DROP TABLE IF EXISTS `mwan_interfaces`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `mwan_interfaces` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `multi_wan_profile_id` int(11) DEFAULT NULL,
+  `name` char(64) NOT NULL,
+  `type` enum('ethernet','lte','wifi') DEFAULT 'ethernet',
+  `apply_sqm_profile` tinyint(1) NOT NULL DEFAULT 0,
+  `sqm_profile_id` int(11) NOT NULL DEFAULT 0,
+  `metric` int(11) NOT NULL DEFAULT 1,
+  `policy_active` tinyint(1) NOT NULL DEFAULT 0,
+  `policy_ratio` int(4) NOT NULL DEFAULT 1,
+  `policy_role` enum('active','standby') DEFAULT 'active',
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mwan_interfaces`
+--
+
+LOCK TABLES `mwan_interfaces` WRITE;
+/*!40000 ALTER TABLE `mwan_interfaces` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mwan_interfaces` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -3059,7 +3355,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `na_realms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `na_realms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `na_id` int(11) NOT NULL,
@@ -3085,7 +3381,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `na_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `na_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `na_id` int(11) NOT NULL,
@@ -3112,7 +3408,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `na_states`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `na_states` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `na_id` char(36) NOT NULL,
@@ -3138,7 +3434,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `nas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nas` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nasname` varchar(128) NOT NULL,
@@ -3169,6 +3465,11 @@ CREATE TABLE `nas` (
   `cloud_id` int(11) DEFAULT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
+  `auth_port` int(11) NOT NULL DEFAULT 1812,
+  `acct_port` int(11) NOT NULL DEFAULT 1813,
+  `coa_port` int(11) NOT NULL DEFAULT 3799,
+  `retries` int(11) NOT NULL DEFAULT 0,
+  `timeout` int(11) NOT NULL DEFAULT 5,
   PRIMARY KEY (`id`),
   KEY `nasname` (`nasname`)
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
@@ -3189,7 +3490,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `networks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `networks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -3199,7 +3500,7 @@ CREATE TABLE `networks` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3208,6 +3509,7 @@ CREATE TABLE `networks` (
 
 LOCK TABLES `networks` WRITE;
 /*!40000 ALTER TABLE `networks` DISABLE KEYS */;
+INSERT INTO `networks` VALUES (19,'Network Dev',21,NULL,NULL,'2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `networks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3217,7 +3519,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `new_accountings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `new_accountings` (
   `mac` varchar(17) NOT NULL,
   `username` varchar(255) NOT NULL DEFAULT '',
@@ -3240,7 +3542,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_actions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_actions` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `node_id` int(10) NOT NULL,
@@ -3271,7 +3573,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_connection_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_connection_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -3299,7 +3601,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_ibss_connections`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_ibss_connections` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -3347,7 +3649,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_ibss_connections_dailies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_ibss_connections_dailies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mac` varchar(64) NOT NULL DEFAULT '',
@@ -3382,7 +3684,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_loads`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_loads` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -3416,7 +3718,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_mesh_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_mesh_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) NOT NULL,
@@ -3444,7 +3746,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_mesh_exits`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_mesh_exits` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) NOT NULL,
@@ -3472,7 +3774,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_mp_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_mp_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -3500,7 +3802,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_neighbors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_neighbors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -3536,7 +3838,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_scans`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_scans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -3563,7 +3865,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_id` int(11) DEFAULT NULL,
@@ -3609,7 +3911,7 @@ CREATE TABLE `node_settings` (
   PRIMARY KEY (`id`),
   KEY `idx_node_settings_mesh_id` (`mesh_id`),
   KEY `idx_node_settings_modified` (`modified`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3618,7 +3920,84 @@ CREATE TABLE `node_settings` (
 
 LOCK TABLES `node_settings` WRITE;
 /*!40000 ALTER TABLE `node_settings` DISABLE KEYS */;
+INSERT INTO `node_settings` VALUES (8,20,'testing123',100,1,6,44,60,600,'2025-08-05 14:54:35','2025-08-05 14:54:35','$1$7aJs1N/W$xyvhpaPerKhyPsVzVEdud.',0,0,1,'Africa/Johannesburg','SAST-2','ZA',120,1,1,600,'radiusdesk','','514','','514','','514',1,'http',60,600,60,0,NULL,0,'range',100,101,'100');
 /*!40000 ALTER TABLE `node_settings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `node_sqm_stats`
+--
+
+DROP TABLE IF EXISTS `node_sqm_stats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `node_sqm_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `node_id` int(11) DEFAULT NULL,
+  `mesh_exit_id` int(11) DEFAULT NULL,
+  `bytes` bigint(20) NOT NULL,
+  `packets` bigint(20) NOT NULL,
+  `drops` bigint(20) NOT NULL,
+  `overlimits` bigint(20) NOT NULL,
+  `backlog` bigint(20) NOT NULL,
+  `qlen` bigint(20) NOT NULL,
+  `memory_used` bigint(20) NOT NULL,
+  `peak_delay_us` bigint(20) NOT NULL,
+  `avg_delay_us` bigint(20) NOT NULL,
+  `base_delay_us` bigint(20) NOT NULL,
+  `way_misses` bigint(20) NOT NULL,
+  `way_indirect_hits` bigint(20) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `node_sqm_stats`
+--
+
+LOCK TABLES `node_sqm_stats` WRITE;
+/*!40000 ALTER TABLE `node_sqm_stats` DISABLE KEYS */;
+/*!40000 ALTER TABLE `node_sqm_stats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `node_station_hourlies`
+--
+
+DROP TABLE IF EXISTS `node_station_hourlies`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `node_station_hourlies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `node_id` int(11) DEFAULT NULL,
+  `mesh_entry_id` int(11) DEFAULT NULL,
+  `mac_address_id` int(11) DEFAULT NULL,
+  `radio_number` tinyint(3) NOT NULL DEFAULT 0,
+  `frequency_band` enum('two','five_lower','five_upper') DEFAULT 'two',
+  `tx_bytes` bigint(20) NOT NULL,
+  `rx_bytes` bigint(20) NOT NULL,
+  `tx_packets` bigint(20) NOT NULL,
+  `rx_packets` bigint(20) NOT NULL,
+  `signal_avg` int(11) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `node_id` (`node_id`,`mesh_entry_id`,`mac_address_id`,`radio_number`,`frequency_band`,`created`),
+  KEY `idx_node_station_hourlies_mac_address_id` (`mac_address_id`),
+  KEY `idx_node_station_hourlies_frequency_band` (`frequency_band`),
+  KEY `idx_node_station_hourlies_date` (`created`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `node_station_hourlies`
+--
+
+LOCK TABLES `node_station_hourlies` WRITE;
+/*!40000 ALTER TABLE `node_station_hourlies` DISABLE KEYS */;
+/*!40000 ALTER TABLE `node_station_hourlies` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -3627,28 +4006,22 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_stations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_stations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
   `mesh_entry_id` int(11) DEFAULT NULL,
+  `mac_address_id` int(11) DEFAULT NULL,
   `radio_number` tinyint(3) NOT NULL DEFAULT 0,
   `frequency_band` enum('two','five_lower','five_upper') DEFAULT 'two',
-  `mac` varchar(17) NOT NULL,
   `tx_bytes` bigint(20) NOT NULL,
   `rx_bytes` bigint(20) NOT NULL,
   `tx_packets` bigint(20) NOT NULL,
   `rx_packets` bigint(20) NOT NULL,
   `tx_bitrate` int(11) NOT NULL,
   `rx_bitrate` int(11) NOT NULL,
-  `authenticated` tinyint(2) NOT NULL DEFAULT 1,
-  `authorized` tinyint(2) NOT NULL DEFAULT 1,
-  `tdls_peer` tinyint(2) NOT NULL DEFAULT 1,
-  `preamble` varchar(255) NOT NULL,
   `tx_failed` int(11) NOT NULL,
-  `wmm_wme` tinyint(2) NOT NULL DEFAULT 0,
   `tx_retries` int(11) NOT NULL,
-  `mfp` tinyint(2) NOT NULL DEFAULT 1,
   `signal_now` int(11) NOT NULL,
   `signal_avg` int(11) NOT NULL,
   `created` datetime NOT NULL,
@@ -3656,8 +4029,9 @@ CREATE TABLE `node_stations` (
   PRIMARY KEY (`id`),
   KEY `idx_node_stations_node_id` (`node_id`),
   KEY `idx_node_stations_mesh_entry_id` (`mesh_entry_id`),
-  KEY `idx_node_stations_modified` (`modified`)
-) ENGINE=InnoDB AUTO_INCREMENT=328 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  KEY `idx_node_stations_modified` (`modified`),
+  KEY `idx_node_mac_address_id` (`mac_address_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -3675,7 +4049,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_stations_dailies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_stations_dailies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mac` varchar(64) NOT NULL DEFAULT '',
@@ -3710,7 +4084,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_systems`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_systems` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -3741,7 +4115,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_uptm_histories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_uptm_histories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -3772,7 +4146,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `node_wifi_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `node_wifi_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -3800,7 +4174,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `nodes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nodes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_id` int(11) DEFAULT NULL,
@@ -3822,7 +4196,7 @@ CREATE TABLE `nodes` (
   `mesh0` varchar(25) NOT NULL DEFAULT '',
   `mesh1` varchar(25) NOT NULL DEFAULT '',
   `mesh2` varchar(25) NOT NULL DEFAULT '',
-  `gateway` enum('none','lan','3g','wifi','wifi_static','wifi_ppp','wifi_pppoe','wan_static','wan_ppp','wan_pppoe') DEFAULT 'none',
+  `gateway` enum('none','lan','3g','wifi','wifi_static','wifi_ppp','wifi_pppoe','wan_static','wan_ppp','wan_pppoe','mwan') DEFAULT 'none',
   `bootcycle` int(11) NOT NULL DEFAULT 0,
   `mesh0_frequency_band` enum('two','five_lower','five_upper') DEFAULT 'two',
   `mesh1_frequency_band` enum('two','five_lower','five_upper') DEFAULT 'two',
@@ -3838,6 +4212,7 @@ CREATE TABLE `nodes` (
   `enable_overviews` tinyint(1) NOT NULL DEFAULT 1,
   `enable_schedules` tinyint(1) NOT NULL DEFAULT 0,
   `schedule_id` int(11) DEFAULT NULL,
+  `multi_wan_profile_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_nodes_mesh_id` (`mesh_id`),
   KEY `idx_nodes_name` (`name`),
@@ -3862,7 +4237,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `notifications`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `severity` int(11) NOT NULL DEFAULT 1,
@@ -3903,7 +4278,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `openvpn_clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `openvpn_clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
@@ -3933,7 +4308,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `openvpn_server_clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `openvpn_server_clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_ap_profile` enum('mesh','ap_profile') DEFAULT 'mesh',
@@ -3967,7 +4342,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `openvpn_servers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `openvpn_servers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -4000,12 +4375,316 @@ LOCK TABLES `openvpn_servers` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `passpoint_cell_networks`
+--
+
+DROP TABLE IF EXISTS `passpoint_cell_networks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_cell_networks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `passpoint_profile_id` int(11) DEFAULT NULL,
+  `name` char(100) NOT NULL,
+  `mcc` int(6) DEFAULT NULL,
+  `mnc` int(6) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_cell_networks`
+--
+
+LOCK TABLES `passpoint_cell_networks` WRITE;
+/*!40000 ALTER TABLE `passpoint_cell_networks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `passpoint_cell_networks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_domains`
+--
+
+DROP TABLE IF EXISTS `passpoint_domains`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_domains` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `passpoint_profile_id` int(11) DEFAULT NULL,
+  `name` char(100) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_domains`
+--
+
+LOCK TABLES `passpoint_domains` WRITE;
+/*!40000 ALTER TABLE `passpoint_domains` DISABLE KEYS */;
+/*!40000 ALTER TABLE `passpoint_domains` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_eap_methods`
+--
+
+DROP TABLE IF EXISTS `passpoint_eap_methods`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_eap_methods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(25) NOT NULL,
+  `short_name` varchar(25) NOT NULL,
+  `hostapd_string` varchar(25) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_eap_methods`
+--
+
+LOCK TABLES `passpoint_eap_methods` WRITE;
+/*!40000 ALTER TABLE `passpoint_eap_methods` DISABLE KEYS */;
+INSERT INTO `passpoint_eap_methods` VALUES (1,'EAP-TLS','eap_tls','13[5:6]',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(2,'EAP-TTLS/PAP','eap_ttls_pap','21[2:1][5:7]',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(3,'EAP-TTLS/MSCHAP2','eap_ttls_mschap2','21[2:4][5:7]',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(4,'PEAP','peap','25[2:4][5:7]',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(5,'EAP-SIM','eap_sim','18[5:1]',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(6,'EAP-USIM','eap_usim','18[5:2]',1,'2025-01-01 00:00:00','2025-01-01 00:00:00');
+/*!40000 ALTER TABLE `passpoint_eap_methods` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_nai_realm_passpoint_eap_methods`
+--
+
+DROP TABLE IF EXISTS `passpoint_nai_realm_passpoint_eap_methods`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_nai_realm_passpoint_eap_methods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `passpoint_nai_realm_id` int(11) DEFAULT NULL,
+  `passpoint_eap_method_id` int(11) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_nai_realm_passpoint_eap_methods`
+--
+
+LOCK TABLES `passpoint_nai_realm_passpoint_eap_methods` WRITE;
+/*!40000 ALTER TABLE `passpoint_nai_realm_passpoint_eap_methods` DISABLE KEYS */;
+/*!40000 ALTER TABLE `passpoint_nai_realm_passpoint_eap_methods` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_nai_realms`
+--
+
+DROP TABLE IF EXISTS `passpoint_nai_realms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_nai_realms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `passpoint_profile_id` int(11) DEFAULT NULL,
+  `encoding` tinyint(1) NOT NULL DEFAULT 0,
+  `name` char(64) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_nai_realms`
+--
+
+LOCK TABLES `passpoint_nai_realms` WRITE;
+/*!40000 ALTER TABLE `passpoint_nai_realms` DISABLE KEYS */;
+/*!40000 ALTER TABLE `passpoint_nai_realms` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_network_types`
+--
+
+DROP TABLE IF EXISTS `passpoint_network_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_network_types` (
+  `id` int(11) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_network_types`
+--
+
+LOCK TABLES `passpoint_network_types` WRITE;
+/*!40000 ALTER TABLE `passpoint_network_types` DISABLE KEYS */;
+INSERT INTO `passpoint_network_types` VALUES (0,'Private network',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(1,'Private network with guest access',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(2,'Chargeable public network',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(3,'Free public network',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(4,'Personal device network',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(5,'Emergency services only network',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(14,'Test or experimental',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(15,'Wildcard',1,'2025-01-01 00:00:00','2025-01-01 00:00:00');
+/*!40000 ALTER TABLE `passpoint_network_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_profiles`
+--
+
+DROP TABLE IF EXISTS `passpoint_profiles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` char(64) NOT NULL,
+  `cloud_id` int(11) DEFAULT NULL,
+  `passpoint_network_type_id` int(11) DEFAULT NULL,
+  `passpoint_venue_group_id` int(11) DEFAULT NULL,
+  `passpoint_venue_group_type_id` int(11) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_profiles`
+--
+
+LOCK TABLES `passpoint_profiles` WRITE;
+/*!40000 ALTER TABLE `passpoint_profiles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `passpoint_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_rcois`
+--
+
+DROP TABLE IF EXISTS `passpoint_rcois`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_rcois` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `passpoint_profile_id` int(11) DEFAULT NULL,
+  `name` char(100) NOT NULL,
+  `rcoi_id` char(100) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_rcois`
+--
+
+LOCK TABLES `passpoint_rcois` WRITE;
+/*!40000 ALTER TABLE `passpoint_rcois` DISABLE KEYS */;
+/*!40000 ALTER TABLE `passpoint_rcois` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_venue_group_types`
+--
+
+DROP TABLE IF EXISTS `passpoint_venue_group_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_venue_group_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(40) NOT NULL,
+  `passpoint_venue_group_id` int(11) NOT NULL,
+  `venue_type_value` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_venue_group_types`
+--
+
+LOCK TABLES `passpoint_venue_group_types` WRITE;
+/*!40000 ALTER TABLE `passpoint_venue_group_types` DISABLE KEYS */;
+INSERT INTO `passpoint_venue_group_types` VALUES (1,'Unspecified',0,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(2,'Unspecified Assembly',1,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(3,'Arena',1,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(4,'Stadium',1,2,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(5,'Passenger Terminal',1,3,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(6,'Amphitheater',1,4,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(7,'Amusement Park',1,5,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(8,'Place of Worship',1,6,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(9,'Cenvention Center',1,7,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(10,'Library',1,8,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(11,'Museum',1,9,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(12,'Restaurant',1,10,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(13,'Theater',1,11,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(14,'Bar',1,12,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(15,'Coffee Shop',1,13,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(16,'Zoo or aquarium',1,14,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(17,'Emergecy Coordination Center',1,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(18,'Unspecified Business',2,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(19,'Doctor or dentist office',2,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(20,'Bank',2,2,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(21,'Fire Station',2,3,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(22,'Police Station',2,4,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(23,'Post Office',2,6,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(24,'Professional Office',2,7,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(25,'Research and development facility',2,8,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(26,'Attourney Office',2,9,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(27,'Unspecified Educational',3,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(28,'Primary School',3,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(29,'Secondary School',3,2,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(30,'University or College',3,3,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(31,'Unspecified Factory and Inductrial',4,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(32,'Factory',4,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(33,'Unspecified Institutional',5,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(34,'Hospital',5,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(35,'Long-term Care Facility',5,2,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(36,'Alchohol and drug re-habilitation center',5,3,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(37,'Group home',5,4,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(38,'Prison or Jail',5,5,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(39,'Unspecified Mercantile',6,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(40,'Retail Store',6,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(41,'Grocery Market',6,2,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(42,'Automotive Service Station',6,3,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(43,'Shopping Mall',6,4,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(44,'Gas Station',6,5,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(45,'Unspecified Residential',7,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(46,'Private Residence',7,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(47,'Hotel Or Motel',7,2,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(48,'Dormitory',7,3,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(49,'Boarding House',7,4,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(50,'Unspecified Storage',8,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(51,'Unspecified Utility and Miscellaneous',9,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(52,'Unspecified Vehicular',10,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(53,'Automobile or Truck',10,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(54,'Airplane',10,2,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(55,'Bus',10,3,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(56,'Ferry',10,4,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(57,'Ship or Boat',10,5,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(58,'Train',10,6,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(59,'Motor Bike',10,7,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(60,'Unspecified Outdoor',11,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(61,'Muni-Mesh Network',11,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(62,'City Park',11,2,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(63,'Rest Area',11,3,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(64,'Traffic Control',11,4,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(65,'Bus Stop',11,5,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(66,'Kiosk',11,6,1,'2025-01-01 00:00:00','2025-01-01 00:00:00');
+/*!40000 ALTER TABLE `passpoint_venue_group_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_venue_groups`
+--
+
+DROP TABLE IF EXISTS `passpoint_venue_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_venue_groups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_venue_groups`
+--
+
+LOCK TABLES `passpoint_venue_groups` WRITE;
+/*!40000 ALTER TABLE `passpoint_venue_groups` DISABLE KEYS */;
+INSERT INTO `passpoint_venue_groups` VALUES (0,'Unspecified',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(1,'Assembly',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(2,'Business',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(3,'Educational',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(4,'Factory-Industrial',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(5,'Institutional',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(6,'Mercantile',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(7,'Residential',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(8,'Storage',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(9,'Utility-Misc',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(10,'Vehicular',1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(11,'Outdoor',1,'2025-01-01 00:00:00','2025-01-01 00:00:00');
+/*!40000 ALTER TABLE `passpoint_venue_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `passpoint_venue_types`
+--
+
+DROP TABLE IF EXISTS `passpoint_venue_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `passpoint_venue_types` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL DEFAULT 'Unspecified',
+  `venue_group` int(4) DEFAULT 0,
+  `venue_type` int(4) DEFAULT 0,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `passpoint_venue_types`
+--
+
+LOCK TABLES `passpoint_venue_types` WRITE;
+/*!40000 ALTER TABLE `passpoint_venue_types` DISABLE KEYS */;
+INSERT INTO `passpoint_venue_types` VALUES (1,'Unspecified',0,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(2,'Unspecified Assembly',1,0,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(3,'Arena',1,1,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(4,'Stadium',1,2,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(5,'Passenger Terminal e.g., airport, bus, ferry, train station',1,3,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(6,'Amphitheater',1,4,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(7,'Amusement Park',1,5,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(8,'Place of Worship',1,6,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(9,'Convention Center',1,6,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(10,'Convention Center',1,7,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(11,'Library',1,8,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(12,'Museum',1,9,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(13,'Restaurant',1,10,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(14,'Theater',1,11,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(15,'Bar',1,12,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(16,'Coffee Shop',1,13,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(17,'Zoo or Aquarium',1,14,1,'2025-01-01 00:00:00','2025-01-01 00:00:00'),(18,'Emergency Coordination Center',1,15,1,'2025-01-01 00:00:00','2025-01-01 00:00:00');
+/*!40000 ALTER TABLE `passpoint_venue_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `permanent_user_notifications`
 --
 
 DROP TABLE IF EXISTS `permanent_user_notifications`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permanent_user_notifications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `permanent_user_id` int(11) DEFAULT NULL,
@@ -4039,7 +4718,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `permanent_user_otps`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permanent_user_otps` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `permanent_user_id` int(11) NOT NULL,
@@ -4066,7 +4745,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `permanent_user_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permanent_user_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `permanent_user_id` int(11) NOT NULL,
@@ -4093,11 +4772,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `permanent_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `permanent_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `token` char(36) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
@@ -4138,8 +4817,10 @@ CREATE TABLE `permanent_users` (
   `site` varchar(100) NOT NULL DEFAULT '',
   `ppsk` varchar(100) NOT NULL DEFAULT '',
   `realm_vlan_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `session_limit` int(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `idx_username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4148,6 +4829,7 @@ CREATE TABLE `permanent_users` (
 
 LOCK TABLES `permanent_users` WRITE;
 /*!40000 ALTER TABLE `permanent_users` DISABLE KEYS */;
+INSERT INTO `permanent_users` VALUES (32,'dev@dev','$2y$10$EqydDAKd4ag4o0mbSWBP8OompiBjIZpS9oavBiW7wc6S55XwTUauS',NULL,'','','','','','sql',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'soft','soft','Dev',19,'Dev',46,NULL,NULL,0,1,'','','',4,4,23,'2025-08-05 14:54:29','2025-08-05 14:54:29','','',NULL,0),(33,'click_to_connect@dev','$2y$10$cw7JP8zm1Gzt1K0czmO5xOXnoGXyobctM76Est5AEh6Y..tUKRph2',NULL,'','','','','','sql',1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'soft','soft','Dev',19,'Dev_Click-To-Connect',47,NULL,NULL,0,1,'','','',4,4,23,'2025-08-05 14:54:29','2025-08-05 14:54:29','','',NULL,0);
 /*!40000 ALTER TABLE `permanent_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4157,7 +4839,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `pptp_clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pptp_clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
@@ -4185,7 +4867,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `predefined_commands`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `predefined_commands` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` char(64) DEFAULT NULL,
@@ -4208,12 +4890,68 @@ LOCK TABLES `predefined_commands` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `private_psk_entries`
+--
+
+DROP TABLE IF EXISTS `private_psk_entries`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `private_psk_entries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `private_psk_id` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL DEFAULT '',
+  `vlan` int(5) NOT NULL DEFAULT 0,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `comment` varchar(255) NOT NULL DEFAULT '',
+  `mac` varchar(17) NOT NULL DEFAULT '',
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `private_psk_entries`
+--
+
+LOCK TABLES `private_psk_entries` WRITE;
+/*!40000 ALTER TABLE `private_psk_entries` DISABLE KEYS */;
+/*!40000 ALTER TABLE `private_psk_entries` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `private_psks`
+--
+
+DROP TABLE IF EXISTS `private_psks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `private_psks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `cloud_id` int(11) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `private_psks`
+--
+
+LOCK TABLES `private_psks` WRITE;
+/*!40000 ALTER TABLE `private_psks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `private_psks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `profile_components`
 --
 
 DROP TABLE IF EXISTS `profile_components`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `profile_components` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -4221,7 +4959,7 @@ CREATE TABLE `profile_components` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4230,6 +4968,7 @@ CREATE TABLE `profile_components` (
 
 LOCK TABLES `profile_components` WRITE;
 /*!40000 ALTER TABLE `profile_components` DISABLE KEYS */;
+INSERT INTO `profile_components` VALUES (49,'SimpleAdd_46',23,'2025-08-05 14:54:29','2025-08-05 14:54:29'),(50,'SimpleAdd_47',23,'2025-08-05 14:54:29','2025-08-05 14:54:29'),(51,'SimpleAdd_48',23,'2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `profile_components` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4239,7 +4978,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profile_fup_components`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `profile_fup_components` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `profile_id` int(11) NOT NULL,
@@ -4274,7 +5013,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `profiles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(128) NOT NULL,
@@ -4282,7 +5021,7 @@ CREATE TABLE `profiles` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4291,6 +5030,7 @@ CREATE TABLE `profiles` (
 
 LOCK TABLES `profiles` WRITE;
 /*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+INSERT INTO `profiles` VALUES (46,'Dev',23,'2025-08-05 14:54:29','2025-08-05 14:54:29'),(47,'Dev_Click-To-Connect',23,'2025-08-05 14:54:29','2025-08-05 14:54:29'),(48,'Dev_User-Registration',23,'2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4300,7 +5040,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `radacct`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `radacct` (
   `radacctid` bigint(21) NOT NULL AUTO_INCREMENT,
   `acctsessionid` varchar(64) NOT NULL DEFAULT '',
@@ -4332,6 +5072,10 @@ CREATE TABLE `radacct` (
   `acctstopdelay` int(12) DEFAULT NULL,
   `xascendsessionsvrkey` varchar(20) DEFAULT NULL,
   `operator_name` varchar(32) NOT NULL DEFAULT '',
+  `framedipv6address` varchar(44) NOT NULL DEFAULT '',
+  `framedipv6prefix` varchar(44) NOT NULL DEFAULT '',
+  `framedinterfaceid` varchar(44) NOT NULL DEFAULT '',
+  `delegatedipv6prefix` varchar(44) NOT NULL DEFAULT '',
   PRIMARY KEY (`radacctid`),
   UNIQUE KEY `acctuniqueid` (`acctuniqueid`),
   KEY `username` (`username`),
@@ -4342,7 +5086,11 @@ CREATE TABLE `radacct` (
   KEY `acctinterval` (`acctinterval`),
   KEY `acctstoptime` (`acctstoptime`),
   KEY `nasipaddress` (`nasipaddress`),
-  KEY `nasidentifier` (`nasidentifier`)
+  KEY `nasidentifier` (`nasidentifier`),
+  KEY `framedipv6address` (`framedipv6address`),
+  KEY `framedipv6prefix` (`framedipv6prefix`),
+  KEY `framedinterfaceid` (`framedinterfaceid`),
+  KEY `delegatedipv6prefix` (`delegatedipv6prefix`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -4354,6 +5102,296 @@ LOCK TABLES `radacct` WRITE;
 /*!40000 ALTER TABLE `radacct` DISABLE KEYS */;
 /*!40000 ALTER TABLE `radacct` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER manage_user_stats_after_insert
+AFTER INSERT ON radacct
+FOR EACH ROW
+BEGIN
+    DECLARE latest_user_stats_id INT;
+    DECLARE creation_time_difference INT;
+    DECLARE new_acctinputoctets BIGINT DEFAULT 0;
+    DECLARE new_acctoutputoctets BIGINT DEFAULT 0;
+    
+    DECLARE stats_interval INT DEFAULT 30;
+
+    
+    SET new_acctinputoctets  = NEW.acctinputoctets;
+    SET new_acctoutputoctets = NEW.acctoutputoctets;
+
+    
+    SELECT id, TIMESTAMPDIFF(MINUTE, created, NOW())
+    INTO latest_user_stats_id, creation_time_difference
+    FROM user_stats
+    WHERE radacct_id = NEW.radacctid
+    ORDER BY timestamp DESC
+    LIMIT 1;
+    
+    
+    IF latest_user_stats_id IS NULL THEN
+        INSERT INTO user_stats (
+            radacct_id,
+            username,
+            realm,
+            nasipaddress,
+            nasidentifier,
+            framedipaddress,
+            callingstationid,
+            timestamp,
+            created,
+            acctinputoctets,
+            acctoutputoctets
+        )
+        VALUES (
+            NEW.radacctid,
+            NEW.username,
+            NEW.realm,
+            NEW.nasipaddress,
+            NEW.nasidentifier,
+            NEW.framedipaddress,
+            NEW.callingstationid,
+            NOW(),
+            NOW(),
+            new_acctinputoctets,
+            new_acctoutputoctets
+        );   
+    END IF;
+
+    IF latest_user_stats_id IS NOT NULL AND creation_time_difference <= stats_interval THEN   
+        
+        UPDATE user_stats
+        SET acctinputoctets = acctinputoctets + (new_acctinputoctets - (SELECT SUM(acctinputoctets) FROM user_stats WHERE radacct_id = NEW.radacctid)),
+            acctoutputoctets = acctoutputoctets + (new_acctoutputoctets - (SELECT SUM(acctoutputoctets) FROM user_stats WHERE radacct_id = NEW.radacctid)),
+            timestamp = NOW()
+        WHERE id = latest_user_stats_id;        
+    END IF;
+    
+    IF latest_user_stats_id IS NOT NULL AND creation_time_difference > stats_interval THEN 
+    
+        SET new_acctinputoctets  = new_acctinputoctets - (SELECT SUM(acctinputoctets) FROM user_stats WHERE radacct_id = NEW.radacctid);
+        SET new_acctoutputoctets = new_acctoutputoctets - (SELECT SUM(acctoutputoctets) FROM user_stats WHERE radacct_id = NEW.radacctid);
+      
+        INSERT INTO user_stats (
+            radacct_id,
+            username,
+            realm,
+            nasipaddress,
+            nasidentifier,
+            framedipaddress,
+            callingstationid,
+            timestamp,
+            created,
+            acctinputoctets,
+            acctoutputoctets
+        )
+        VALUES (
+            NEW.radacctid,
+            NEW.username,
+            NEW.realm,
+            NEW.nasipaddress,
+            NEW.nasidentifier,
+            NEW.framedipaddress,
+            NEW.callingstationid,
+            NOW(),
+            NOW(),
+            new_acctinputoctets,
+            new_acctoutputoctets
+        );    
+    END IF;
+       
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER manage_user_stats_after_update
+AFTER UPDATE ON radacct
+FOR EACH ROW
+BEGIN
+    DECLARE latest_user_stats_id INT;
+    DECLARE creation_time_difference INT;
+    DECLARE updated_acctinputoctets BIGINT DEFAULT 0;
+    DECLARE updated_acctoutputoctets BIGINT DEFAULT 0;
+    
+    DECLARE stats_interval INT DEFAULT 30;
+
+    
+    SET updated_acctinputoctets = NEW.acctinputoctets;
+    SET updated_acctoutputoctets = NEW.acctoutputoctets;
+
+    
+    SELECT id, TIMESTAMPDIFF(MINUTE, created, NOW())
+    INTO latest_user_stats_id, creation_time_difference
+    FROM user_stats
+    WHERE radacct_id = NEW.radacctid
+    ORDER BY timestamp DESC
+    LIMIT 1;
+    
+    IF latest_user_stats_id IS NULL THEN
+        INSERT INTO user_stats (
+            radacct_id,
+            username,
+            realm,
+            nasipaddress,
+            nasidentifier,
+            framedipaddress,
+            callingstationid,
+            timestamp,
+            created,
+            acctinputoctets,
+            acctoutputoctets
+        )
+        VALUES (
+            NEW.radacctid,
+            NEW.username,
+            NEW.realm,
+            NEW.nasipaddress,
+            NEW.nasidentifier,
+            NEW.framedipaddress,
+            NEW.callingstationid,
+            NOW(),
+            NOW(),
+            updated_acctinputoctets,
+            updated_acctoutputoctets
+        );
+    
+    END IF;
+
+    IF latest_user_stats_id IS NOT NULL AND creation_time_difference <= stats_interval THEN 
+
+        
+        UPDATE user_stats
+        SET acctinputoctets = acctinputoctets + (updated_acctinputoctets - (SELECT SUM(acctinputoctets) FROM user_stats WHERE radacct_id = NEW.radacctid)),
+            acctoutputoctets = acctoutputoctets + (updated_acctoutputoctets - (SELECT SUM(acctoutputoctets) FROM user_stats WHERE radacct_id = NEW.radacctid)),
+            timestamp = NOW()
+        WHERE id = latest_user_stats_id;
+        
+    END IF;
+    
+    IF latest_user_stats_id IS NOT NULL AND creation_time_difference > stats_interval THEN
+    
+        SET updated_acctinputoctets  = updated_acctinputoctets - (SELECT SUM(acctinputoctets) FROM user_stats WHERE radacct_id = NEW.radacctid);
+        SET updated_acctoutputoctets = updated_acctoutputoctets - (SELECT SUM(acctoutputoctets) FROM user_stats WHERE radacct_id = NEW.radacctid); 
+
+        
+        INSERT INTO user_stats (
+            radacct_id,
+            username,
+            realm,
+            nasipaddress,
+            nasidentifier,
+            framedipaddress,
+            callingstationid,
+            timestamp,
+            created,
+            acctinputoctets,
+            acctoutputoctets
+        )
+        VALUES (
+            NEW.radacctid,
+            NEW.username,
+            NEW.realm,
+            NEW.nasipaddress,
+            NEW.nasidentifier,
+            NEW.framedipaddress,
+            NEW.callingstationid,
+            NOW(),
+            NOW(),
+            updated_acctinputoctets,
+            updated_acctoutputoctets
+        );
+    END IF;
+
+     
+    IF OLD.acctstoptime IS NULL AND NEW.acctstoptime IS NOT NULL THEN
+        
+        INSERT INTO radacct_history 
+        SELECT * FROM radacct WHERE radacctid = NEW.radacctid;
+    END IF;
+
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `radacct_history`
+--
+
+DROP TABLE IF EXISTS `radacct_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `radacct_history` (
+  `radacctid` bigint(21) NOT NULL AUTO_INCREMENT,
+  `acctsessionid` varchar(64) NOT NULL DEFAULT '',
+  `acctuniqueid` varchar(32) NOT NULL DEFAULT '',
+  `username` varchar(64) NOT NULL DEFAULT '',
+  `groupname` varchar(64) NOT NULL DEFAULT '',
+  `realm` varchar(64) DEFAULT '',
+  `nasipaddress` varchar(15) NOT NULL DEFAULT '',
+  `nasidentifier` varchar(64) NOT NULL DEFAULT '',
+  `nasportid` varchar(15) DEFAULT NULL,
+  `nasporttype` varchar(32) DEFAULT NULL,
+  `acctstarttime` datetime DEFAULT NULL,
+  `acctupdatetime` datetime DEFAULT NULL,
+  `acctstoptime` datetime DEFAULT NULL,
+  `acctinterval` int(12) DEFAULT NULL,
+  `acctsessiontime` int(12) unsigned DEFAULT NULL,
+  `acctauthentic` varchar(32) DEFAULT NULL,
+  `connectinfo_start` varchar(50) DEFAULT NULL,
+  `connectinfo_stop` varchar(50) DEFAULT NULL,
+  `acctinputoctets` bigint(20) DEFAULT NULL,
+  `acctoutputoctets` bigint(20) DEFAULT NULL,
+  `calledstationid` varchar(50) NOT NULL DEFAULT '',
+  `callingstationid` varchar(50) NOT NULL DEFAULT '',
+  `acctterminatecause` varchar(32) NOT NULL DEFAULT '',
+  `servicetype` varchar(32) DEFAULT NULL,
+  `framedprotocol` varchar(32) DEFAULT NULL,
+  `framedipaddress` varchar(15) NOT NULL DEFAULT '',
+  `acctstartdelay` int(12) DEFAULT NULL,
+  `acctstopdelay` int(12) DEFAULT NULL,
+  `xascendsessionsvrkey` varchar(20) DEFAULT NULL,
+  `operator_name` varchar(32) NOT NULL DEFAULT '',
+  PRIMARY KEY (`radacctid`),
+  KEY `username` (`username`),
+  KEY `framedipaddress` (`framedipaddress`),
+  KEY `acctsessionid` (`acctsessionid`),
+  KEY `acctsessiontime` (`acctsessiontime`),
+  KEY `acctstarttime` (`acctstarttime`),
+  KEY `acctinterval` (`acctinterval`),
+  KEY `acctstoptime` (`acctstoptime`),
+  KEY `nasipaddress` (`nasipaddress`),
+  KEY `nasidentifier` (`nasidentifier`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `radacct_history`
+--
+
+LOCK TABLES `radacct_history` WRITE;
+/*!40000 ALTER TABLE `radacct_history` DISABLE KEYS */;
+/*!40000 ALTER TABLE `radacct_history` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `radcheck`
@@ -4361,7 +5399,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `radcheck`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `radcheck` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL DEFAULT '',
@@ -4371,7 +5409,7 @@ CREATE TABLE `radcheck` (
   PRIMARY KEY (`id`),
   KEY `username` (`username`(32)),
   KEY `FK_radcheck_ref_vouchers` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=10623 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10633 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4380,6 +5418,7 @@ CREATE TABLE `radcheck` (
 
 LOCK TABLES `radcheck` WRITE;
 /*!40000 ALTER TABLE `radcheck` DISABLE KEYS */;
+INSERT INTO `radcheck` VALUES (10623,'dev@dev','User-Profile',':=','Dev'),(10624,'dev@dev','Rd-Realm',':=','Dev'),(10625,'dev@dev','Rd-Account-Disabled',':=','0'),(10626,'dev@dev','Cleartext-Password',':=','testing123'),(10627,'dev@dev','Rd-User-Type',':=','user'),(10628,'click_to_connect@dev','User-Profile',':=','Dev_Click-To-Connect'),(10629,'click_to_connect@dev','Rd-Realm',':=','Dev'),(10630,'click_to_connect@dev','Rd-Account-Disabled',':=','0'),(10631,'click_to_connect@dev','Cleartext-Password',':=','click_to_connect'),(10632,'click_to_connect@dev','Rd-User-Type',':=','user');
 /*!40000 ALTER TABLE `radcheck` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4389,7 +5428,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `radgroupcheck`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `radgroupcheck` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `groupname` varchar(64) NOT NULL DEFAULT '',
@@ -4401,7 +5440,7 @@ CREATE TABLE `radgroupcheck` (
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `groupname` (`groupname`(32))
-) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4410,6 +5449,7 @@ CREATE TABLE `radgroupcheck` (
 
 LOCK TABLES `radgroupcheck` WRITE;
 /*!40000 ALTER TABLE `radgroupcheck` DISABLE KEYS */;
+INSERT INTO `radgroupcheck` VALUES (142,'SimpleAdd_47','Rd-Reset-Type-Data',':=','daily','SimpleProfile','2025-08-05 14:54:29','2025-08-05 14:54:29'),(143,'SimpleAdd_47','Rd-Total-Data',':=','250000000','SimpleProfile','2025-08-05 14:54:29','2025-08-05 14:54:29'),(144,'SimpleAdd_47','Rd-Cap-Type-Data',':=','hard','SimpleProfile','2025-08-05 14:54:29','2025-08-05 14:54:29'),(145,'SimpleAdd_47','Rd-Mac-Counter-Data',':=','1','SimpleProfile','2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `radgroupcheck` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4419,7 +5459,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `radgroupreply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `radgroupreply` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `groupname` varchar(64) NOT NULL DEFAULT '',
@@ -4431,7 +5471,7 @@ CREATE TABLE `radgroupreply` (
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `groupname` (`groupname`(32))
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4440,6 +5480,7 @@ CREATE TABLE `radgroupreply` (
 
 LOCK TABLES `radgroupreply` WRITE;
 /*!40000 ALTER TABLE `radgroupreply` DISABLE KEYS */;
+INSERT INTO `radgroupreply` VALUES (62,'SimpleAdd_47','WISPr-Bandwidth-Max-Up',':=','512000','SimpleProfile','2025-08-05 14:54:29','2025-08-05 14:54:29'),(63,'SimpleAdd_47','WISPr-Bandwidth-Max-Down',':=','512000','SimpleProfile','2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `radgroupreply` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4449,7 +5490,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `radippool`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `radippool` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `pool_name` varchar(30) NOT NULL,
@@ -4489,7 +5530,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `radpostauth`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `radpostauth` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL DEFAULT '',
@@ -4517,7 +5558,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `radreply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `radreply` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL DEFAULT '',
@@ -4545,7 +5586,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `radusergroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `radusergroup` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL DEFAULT '',
@@ -4553,7 +5594,7 @@ CREATE TABLE `radusergroup` (
   `priority` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `username` (`username`(32))
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4562,7 +5603,35 @@ CREATE TABLE `radusergroup` (
 
 LOCK TABLES `radusergroup` WRITE;
 /*!40000 ALTER TABLE `radusergroup` DISABLE KEYS */;
+INSERT INTO `radusergroup` VALUES (47,'Dev','SimpleAdd_46',5),(48,'Dev_Click-To-Connect','SimpleAdd_47',5),(49,'Dev_User-Registration','SimpleAdd_48',5);
 /*!40000 ALTER TABLE `radusergroup` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `realm_admins`
+--
+
+DROP TABLE IF EXISTS `realm_admins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `realm_admins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `realm_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `permissions` enum('admin','view','granular') DEFAULT 'admin',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `realm_admins`
+--
+
+LOCK TABLES `realm_admins` WRITE;
+/*!40000 ALTER TABLE `realm_admins` DISABLE KEYS */;
+/*!40000 ALTER TABLE `realm_admins` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -4571,7 +5640,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `realm_mac_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `realm_mac_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `realm_id` int(11) NOT NULL,
@@ -4599,7 +5668,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `realm_pmks`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `realm_pmks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `realm_id` int(11) NOT NULL,
@@ -4627,7 +5696,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `realm_ssids`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `realm_ssids` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `realm_id` int(11) NOT NULL,
@@ -4658,7 +5727,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `realm_vlans`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `realm_vlans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `realm_id` int(11) NOT NULL,
@@ -4686,7 +5755,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `realms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `realms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL DEFAULT '',
@@ -4717,7 +5786,7 @@ CREATE TABLE `realms` (
   `suffix_vouchers` tinyint(1) NOT NULL DEFAULT 0,
   `suffix_devices` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -4726,6 +5795,7 @@ CREATE TABLE `realms` (
 
 LOCK TABLES `realms` WRITE;
 /*!40000 ALTER TABLE `realms` DISABLE KEYS */;
+INSERT INTO `realms` VALUES (19,'Dev','logo.png','','','','','','','','','',NULL,NULL,23,'2025-08-05 14:54:29','2025-08-05 14:54:29','','','','','','','','dev',1,0,0);
 /*!40000 ALTER TABLE `realms` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -4735,7 +5805,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `registration_requests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `registration_requests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -4766,7 +5836,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `reverse_lookups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reverse_lookups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ip` varchar(255) NOT NULL,
@@ -4792,7 +5862,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rolling_last_day`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rolling_last_day` (
   `mesh_id` int(11) NOT NULL,
   `tree_tag_id` int(11) DEFAULT NULL,
@@ -4837,7 +5907,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rolling_last_hour`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rolling_last_hour` (
   `mesh_id` int(11) NOT NULL,
   `tree_tag_id` int(11) DEFAULT NULL,
@@ -4882,7 +5952,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rolling_last_ninety_days`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rolling_last_ninety_days` (
   `mesh_id` int(11) NOT NULL,
   `tree_tag_id` int(11) DEFAULT NULL,
@@ -4927,7 +5997,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rolling_last_seven_days`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rolling_last_seven_days` (
   `mesh_id` int(11) NOT NULL,
   `tree_tag_id` int(11) DEFAULT NULL,
@@ -4972,7 +6042,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rolling_last_sixty_days`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rolling_last_sixty_days` (
   `mesh_id` int(11) NOT NULL,
   `tree_tag_id` int(11) DEFAULT NULL,
@@ -5017,7 +6087,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rolling_last_thirty_days`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rolling_last_thirty_days` (
   `mesh_id` int(11) NOT NULL,
   `tree_tag_id` int(11) DEFAULT NULL,
@@ -5062,7 +6132,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `schedule_entries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `schedule_entries` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `schedule_id` int(11) DEFAULT NULL,
@@ -5099,7 +6169,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `schedules`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `schedules` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` char(64) DEFAULT NULL,
@@ -5125,7 +6195,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `sites`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sites` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -5135,7 +6205,7 @@ CREATE TABLE `sites` (
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5144,6 +6214,7 @@ CREATE TABLE `sites` (
 
 LOCK TABLES `sites` WRITE;
 /*!40000 ALTER TABLE `sites` DISABLE KEYS */;
+INSERT INTO `sites` VALUES (21,'Site Dev',23,NULL,NULL,'2025-08-05 14:54:29','2025-08-05 14:54:29');
 /*!40000 ALTER TABLE `sites` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5153,7 +6224,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `sms_histories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sms_histories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_id` int(11) NOT NULL,
@@ -5183,7 +6254,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `social_login_user_realms`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `social_login_user_realms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `social_login_user_id` int(11) DEFAULT NULL,
@@ -5209,7 +6280,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `social_login_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `social_login_users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `provider` enum('Facebook','Google','Twitter') DEFAULT 'Facebook',
@@ -5247,7 +6318,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `softflows`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `softflows` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `dynamic_client_id` int(11) DEFAULT NULL,
@@ -5280,12 +6351,60 @@ LOCK TABLES `softflows` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `sqm_profiles`
+--
+
+DROP TABLE IF EXISTS `sqm_profiles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sqm_profiles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `cloud_id` int(11) DEFAULT NULL,
+  `upload` int(11) NOT NULL DEFAULT 2032,
+  `download` int(11) NOT NULL DEFAULT 14698,
+  `linklayer` enum('none','ethernet','atm') NOT NULL DEFAULT 'none',
+  `overhead` int(11) NOT NULL,
+  `tcMTU` int(11) NOT NULL,
+  `tcTSIZE` int(11) NOT NULL,
+  `tcMPU` int(11) NOT NULL,
+  `ilimit` int(11) NOT NULL,
+  `elimit` int(11) NOT NULL,
+  `itarget` varchar(10) NOT NULL,
+  `etarget` varchar(10) NOT NULL,
+  `ingress_ecn` enum('ECN','NOECN') NOT NULL DEFAULT 'ECN',
+  `egress_ecn` enum('ECN','NOECN') NOT NULL DEFAULT 'ECN',
+  `target` varchar(10) NOT NULL,
+  `squash_dscp` tinyint(1) NOT NULL DEFAULT 1,
+  `squash_ingress` tinyint(1) NOT NULL DEFAULT 1,
+  `qdisc` enum('fq_codel','efq_codel','nfq_codel','sfq','codel','ns2_codel','pie','cake') NOT NULL DEFAULT 'fq_codel',
+  `script` enum('simple.qos','simplest.qos','layer_cake.qos','piece_of_cake.qos','simplest_tbf.qos') NOT NULL DEFAULT 'simple.qos',
+  `iqdisc_opts` text DEFAULT NULL,
+  `eqdisc_opts` text DEFAULT NULL,
+  `qdisc_advanced` tinyint(1) NOT NULL DEFAULT 0,
+  `qdisc_really_advanced` tinyint(1) NOT NULL DEFAULT 0,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sqm_profiles`
+--
+
+LOCK TABLES `sqm_profiles` WRITE;
+/*!40000 ALTER TABLE `sqm_profiles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `sqm_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `temp_flow_logs`
 --
 
 DROP TABLE IF EXISTS `temp_flow_logs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `temp_flow_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -5325,7 +6444,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `temp_proxy_logs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `temp_proxy_logs` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `node_id` int(11) DEFAULT NULL,
@@ -5356,7 +6475,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `temp_reports`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `temp_reports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `mesh_id` int(11) NOT NULL,
@@ -5384,7 +6503,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `timezones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `timezones` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
@@ -5411,7 +6530,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `top_up_transactions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `top_up_transactions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -5444,7 +6563,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `top_ups`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `top_ups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cloud_id` int(11) DEFAULT NULL,
@@ -5475,7 +6594,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unknown_dynamic_clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `unknown_dynamic_clients` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nasidentifier` varchar(128) NOT NULL DEFAULT '',
@@ -5505,7 +6624,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `unknown_nodes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `unknown_nodes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `mac` varchar(255) NOT NULL,
@@ -5541,7 +6660,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -5551,7 +6670,7 @@ CREATE TABLE `user_settings` (
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idx_user_settings_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=483 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=495 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -5560,7 +6679,7 @@ CREATE TABLE `user_settings` (
 
 LOCK TABLES `user_settings` WRITE;
 /*!40000 ALTER TABLE `user_settings` DISABLE KEYS */;
-INSERT INTO `user_settings` VALUES (91,-1,'UserStatsLastRun','1714462802','2019-11-12 19:00:03','2024-04-30 07:40:02'),(110,-1,'password','admin','2021-06-26 06:47:40','2021-06-26 06:47:40'),(111,-1,'country','ZA','2021-06-26 06:47:40','2022-08-26 18:36:42'),(112,-1,'timezone','24','2021-06-26 06:47:40','2021-06-26 06:47:40'),(113,-1,'heartbeat_dead_after','900','2021-06-26 06:47:40','2021-10-25 22:12:37'),(114,-1,'cp_radius_1','192.168.8.220','2021-06-26 06:47:40','2021-10-25 22:12:37'),(115,-1,'cp_radius_2','','2021-06-26 06:47:40','2021-06-26 06:47:40'),(116,-1,'cp_radius_secret','testing123','2021-06-26 06:47:40','2021-06-26 06:47:40'),(117,-1,'cp_uam_url','http://192.168.8.220/cake4/rd_cake/dynamic-details/chilli-browser-detect/','2021-06-26 06:47:40','2022-08-26 18:37:10'),(118,-1,'cp_uam_secret','greatsecret','2021-06-26 06:47:40','2021-06-26 06:47:40'),(119,-1,'cp_swap_octet','0','2021-06-26 06:47:40','2022-08-12 04:48:16'),(120,-1,'cp_mac_auth','0','2021-06-26 06:47:40','2022-08-12 04:48:16'),(121,-1,'cp_coova_optional','','2021-06-26 06:47:40','2021-06-26 06:47:40'),(122,-1,'email_enabled','0','2021-06-26 06:47:40','2021-06-26 06:47:40'),(123,-1,'email_ssl','0','2021-06-26 06:47:40','2021-06-26 06:47:40'),(124,-1,'s_k','xJ3ktaC39H','2021-10-25 22:15:38','2021-10-25 22:15:38'),(125,-1,'s_iv','anSYCDY1C9','2021-10-25 22:15:38','2021-10-25 22:15:38'),(126,-1,'s_l','Ryttd0xFdFZTK210Z2JFOGw4c0M1WTdtOUJxeXRGdnBDZnduNHRUS0xzcz0=','2021-10-25 22:36:29','2021-10-25 22:36:29'),(450,44,'wl_active','1','2022-08-08 14:12:09','2022-08-08 14:12:09'),(451,44,'wl_header','RADIUSdesk','2022-08-08 14:12:09','2022-08-08 14:12:09'),(452,44,'wl_h_bg','ffffff','2022-08-08 14:12:09','2022-08-08 14:12:09'),(453,44,'wl_h_fg','005691','2022-08-08 14:12:09','2022-08-08 14:12:09'),(454,44,'wl_footer','RADIUSdesk 2022','2022-08-08 14:12:09','2022-08-08 14:12:09'),(455,44,'wl_img_active','1','2022-08-08 14:12:09','2022-08-08 14:12:09'),(456,44,'wl_img_file','logo.png','2022-08-08 14:12:09','2022-08-08 14:12:09'),(457,44,'compact_view','1','2022-08-08 14:12:09','2022-08-08 14:12:09'),(458,-1,'cloud_id','21','2022-08-12 04:48:16','2022-08-23 12:57:40'),(459,-1,'mqtt_enabled','0','2022-08-12 04:48:40','2022-08-12 04:48:40'),(460,-1,'api_mqtt_enabled','0','2022-08-12 04:48:40','2022-08-12 04:48:40'),(461,-1,'sms_1_enabled','0','2022-08-12 04:56:51','2022-08-12 04:56:51'),(462,-1,'sms_1_ssl_verify_peer','0','2022-08-12 04:56:51','2022-08-12 04:56:51'),(463,-1,'sms_1_ssl_verify_host','0','2022-08-12 04:56:51','2022-08-12 04:56:51'),(464,-1,'sms_2_enabled','0','2022-08-12 04:56:55','2022-08-12 04:56:55'),(465,-1,'sms_2_ssl_verify_peer','0','2022-08-12 04:56:55','2022-08-12 04:56:55'),(466,-1,'sms_2_ssl_verify_host','0','2022-08-12 04:56:55','2022-08-12 04:56:55'),(467,-1,'report_adv_proto','http','2022-08-23 12:57:40','2022-08-23 12:57:40'),(468,-1,'report_adv_light','60','2022-08-23 12:57:40','2022-08-23 12:57:40'),(469,-1,'report_adv_full','600','2022-08-23 12:57:40','2022-08-23 12:57:40'),(470,-1,'report_adv_sampling','60','2022-08-23 12:57:40','2022-08-23 12:57:40'),(471,-1,'UserStatsCompactingStoppedAt','1661472000','2022-08-25 03:10:02','2022-08-26 03:10:02'),(472,-1,'UserStatsDailiesStoppedAt','1661472000','2022-08-25 04:10:01','2022-08-26 04:10:02');
+INSERT INTO `user_settings` VALUES (91,-1,'UserStatsLastRun','1714462802','2019-11-12 19:00:03','2024-04-30 07:40:02'),(110,-1,'password','admin','2021-06-26 06:47:40','2021-06-26 06:47:40'),(111,-1,'country','ZA','2021-06-26 06:47:40','2022-08-26 18:36:42'),(112,-1,'timezone','24','2021-06-26 06:47:40','2021-06-26 06:47:40'),(113,-1,'heartbeat_dead_after','900','2021-06-26 06:47:40','2021-10-25 22:12:37'),(114,-1,'cp_radius_1','192.168.8.220','2021-06-26 06:47:40','2021-10-25 22:12:37'),(115,-1,'cp_radius_2','','2021-06-26 06:47:40','2021-06-26 06:47:40'),(116,-1,'cp_radius_secret','testing123','2021-06-26 06:47:40','2021-06-26 06:47:40'),(117,-1,'cp_uam_url','http://192.168.8.220/cake4/rd_cake/dynamic-details/chilli-browser-detect/','2021-06-26 06:47:40','2022-08-26 18:37:10'),(118,-1,'cp_uam_secret','greatsecret','2021-06-26 06:47:40','2021-06-26 06:47:40'),(119,-1,'cp_swap_octet','0','2021-06-26 06:47:40','2022-08-12 04:48:16'),(120,-1,'cp_mac_auth','0','2021-06-26 06:47:40','2022-08-12 04:48:16'),(121,-1,'cp_coova_optional','','2021-06-26 06:47:40','2021-06-26 06:47:40'),(122,-1,'email_enabled','0','2021-06-26 06:47:40','2021-06-26 06:47:40'),(123,-1,'email_ssl','0','2021-06-26 06:47:40','2021-06-26 06:47:40'),(124,-1,'s_k','xJ3ktaC39H','2021-10-25 22:15:38','2021-10-25 22:15:38'),(125,-1,'s_iv','anSYCDY1C9','2021-10-25 22:15:38','2021-10-25 22:15:38'),(126,-1,'s_l','Ryttd0xFdFZTK210Z2JFOGw4c0M1WTdtOUJxeXRGdnBDZnduNHRUS0xzcz0=','2021-10-25 22:36:29','2021-10-25 22:36:29'),(458,-1,'cloud_id','21','2022-08-12 04:48:16','2022-08-23 12:57:40'),(459,-1,'mqtt_enabled','0','2022-08-12 04:48:40','2022-08-12 04:48:40'),(460,-1,'api_mqtt_enabled','0','2022-08-12 04:48:40','2022-08-12 04:48:40'),(461,-1,'sms_1_enabled','0','2022-08-12 04:56:51','2022-08-12 04:56:51'),(462,-1,'sms_1_ssl_verify_peer','0','2022-08-12 04:56:51','2022-08-12 04:56:51'),(463,-1,'sms_1_ssl_verify_host','0','2022-08-12 04:56:51','2022-08-12 04:56:51'),(464,-1,'sms_2_enabled','0','2022-08-12 04:56:55','2022-08-12 04:56:55'),(465,-1,'sms_2_ssl_verify_peer','0','2022-08-12 04:56:55','2022-08-12 04:56:55'),(466,-1,'sms_2_ssl_verify_host','0','2022-08-12 04:56:55','2022-08-12 04:56:55'),(467,-1,'report_adv_proto','http','2022-08-23 12:57:40','2022-08-23 12:57:40'),(468,-1,'report_adv_light','60','2022-08-23 12:57:40','2022-08-23 12:57:40'),(469,-1,'report_adv_full','600','2022-08-23 12:57:40','2022-08-23 12:57:40'),(470,-1,'report_adv_sampling','60','2022-08-23 12:57:40','2022-08-23 12:57:40'),(471,-1,'UserStatsCompactingStoppedAt','1661472000','2022-08-25 03:10:02','2022-08-26 03:10:02'),(472,-1,'UserStatsDailiesStoppedAt','1661472000','2022-08-25 04:10:01','2022-08-26 04:10:02'),(483,44,'wl_active','1','2025-08-05 14:55:13','2025-08-05 14:55:13'),(484,44,'wl_header','RADIUSdesk','2025-08-05 14:55:13','2025-08-05 14:55:13'),(485,44,'wl_h_bg','ffffff','2025-08-05 14:55:13','2025-08-05 14:55:13'),(486,44,'wl_h_fg','005691','2025-08-05 14:55:13','2025-08-05 14:55:13'),(487,44,'wl_footer','RADIUSdesk 2026','2025-08-05 14:55:13','2025-08-05 14:55:13'),(488,44,'wl_img_active','1','2025-08-05 14:55:13','2025-08-05 14:55:13'),(489,44,'wl_img_file','logo.png','2025-08-05 14:55:13','2025-08-05 14:55:13'),(490,44,'cloud_id','23','2025-08-05 14:55:13','2025-08-05 14:55:13'),(491,44,'realm_id','0','2025-08-05 14:55:13','2025-08-05 14:55:13'),(492,44,'compact_view','1','2025-08-05 14:55:13','2025-08-05 14:55:13'),(493,44,'radius_overview','1','2025-08-05 14:55:13','2025-08-05 14:55:13'),(494,44,'meshdesk_overview','1','2025-08-05 14:55:13','2025-08-05 14:55:13');
 /*!40000 ALTER TABLE `user_settings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5570,7 +6689,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_ssids`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_ssids` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL DEFAULT '',
@@ -5598,7 +6717,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_stats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_stats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `radacct_id` int(11) NOT NULL,
@@ -5611,11 +6730,14 @@ CREATE TABLE `user_stats` (
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `acctinputoctets` bigint(20) NOT NULL,
   `acctoutputoctets` bigint(20) NOT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `us_realm_timestamp` (`realm`,`timestamp`),
   KEY `us_username_timestamp` (`username`,`timestamp`),
   KEY `us_nasidentifier_timestamp` (`nasidentifier`,`timestamp`),
-  KEY `us_callingstationid_timestamp` (`callingstationid`,`timestamp`)
+  KEY `us_callingstationid_timestamp` (`callingstationid`,`timestamp`),
+  KEY `idx_radacct_id` (`radacct_id`),
+  KEY `idx_radacct_timestamp` (`radacct_id`,`timestamp`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -5634,7 +6756,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_stats_dailies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user_stats_dailies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_stat_id` int(11) NOT NULL,
@@ -5668,11 +6790,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) DEFAULT NULL,
   `token` char(36) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
   `surname` varchar(50) NOT NULL,
@@ -5697,7 +6819,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (44,'root','9b2b0416194bfdd0db089b9c09fad3163eae5383','b4c6ac81-8c7c-4802-b50a-0a6380555b50','root','','','','',1,4,8,4,'2012-12-10 13:14:13','2021-06-26 06:02:53',24);
+INSERT INTO `users` VALUES (44,'root','$2y$10$BcIuhiVdeLSCeJNMPzxsOuyNB4nwhSXBimu9ulP1UtxjsRLNFHGxi','b4c6ac81-8c7c-4802-b50a-0a6380555b50','root','','','','',1,4,8,4,'2012-12-10 13:14:13','2025-02-13 11:34:48',24);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -5707,7 +6829,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vouchers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vouchers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) DEFAULT NULL,
@@ -5737,7 +6859,8 @@ CREATE TABLE `vouchers` (
   `time_used` int(12) DEFAULT NULL,
   `time_cap` int(12) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `ak_vouchers` (`name`)
+  UNIQUE KEY `ak_vouchers` (`name`),
+  UNIQUE KEY `idx_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -5749,6 +6872,331 @@ LOCK TABLES `vouchers` WRITE;
 /*!40000 ALTER TABLE `vouchers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `vouchers` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `wan_lte_stats`
+--
+
+DROP TABLE IF EXISTS `wan_lte_stats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wan_lte_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ap_id` int(11) DEFAULT NULL,
+  `node_id` int(11) DEFAULT NULL,
+  `mwan_interface_id` int(11) DEFAULT NULL,
+  `mcc` int(11) DEFAULT NULL,
+  `mnc` int(11) DEFAULT NULL,
+  `rsrp` int(11) DEFAULT NULL,
+  `rsrq` int(11) DEFAULT NULL,
+  `rssi` int(11) DEFAULT NULL,
+  `snr` int(11) DEFAULT NULL,
+  `type` char(64) NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `modified` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wan_lte_stats`
+--
+
+LOCK TABLES `wan_lte_stats` WRITE;
+/*!40000 ALTER TABLE `wan_lte_stats` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wan_lte_stats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wan_mwan3_status`
+--
+
+DROP TABLE IF EXISTS `wan_mwan3_status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wan_mwan3_status` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ap_id` int(11) DEFAULT NULL,
+  `node_id` int(11) DEFAULT NULL,
+  `mwan3_status` text NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `modified` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wan_mwan3_status`
+--
+
+LOCK TABLES `wan_mwan3_status` WRITE;
+/*!40000 ALTER TABLE `wan_mwan3_status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wan_mwan3_status` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wan_traffic_stats`
+--
+
+DROP TABLE IF EXISTS `wan_traffic_stats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wan_traffic_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ap_id` int(11) DEFAULT NULL,
+  `node_id` int(11) DEFAULT NULL,
+  `mwan_interface_id` int(11) DEFAULT NULL,
+  `ipv4_mask` int(11) DEFAULT NULL,
+  `ipv4_address` varchar(45) DEFAULT NULL,
+  `ipv6_mask` int(11) DEFAULT NULL,
+  `ipv6_address` varchar(45) DEFAULT NULL,
+  `tx_bytes` bigint(20) NOT NULL,
+  `rx_bytes` bigint(20) NOT NULL,
+  `delta_tx_bytes` bigint(20) NOT NULL,
+  `delta_rx_bytes` bigint(20) NOT NULL,
+  `tx_packets` bigint(20) NOT NULL,
+  `rx_packets` bigint(20) NOT NULL,
+  `delta_tx_packets` bigint(20) NOT NULL,
+  `delta_rx_packets` bigint(20) NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `modified` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wan_traffic_stats`
+--
+
+LOCK TABLES `wan_traffic_stats` WRITE;
+/*!40000 ALTER TABLE `wan_traffic_stats` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wan_traffic_stats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `wan_wifi_stats`
+--
+
+DROP TABLE IF EXISTS `wan_wifi_stats`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `wan_wifi_stats` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ap_id` int(11) DEFAULT NULL,
+  `node_id` int(11) DEFAULT NULL,
+  `mwan_interface_id` int(11) DEFAULT NULL,
+  `rx_packets` bigint(20) NOT NULL,
+  `tx_packets` bigint(20) NOT NULL,
+  `signal` int(11) DEFAULT NULL,
+  `bitrate` int(11) DEFAULT NULL,
+  `txpower` int(11) DEFAULT NULL,
+  `tx_rate` int(11) DEFAULT NULL,
+  `channel` int(11) DEFAULT NULL,
+  `quality` int(11) DEFAULT NULL,
+  `rx_rate` int(11) DEFAULT NULL,
+  `noise` int(11) DEFAULT NULL,
+  `ssid` char(124) NOT NULL,
+  `created` datetime NOT NULL DEFAULT current_timestamp(),
+  `modified` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `wan_wifi_stats`
+--
+
+LOCK TABLES `wan_wifi_stats` WRITE;
+/*!40000 ALTER TABLE `wan_wifi_stats` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wan_wifi_stats` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping events for database 'rd'
+--
+/*!50106 SET @save_time_zone= @@TIME_ZONE */ ;
+/*!50106 DROP EVENT IF EXISTS `aggregate_ap_stations_hourly` */;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8mb3 */ ;;
+/*!50003 SET character_set_results = utf8mb3 */ ;;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`root`@`localhost`*/ /*!50106 EVENT `aggregate_ap_stations_hourly` ON SCHEDULE EVERY 1 HOUR STARTS '2024-09-10 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    INSERT INTO ap_station_hourlies (
+        ap_id,
+        ap_profile_entry_id,
+        mac_address_id,
+        radio_number,
+        frequency_band,
+        tx_bytes,
+        rx_bytes,
+        tx_packets,
+        rx_packets,
+        signal_avg,
+        created,
+        modified
+    )
+    SELECT
+        ap_id,
+        ap_profile_entry_id,
+        mac_address_id,
+        radio_number,
+        frequency_band,
+        SUM(tx_bytes),
+        SUM(rx_bytes),
+        SUM(tx_packets),
+        SUM(rx_packets),
+        AVG(signal_avg),
+        DATE_FORMAT(NOW() - INTERVAL 1 HOUR, '%Y-%m-%d %H:00:00') AS created,
+        DATE_FORMAT(NOW() - INTERVAL 1 HOUR, '%Y-%m-%d %H:00:00') AS modified
+    FROM
+        ap_stations
+    WHERE
+        created >= NOW() - INTERVAL 1 HOUR
+    GROUP BY
+        ap_id,
+        ap_profile_entry_id,
+        mac_address_id,
+        radio_number,
+        frequency_band;
+
+    
+    DELETE FROM ap_stations
+    WHERE created < NOW() - INTERVAL 1 HOUR;
+
+     
+    DELETE FROM ap_station_hourlies
+    WHERE created < CURDATE() - INTERVAL 8 DAY;
+
+END */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+/*!50106 DROP EVENT IF EXISTS `aggregate_node_stations_hourly` */;;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8mb3 */ ;;
+/*!50003 SET character_set_results = utf8mb3 */ ;;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`root`@`localhost`*/ /*!50106 EVENT `aggregate_node_stations_hourly` ON SCHEDULE EVERY 1 HOUR STARTS '2024-09-10 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    INSERT INTO node_station_hourlies (
+        node_id,
+        mesh_entry_id,
+        mac_address_id,
+        radio_number,
+        frequency_band,
+        tx_bytes,
+        rx_bytes,
+        tx_packets,
+        rx_packets,
+        signal_avg,
+        created,
+        modified
+    )
+    SELECT
+        node_id,
+        mesh_entry_id,
+        mac_address_id,
+        radio_number,
+        frequency_band,
+        SUM(tx_bytes),
+        SUM(rx_bytes),
+        SUM(tx_packets),
+        SUM(rx_packets),
+        AVG(signal_avg),
+        DATE_FORMAT(NOW() - INTERVAL 1 HOUR, '%Y-%m-%d %H:00:00') AS created,
+        DATE_FORMAT(NOW() - INTERVAL 1 HOUR, '%Y-%m-%d %H:00:00') AS modified
+    FROM
+        node_stations
+    WHERE
+       created >= NOW() - INTERVAL 1 HOUR
+    GROUP BY
+        node_id,
+        mesh_entry_id,
+        mac_address_id,
+        radio_number,
+        frequency_band;
+
+    
+    DELETE FROM node_stations
+    WHERE created < NOW() - INTERVAL 1 HOUR;
+
+    
+    DELETE FROM node_station_hourlies
+    WHERE created < CURDATE() - INTERVAL 8 DAY;
+END */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+/*!50106 DROP EVENT IF EXISTS `cleanup_radacct` */;;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8mb3 */ ;;
+/*!50003 SET character_set_results = utf8mb3 */ ;;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`root`@`localhost`*/ /*!50106 EVENT `cleanup_radacct` ON SCHEDULE EVERY 1 HOUR STARTS '2025-01-09 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    DELETE FROM radacct
+    WHERE acctstoptime IS NOT NULL;
+END */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+/*!50106 DROP EVENT IF EXISTS `trim_wan_stats` */;;
+DELIMITER ;;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;;
+/*!50003 SET character_set_client  = utf8mb3 */ ;;
+/*!50003 SET character_set_results = utf8mb3 */ ;;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;;
+/*!50003 SET @saved_time_zone      = @@time_zone */ ;;
+/*!50003 SET time_zone             = 'SYSTEM' */ ;;
+/*!50106 CREATE*/ /*!50117 DEFINER=`root`@`localhost`*/ /*!50106 EVENT `trim_wan_stats` ON SCHEDULE EVERY 1 HOUR STARTS '2024-11-22 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+    
+    
+    DELETE FROM wan_traffic_stats
+    WHERE created < NOW() - INTERVAL 2 HOUR;
+
+    DELETE FROM wan_wifi_stats
+    WHERE created < NOW() - INTERVAL 2 HOUR;
+
+    DELETE FROM wan_lte_stats
+    WHERE created < NOW() - INTERVAL 2 HOUR;
+
+END */ ;;
+/*!50003 SET time_zone             = @saved_time_zone */ ;;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;;
+/*!50003 SET character_set_results = @saved_cs_results */ ;;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;;
+DELIMITER ;
+/*!50106 SET TIME_ZONE= @save_time_zone */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -5759,4 +7207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-30  7:49:08
+-- Dump completed on 2025-08-05 15:03:34

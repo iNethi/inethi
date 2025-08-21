@@ -2,5 +2,7 @@
 - name: Set up Splash screen
   hosts: localserver
   become: true
+  vars_files:
+    - vault/production.yml
   roles:
     - splash

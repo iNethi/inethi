@@ -2,5 +2,8 @@
 - name: Set up Keycloak stack
   hosts: localserver
   become: true
+  vars_files:
+    - vault/production.yml
   roles:
+    - docker
     - keycloak

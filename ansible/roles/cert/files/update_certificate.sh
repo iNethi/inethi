@@ -7,13 +7,13 @@ set +a
 
 # Define variables
 KEYSTORE_PASS="iNethi2023#"
-CERT_URL="http://54.88.150.74/cert/acme.json"
+CERT_URL="https://splash.inethilocal.net/cert/acme.json"
 CERT_FILE="/mnt/data/traefik/letsencrypt/acme.json"
 KEYCLOAK_CERT_DIR="/mnt/data/keycloak/certs"
 
 
 # Download the current certificate
-curl -L -k "https://54.88.150.74/cert/acme.json" -o "/mnt/data/traefik/letsencrypt/acme.json.new"
+curl -L -k "https://splash.inethilocal.net/cert/acme.json" -o "/mnt/data/traefik/letsencrypt/acme.json.new"
 
 # Check if the certificate has changed
 if ! cmp -s "${CERT_FILE}" "${CERT_FILE}.new"; then

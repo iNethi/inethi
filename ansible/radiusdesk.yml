@@ -2,5 +2,8 @@
 - name: Set up Radiusdesk
   hosts: localserver
   become: true
+  vars_files:
+    - vault/production.yml
   roles:
+    - docker
     - radiusdesk

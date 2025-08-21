@@ -1,5 +1,7 @@
 ---
 - name: Set up data mount for iNethi data
   hosts: localserver
+  vars_files:
+    - vault/production.yml
   roles:
     - folders

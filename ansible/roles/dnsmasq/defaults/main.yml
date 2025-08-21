@@ -1,3 +1,0 @@
-BRIDGE: "inethi-bridge-traefik"
-INETHI_LOCAL_DOMAIN: "inethilocal.net"
-DATA_MOUNT: "/mnt/data"
