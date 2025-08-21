@@ -3,5 +3,7 @@
   hosts: localserver
   become: true
   gather_facts: true
+  vars_files:
+    - vault/production.yml
   roles:
     - dnsmasq

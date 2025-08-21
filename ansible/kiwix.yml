@@ -2,5 +2,7 @@
 - name: Deploy Kiwix
   hosts: localserver
   become: true
+  vars_files:
+    - vault/production.yml
   roles:
     - kiwix

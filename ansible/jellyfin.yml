@@ -2,5 +2,7 @@
 - name: Set up Jellyfin
   hosts: localserver
   become: true
+  vars_files:
+    - vault/production.yml
   roles:
     - jellyfin

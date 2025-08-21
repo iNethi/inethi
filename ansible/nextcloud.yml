@@ -2,5 +2,7 @@
 - name: Set up Nextcloud stack
   hosts: localserver
   become: true
+  vars_files:
+    - vault/production.yml
   roles:
     - nextcloud

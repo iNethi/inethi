@@ -1,0 +1,56 @@
+services:
+  radiusdesk:
+    image: keegan337/radiusdesk:4.0.2
+    container_name: radiusdesk
+    environment:
+      - "PHP_INI_SCAN_DIR=:/p/gd"
+      - "PHP.cgi.fix_pathinfo=1"
+      - "PHP_SELF=/index.php"
+      - "PHP_INI_SCAN_DIR=:/p/sqlite3"
+    restart: unless-stopped
+    depends_on:
+      rdmariadb:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "1812:1812/udp"
+      - "1813:1813/udp"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.radiusdesk.rule: "Host(`radiusdesk.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.radiusdesk.entrypoints: "websecure"
+    networks:
+      - "{{ BRIDGE }}"
+
+  rdmariadb:
+    image: docker.io/bitnami/mariadb:latest
+    container_name: radiusdesk-mariadb
+    restart: unless-stopped
+    volumes:
+      - ./db_conf/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro
+      - ./db_startup/db_priveleges.sql:/docker-entrypoint-initdb.d/10-db_priveleges.sql:ro
+      - ./db_startup/rd.sql:/docker-entrypoint-initdb.d/20-rd.sql:ro
+      - rd_data:/bitnami/mariadb
+    environment:
+      - "MARIADB_ROOT_PASSWORD={{ RADIUSDESK_DB_ROOT_PASSWORD }}"
+      - "MARIADB_USER={{ RADIUSDESK_DB_USER }}"
+      - "MARIADB_PASSWORD={{ RADIUSDESK_DB_PASSWORD }}"
+      - "MARIADB_DATABASE={{ RADIUSDESK_DB_NAME }}"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-u",
+          "root",
+          "-p{{ RADIUSDESK_DB_ROOT_PASSWORD }}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - "{{ BRIDGE }}"
+
+volumes:
+  rd_data:

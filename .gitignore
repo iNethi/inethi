@@ -1,5 +1,92 @@
-.idea
-artifacts
-venv
-saved-devices/saved-devices.yml
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+
+# Ansible vault files
+.vault_password
+ansible/vault/*.yml
+
+# Ansible inventory (may contain sensitive data)
 ansible/inventory/hosts
+
+# Logs
+*.log
+/tmp/ansible.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Saved device configurations
+saved-devices/saved-devices.yml
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.csr
+
+# Backup files
+*.tar.gz
+*.zip
+*.rar
+
+# Default passwords (can be customized)
+default_passwords.json
+
+# Docker
+.dockerignore
+
+# Ansible
+*.retry
+artifacts

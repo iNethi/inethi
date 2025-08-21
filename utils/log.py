@@ -1,16 +1,16 @@
-"""Class that uses ANSI codes to print coloured output"""
+"""
+Enhanced logging utility for the iNethi builder
+Uses beautiful colors and icons for better user experience
+"""
+from utils.colors import (
+    success, error, warning, info, heading, input_prompt,
+    print_success, print_error, print_warning, print_info
+)
 
 
 class Log:
     def __init__(self):
-
-        self.RED = '\033[31m'
-        self.GREEN = '\033[32m'
-        self.YELLOW = '\033[33m'
-        self.BLUE = '\033[34m'
-        self.BLUE_BACK = '\033[46m'
-        self.END_COLOR = '\033[0m'
-        self.UNDERLINE = '\033[4m'
+        # Legacy constants for backward compatibility
         self.warning = 'WARNING'
         self.success = 'SUCCESS'
         self.error = 'ERROR'
@@ -19,18 +19,18 @@ class Log:
         self.input = 'INPUT'
 
     def log(self, message, level):
-        """Log a message"""
+        """Log a message with enhanced colors and icons"""
         if level == self.warning:
-            print(self.YELLOW + message + self.END_COLOR)
+            print_warning(message)
         elif level == self.success:
-            print(self.GREEN + message + self.END_COLOR)
+            print_success(message)
         elif level == self.error:
-            print(self.RED + message + self.END_COLOR)
+            print_error(message)
         elif level == self.heading:
-            print(self.BLUE_BACK + message + self.END_COLOR)
+            print(heading(f"--- {message} ---"))
         elif level == self.info:
-            print(self.BLUE + message + self.END_COLOR)
+            print_info(message)
         elif level == self.input:
-            print(self.UNDERLINE + message + self.END_COLOR)
+            print(input_prompt(message))
         else:
             print(message)

@@ -7,12 +7,12 @@
   file:
     path: "{{ DATA_MOUNT }}/prometheus"
     state: directory
-    mode: '0777'
+    mode: "0777"
 - name: Create directory for grafana volume
   file:
     path: "{{ DATA_MOUNT }}/grafana"
     state: directory
-    mode: '0777'
+    mode: "0777"
 - name: Create subdirectory for prometheus volume
   file:
     path: "{{ DATA_MOUNT }}/prometheus/prometheus-config"
@@ -27,7 +27,6 @@
     dest: "{{ DATA_MOUNT }}/prometheus/prometheus-config/"
 - name: Download acme.json file
   get_url:
-    url: "http://54.88.150.74/cert/acme.json"
+    url: "https://splash.inethilocal.net/cert/acme.json"
     dest: "{{ DATA_MOUNT }}/traefik/letsencrypt/acme.json"
-    mode: '0600'
-    validate_certs: no
+    mode: "0600"
