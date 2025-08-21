@@ -115,6 +115,31 @@ class ConfigManager:
         
         return True
     
+    def validate_config_for_setup(self) -> bool:
+        """Validate configuration settings for initial setup (more lenient)"""
+        errors = []
+        
+        # Validate environment
+        env = self.get_environment()
+        if env not in ['production']:
+            errors.append(f"Invalid environment: {env}. Only 'production' is supported.")
+        
+        # For setup, we don't require server config to be complete yet
+        # as it will be collected during the interactive setup
+        
+        # Validate paths
+        env_config = self.get_environment_config()
+        if not env_config.data_mount:
+            errors.append("Data mount path is required")
+        
+        if errors:
+            print("Configuration validation errors:")
+            for error in errors:
+                print(f"  - {error}")
+            return False
+        
+        return True
+    
     def get_ansible_group_vars_path(self) -> str:
         """Get path to Ansible group vars for current environment"""
         env = self.get_environment()

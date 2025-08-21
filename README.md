@@ -1,56 +1,186 @@
-# iNethi Builder
+# iNethi Platform Builder
 
-## What is the iNethi Platform
-This repo contains code to set up an iNethi system, but what is the iNethi system? The iNethi platform is a dockerised 
-system that allows you to create locally-hosted services that are accessible of a Local Area Network (LAN). These 
-services offer content delivery platforms like [Jellyfin](https://jellyfin.org/), accounting and user management systems 
-like [RADIUSdesk](https://www.radiusdesk.com/) and our own [bespoke](https://github.com/iNethi/backend/tree/main) 
-systems. You can find out more about the services offered [here](SERVICES.md).
+## Overview
 
-## Running the Code
-This code is intended to be **run on an Ubuntu machine** with the target system being **an Ubuntu server**. It is 
-possible to install the required packages and run the code on non-ubuntu machines but the target system will always
-need to be an Ubuntu machine.
+The **iNethi Platform** is a comprehensive, self-hosted solution for creating offline digital communities and local networks. It provides a complete ecosystem of services that can be deployed on a single Ubuntu server and accessed over a Local Area Network (LAN).
 
-### Pre-requisites
-Before running the code install the required packages by running the [pre-installation script](pre-installation.sh):
-`./pre-installation` from the root of the repo.
+### What It Provides
 
-## Quickstart
-Install the pre-requisites, activate the virtual environment created by the pre-install script and then run the Python 
-script in the root of the repo:
-1. `./pre-installation` 
-2. `source venv/bin/activate`
-3. `python3 main.py`
+- **Media Services**: Jellyfin for movies, music, and photos
+- **File Sharing**: Nextcloud for file storage and collaboration
+- **Learning**: Moodle for educational content and courses
+- **Web Publishing**: WordPress for websites and blogs
+- **Identity Management**: Keycloak for user authentication
+- **Network Management**: RADIUSdesk for network access control
+- **Offline Content**: Kiwix for offline Wikipedia and educational resources
+- **Internet Radio**: Azuracast for broadcasting
+- **Reverse Proxy**: Traefik for SSL termination and service routing
 
-## Customisation
-The current system uses Traefik and the `inethilocal.net` domain that we allow public LAN usage of to create a reverse
-proxy that allows you to access the dockerised services. However, if you want to use your own certificate, change any 
-usernames, passwords, data mounts etc. you can edit them in the ansible defaults folders in each directory. **PLEASE note**
-to ensure the correct outcomes please change the *DATA_MOUNT* variable in all directories if you want to change it.
+### Key Features
 
-### Caveats
-If you change your certificate or any variables relating the [keycloak service](ansible/roles/keycloak) ensure you 
-change the necessary variables in the [certificate manager](ansible/roles/cert) as you will need to update your
-keystore and certificates mounted to the Traefik and Keycloak containers to ensure encryption is upheld.
+- **Offline-First**: All services work without internet connectivity
+- **Docker-Based**: Containerized services for easy deployment and management
+- **Centralized Management**: Single interface for all services
+- **Production-Ready**: Secure, scalable, and maintainable
+- **Community-Focused**: Designed for schools, libraries, community centers, and remote areas
 
-## Production
-In a production environment please change all usernames and passwords. These can be found in the `defaults/main.yml` file
-of each ansible role. Not all services require usernames and passwords.
+## Setup
 
-The typical folder structure is as follows:
+### System Requirements
+
+- **Host Machine**: Ubuntu (recommended) or any Linux with Python 3
+- **Target Server**: Ubuntu server with SSH access
+- **Network**: Both machines on same LAN or accessible network
+
+### Important Files
+
+#### Configuration Files
+
+- **`.env.example`** → **`.env`** - Main configuration template
+- **`default_passwords.json.example`** → **`default_passwords.json`** - Service password templates
+- **`ansible/group_vars/all.yml`** - Centralized Ansible variables
+- **`ansible/vault/production.yml`** - Encrypted sensitive data (created during setup)
+
+#### Core Scripts
+
+- **`pre-installation.sh`** - Installs Python, Ansible, and dependencies
+- **`main.py`** - Main deployment orchestrator
+- **`setup_config.py`** - Interactive configuration setup
+- **`validate_config.py`** - Configuration validation
+
+#### Ansible Structure
+
+- **`ansible/*.yml`** - Service deployment playbooks
+- **`ansible/roles/*/`** - Individual service configurations
+- **`ansible/ansible.cfg`** - Ansible configuration
+
+### Initial Setup
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/iNethi/inethi.git
+   cd inethi
+   ```
+
+2. **Run pre-installation**:
+
+   ```bash
+   ./pre-installation.sh
+   ```
+
+   This script:
+
+   - Installs Python 3, pip3, Ansible, SSH tools
+   - Creates Python virtual environment
+   - Installs required packages
+   - Copies configuration templates
+
+3. **Activate virtual environment**:
+   ```bash
+   source venv/bin/activate
+   ```
+
+## Running
+
+### Interactive Deployment (Recommended)
+
+```bash
+python3 main.py
 ```
-inethi-internal/
-├── ansible/
-│   ├── kiwix.yml
-│   ├── roles/
-│   │   ├── kiwix/
-│   │   │   ├── defaults/
-│   │   │   │   └── main.yml
-│   │   │   └── files/
-│   │   │   └── tasks/
+
+This will:
+
+1. **Check configuration** - Ensure all required files exist
+2. **Setup vault** - Create encrypted password storage
+3. **Validate environment** - Check all prerequisites
+4. **Server configuration** - Collect server details (IP, user, password)
+5. **Service selection** - Choose which services to deploy
+6. **System setup** - Install Docker, Traefik, and prerequisites
+7. **Service deployment** - Deploy selected services
+
+### Command Line Options
+
+```bash
+# Deploy specific services
+python3 main.py --services nextcloud,jellyfin
+
+# Deploy all services
+python3 main.py --services all
+
+# Skip system setup (Docker, Traefik)
+python3 main.py --skip-setup
+
+# Non-interactive mode (uses .env configuration)
+python3 main.py --non-interactive
+
+# Verbose output
+python3 main.py --verbose
 ```
 
-## Accessing the Services
-Root your LAN traffic to the server running the iNethi system using your hosts file or a firewall. Traefik is used as a
-reverse-proxy so routing to the services is managed by it. Find the default URLs in the [services](SERVICES.md) file.
+### What You Can Edit
+
+#### Before Deployment
+
+- **`.env`** - Server connection details, data mount location, domain
+- **`default_passwords.json`** - Service passwords (optional, can use defaults)
+
+#### After Deployment
+
+- **`ansible/group_vars/all.yml`** - Service configurations, ports, settings
+- **`ansible/vault/production.yml`** - Encrypted passwords (use `ansible-vault edit`)
+
+#### Service-Specific
+
+- **`ansible/roles/*/defaults/main.yml`** - Individual service settings
+- **`ansible/roles/*/files/`** - Service configuration files
+
+### Configuration Examples
+
+#### Basic .env Configuration
+
+```bash
+# Server Configuration
+DEFAULT_SERVER_IP=192.168.1.100
+DEFAULT_SERVER_USER=ubuntu
+DEFAULT_AUTH_METHOD=password
+DEFAULT_AUTH_VALUE=your_server_password
+
+# Storage
+DATA_MOUNT=/mnt/data
+
+# Domain
+INETHI_LOCAL_DOMAIN=inethilocal.net
+```
+
+#### Service Selection
+
+```bash
+# Deploy core services only
+DEFAULT_SERVICES=traefik,keycloak,nextcloud
+
+# Deploy everything
+DEFAULT_SERVICES=all
+```
+
+## Accessing Services
+
+After deployment, services are available at:
+
+- **Traefik Dashboard**: `https://traefik.inethilocal.net`
+- **Nextcloud**: `https://nextcloud.inethilocal.net`
+- **Jellyfin**: `https://jellyfin.inethilocal.net`
+- **Moodle**: `https://moodle.inethilocal.net`
+- **WordPress**: `https://wordpress.inethilocal.net`
+
+### Network Configuration
+
+To access services from other devices on your LAN:
+
+1. **DNS Configuration**: Add `*.inethilocal.net` entries pointing to your server IP
+2. **Firewall**: Ensure ports 80 and 443 are open on the server
+3. **SSL Certificates**: Automatically generated by Traefik
+
+## Documentation
+
+- **[Services Overview](SERVICES.md)** - Information about available services

@@ -26,8 +26,8 @@ def validate_environment_setup():
         print_warning("Please edit .env file with your configuration and run validation again")
         return False
     
-    # Validate configuration
-    if not config.validate_config():
+    # Validate configuration (use lenient validation for setup)
+    if not config.validate_config_for_setup():
         print_error("Configuration validation failed")
         print_info("Please complete the configuration setup before proceeding")
         return False
