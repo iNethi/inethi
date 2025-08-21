@@ -146,7 +146,7 @@ class INethiBuilder:
                 else:
                     self.log.log("ℹ️  Vault configuration unchanged", 'INFO')
         
-                return True
+        return True
         
     def _ensure_config_files(self):
         """Ensure required configuration files exist"""
@@ -432,7 +432,25 @@ class INethiBuilder:
             
             # Validate environment
             if not self.validate_environment():
-                return False
+                self.log.log("❌ Configuration validation failed", 'ERROR')
+                self.log.log("Please complete the configuration setup before proceeding", 'INFO')
+                
+                # Offer to run setup again
+                setup_choice = input("Would you like to set up your configuration now? (y/n): ").strip().lower()
+                if setup_choice in ['y', 'yes']:
+                    self.log.log("🔧 Starting configuration setup...", 'INFO')
+                    if not run_setup():
+                        self.log.log("❌ Configuration setup failed", 'ERROR')
+                        return False
+                    self.log.log("✅ Configuration setup completed", 'SUCCESS')
+                    
+                    # Validate again after setup
+                    if not self.validate_environment():
+                        self.log.log("❌ Configuration still invalid after setup", 'ERROR')
+                        return False
+                else:
+                    self.log.log("❌ Configuration setup required to continue", 'ERROR')
+                    return False
                 
             # Non-interactive mode
             if non_interactive:

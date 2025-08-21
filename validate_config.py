@@ -29,6 +29,7 @@ def validate_environment_setup():
     # Validate configuration
     if not config.validate_config():
         print_error("Configuration validation failed")
+        print_info("Please complete the configuration setup before proceeding")
         return False
     
     print_success("Environment setup validation passed")
@@ -159,7 +160,7 @@ def run_validation() -> bool:
     else:
         print_warning("⚠️  Some configuration issues detected")
         print_info("The interactive setup will help you fix these issues")
-        return True  # Allow setup to continue, let interactive setup handle issues
+        return False  # Don't allow setup to continue with validation errors
 
 def main():
     """Main validation function"""
