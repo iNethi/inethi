@@ -3,7 +3,7 @@ Enhanced logging utility for the iNethi builder
 Uses beautiful colors and icons for better user experience
 """
 from utils.colors import (
-    success, error, warning, info, heading, input_prompt,
+    heading, input_prompt,
     print_success, print_error, print_warning, print_info
 )
 

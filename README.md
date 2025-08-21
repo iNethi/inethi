@@ -26,6 +26,18 @@ The **iNethi Platform** is a comprehensive, self-hosted solution for creating of
 
 ## Setup
 
+### TL;DR
+
+Run the following and follow the prompts on-screen:
+
+```
+git clone https://github.com/iNethi/inethi.git
+cd inethi
+./pre-installation.sh
+source venv/bin/activate
+python3 main.py
+```
+
 ### System Requirements
 
 - **Host Machine**: Ubuntu (recommended) or any Linux with Python 3

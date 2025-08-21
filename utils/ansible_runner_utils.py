@@ -22,7 +22,7 @@ def status_handler(data, runner_config):
         'timeout': '⏰ Ansible execution timed out',
         'canceled': '🚫 Ansible execution was canceled'
     }
-    
+
     user_message = status_messages.get(status, f"Status: {status}")
     if status in ['starting', 'running', 'successful']:
         log.log(user_message, SUCCESS)
@@ -62,7 +62,7 @@ def event_handler(data):
     # Get task name for context
     task_name = data.get('event_data', {}).get('name', '')
     task_action = data.get('event_data', {}).get('task_action', '')
-    
+
     # Build context string
     context = ''
     if task_name:
@@ -92,7 +92,14 @@ def event_handler(data):
         stats = data.get('event_data', {}).get('stats', {})
         if stats:
             for host, host_stats in stats.items():
-                log.log(f"📊 {host}: {host_stats.get('ok', 0)} ok, {host_stats.get('changed', 0)} changed, {host_stats.get('failed', 0)} failed, {host_stats.get('skipped', 0)} skipped", INFO)
+                ok_count = host_stats.get('ok', 0)
+                changed_count = host_stats.get('changed', 0)
+                failed_count = host_stats.get('failed', 0)
+                skipped_count = host_stats.get('skipped', 0)
+                log.log(
+                    f"📊 {host}: {ok_count} ok, {changed_count} changed, "
+                    f"{failed_count} failed, {skipped_count} skipped",
+                    INFO)
         return
     elif 'PLAY RECAP' in data.get('stdout', ''):
         # Show play recap
