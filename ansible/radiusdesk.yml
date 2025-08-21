@@ -5,4 +5,5 @@
   vars_files:
     - vault/production.yml
   roles:
+    - docker
     - radiusdesk
