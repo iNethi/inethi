@@ -10,9 +10,8 @@
     restart_policy: unless-stopped
     state: started
     volumes:
-      - "{{ DATA_MOUNT }}/radiusdesk/db_conf/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro"
-      - "{{ DATA_MOUNT }}/radiusdesk/db_startup/db_priveleges.sql:/docker-entrypoint-initdb.d/10-db_priveleges.sql:ro"
-      - "{{ DATA_MOUNT }}/radiusdesk/db_startup/rd.sql:/docker-entrypoint-initdb.d/20-rd.sql:ro"
+      - "{{ DATA_MOUNT }}/radiusdesk-mariadb/db_conf/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro"
+      - "{{ DATA_MOUNT }}/radiusdesk-mariadb/db_startup:/docker-entrypoint-initdb.d:ro"
       - "rd_data:/bitnami/mariadb"
     env:
       ALLOW_EMPTY_PASSWORD: "yes"
@@ -21,10 +20,10 @@
       MARIADB_PASSWORD: "rd"
       MARIADB_DATABASE: "rd"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-u", "root"]
-      interval: "30s"
-      timeout: "10s"
-      retries: 10
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "-prd"]
+      interval: "10s"
+      timeout: "5s"
+      retries: 5
     networks:
       - name: "{{ BRIDGE }}"
 
@@ -33,8 +32,8 @@
     name: rdmariadb
   register: mariadb_info
   until: mariadb_info.container.State.Health.Status == 'healthy'
-  retries: 20
-  delay: 10
+  retries: 10
+  delay: 6
 
 - name: Start Radiusdesk Docker Container
   docker_container:
@@ -46,12 +45,6 @@
       PHP_INI_SCAN_DIR: ":/p/gd:/p/sqlite3"
       PHP.cgi.fix_pathinfo: "1"
       PHP_SELF: "/index.php"
-      # Database connection settings
-      DB_HOST: "rdmariadb"
-      DB_PORT: "3306"
-      DB_NAME: "rd"
-      DB_USER: "rd"
-      DB_PASSWORD: "rd"
     ports:
       - "1812:1812/udp"
       - "1813:1813/udp"
