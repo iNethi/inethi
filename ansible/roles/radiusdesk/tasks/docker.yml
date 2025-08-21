@@ -33,7 +33,11 @@
   register: mariadb_info
   until: mariadb_info.container.State.Health.Status == 'healthy'
   retries: 10
-  delay: 6
+  delay: 10
+
+- name: Additional wait for MariaDB to be fully ready
+  wait_for:
+    timeout: 300
 
 - name: Start Radiusdesk Docker Container
   docker_container:
