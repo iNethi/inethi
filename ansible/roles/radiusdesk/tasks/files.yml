@@ -1,8 +1,22 @@
 ---
-- name: Copy files to Server
+- name: Copy database configuration files
   copy:
-    src: files/
-    dest: "{{ DATA_MOUNT }}/radiusdesk-mariadb"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0644"
+  with_items:
+    - {
+        src: "files/db_conf/my_custom.cnf",
+        dest: "{{ DATA_MOUNT }}/radiusdesk-mariadb/db_conf/my_custom.cnf",
+      }
+    - {
+        src: "files/db_startup/db_priveleges.sql",
+        dest: "{{ DATA_MOUNT }}/radiusdesk-mariadb/db_startup/db_priveleges.sql",
+      }
+    - {
+        src: "files/db_startup/rd.sql",
+        dest: "{{ DATA_MOUNT }}/radiusdesk-mariadb/db_startup/rd.sql",
+      }
 
 - name: Set permissions on database volume
   file:
