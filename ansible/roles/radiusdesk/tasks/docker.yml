@@ -42,8 +42,6 @@
     image: keegan337/radiusdesk:4.0.2
     restart_policy: unless-stopped
     state: started
-    depends_on:
-      - rdmariadb
     env:
       PHP_INI_SCAN_DIR: ":/p/gd:/p/sqlite3"
       PHP.cgi.fix_pathinfo: "1"
