@@ -8,4 +8,3 @@
   community.docker.docker_compose_v2:
     project_src: "{{ DATA_MOUNT }}/radiusdesk"
     state: present
-    restarted: yes
