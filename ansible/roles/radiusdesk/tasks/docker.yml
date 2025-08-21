@@ -16,20 +16,12 @@
       - "rd_data:/bitnami/mariadb"
     env:
       ALLOW_EMPTY_PASSWORD: "yes"
-      MARIADB_ROOT_PASSWORD: "rd""
-      MARIADB_USER: "rd""
-      MARIADB_PASSWORD: "rd""
-      MARIADB_DATABASE: "rd""
+      MARIADB_ROOT_PASSWORD: "rd"
+      MARIADB_USER: "rd"
+      MARIADB_PASSWORD: "rd"
+      MARIADB_DATABASE: "rd"
     healthcheck:
-      test:
-        [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-u",
-          "root",
-          "-prd"",
-        ]
+      test: ["CMD", "mysqladmin", "ping", "-u", "root", "-prd"]
       interval: "10s"
       timeout: "5s"
       retries: 5
