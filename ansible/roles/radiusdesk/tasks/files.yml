@@ -1,12 +1,11 @@
 ---
-- name: Copy RADIUSdesk database configuration files
+- name: Copy files to Server
   copy:
-    src: "{{ role_path }}/files/db_conf/"
-    dest: "{{ DATA_MOUNT }}/radiusdesk/db_conf/"
-    mode: "0644"
+    src: files/
+    dest: "{{ DATA_MOUNT }}/radiusdesk-mariadb"
 
-- name: Copy RADIUSdesk database startup files
-  copy:
-    src: "{{ role_path }}/files/db_startup/"
-    dest: "{{ DATA_MOUNT }}/radiusdesk/db_startup/"
-    mode: "0644"
+- name: Set permissions on database volume
+  file:
+    path: "{{ DATA_MOUNT }}/radiusdesk-mariadb"
+    mode: "0777"
+    recurse: yes
