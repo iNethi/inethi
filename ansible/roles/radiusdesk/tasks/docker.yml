@@ -11,7 +11,8 @@
     state: started
     volumes:
       - "{{ DATA_MOUNT }}/radiusdesk/db_conf/my_custom.cnf:/opt/bitnami/mariadb/conf/my_custom.cnf:ro"
-      - "{{ DATA_MOUNT }}/radiusdesk/db_startup:/docker-entrypoint-initdb.d:ro"
+      - "{{ DATA_MOUNT }}/radiusdesk/db_startup/db_priveleges.sql:/docker-entrypoint-initdb.d/10-db_priveleges.sql:ro"
+      - "{{ DATA_MOUNT }}/radiusdesk/db_startup/rd.sql:/docker-entrypoint-initdb.d/20-rd.sql:ro"
       - "rd_data:/bitnami/mariadb"
     env:
       ALLOW_EMPTY_PASSWORD: "yes"
@@ -50,9 +51,10 @@
     restart_policy: unless-stopped
     state: started
     env:
-      PHP_INI_SCAN_DIR: ":/p/gd:/p/sqlite3"
-      PHP.cgi.fix_pathinfo: "1"
-      PHP_SELF: "/index.php"
+      - "PHP_INI_SCAN_DIR=:/p/gd"
+      - "PHP.cgi.fix_pathinfo=1"
+      - "PHP_SELF=/index.php"
+      - "PHP_INI_SCAN_DIR=:/p/sqlite3"
     ports:
       - "1812:1812/udp"
       - "1813:1813/udp"
