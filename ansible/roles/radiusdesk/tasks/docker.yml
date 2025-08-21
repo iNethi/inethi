@@ -15,7 +15,6 @@
       - "{{ DATA_MOUNT }}/radiusdesk/db_startup/rd.sql:/docker-entrypoint-initdb.d/20-rd.sql:ro"
       - "rd_data:/bitnami/mariadb"
     env:
-      ALLOW_EMPTY_PASSWORD: "yes"
       MARIADB_ROOT_PASSWORD: "rd"
       MARIADB_USER: "rd"
       MARIADB_PASSWORD: "rd"
