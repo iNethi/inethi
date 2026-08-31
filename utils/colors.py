@@ -14,6 +14,7 @@ class Colors:
     RED = '\033[91m'
     PURPLE = '\033[95m'
     CYAN = '\033[96m'
+    GREY = '\033[90m'
 
     # Bright colors
     BRIGHT_BLUE = '\033[94;1m'
@@ -22,6 +23,7 @@ class Colors:
     BRIGHT_RED = '\033[91;1m'
     BRIGHT_PURPLE = '\033[95;1m'
     BRIGHT_CYAN = '\033[96;1m'
+    BRIGHT_GREY = '\033[90;1m'
 
     # Background colors
     BG_BLUE = '\033[44m'
@@ -40,6 +42,7 @@ class Colors:
     RESET = '\033[0m'
     CLEAR = '\033[2J'
     CLEAR_LINE = '\033[K'
+      
 
 # Color functions for different message types
 
@@ -61,12 +64,12 @@ def warning(text: str) -> str:
 
 def info(text: str) -> str:
     """Format info messages in blue"""
-    return f"{Colors.BRIGHT_BLUE}ℹ {text}{Colors.RESET}"
+    return f"{Colors.GREY}ℹ {text}{Colors.RESET}"
 
 
 def heading(text: str) -> str:
     """Format headings in bold cyan"""
-    return f"{Colors.BRIGHT_CYAN}{Colors.BOLD}{text}{Colors.RESET}"
+    return f"{Colors.BRIGHT_GREY}{Colors.BOLD}{text}{Colors.RESET}"
 
 
 def subheading(text: str) -> str:
@@ -132,7 +135,20 @@ def box(text: str, title: str = "") -> str:
 
     box_text += f"{Colors.CYAN}└{'─' * (max_length + 2)}┘{Colors.RESET}"
     return box_text
-
+    
+    
+def task_name(text: str) -> str:
+    return f"{Colors.GREY}{text}{Colors.RESET}"
+    
+def task_action_success(text: str) -> str:
+    return f"{Colors.GREEN}{text}{Colors.RESET}"
+    
+def task_action_info(text: str) -> str:
+    return f"{Colors.GREY}{text}{Colors.RESET}"
+    
+def task_action_error(text: str) -> str:
+    return f"{Colors.RED}{text}{Colors.RESET}"
+    
 
 def print_header(title: str, subtitle: str = ""):
     """Print a beautiful header"""

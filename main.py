@@ -122,7 +122,7 @@ class INethiBuilder:
                     needs_vault_setup = True
 
             if needs_vault_setup:
-                self.log.log("⚠️  Vault configuration incomplete", 'WARNING')
+                self.log.log("⚠️ Vault configuration incomplete", 'WARNING')
                 vault_choice = input("Would you like to complete vault setup now? (y/n): ").strip().lower()
                 if vault_choice in ['y', 'yes']:
                     self.log.log("🔧 Starting vault setup...", 'INFO')
@@ -381,7 +381,7 @@ class INethiBuilder:
                 self.log.log(f"❌ Failed to install {service}", 'ERROR')
                 return False
 
-            self.log.log(f"✅ {service} installed successfully", 'SUCCESS')
+            self.log.log(f"○ {service} installed successfully", 'SUCCESS')
 
         return True
 
@@ -489,7 +489,7 @@ class INethiBuilder:
             return False
 
         # Success
-        self.log.log("🎉 Installation completed successfully!", 'SUCCESS')
+        self.log.log("→ Installation completed successfully!", 'SUCCESS')
         self.log.log("Your iNethi platform is now ready to use.", 'INFO')
         return True
 

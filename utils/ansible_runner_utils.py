@@ -8,22 +8,33 @@ ERROR = 'ERROR'
 HEADING = 'HEADING'
 INFO = 'INFO'
 INPUT = 'INPUT'
+TASK_NAME = 'TASK_NAME'
+TASK_ACTION_SUCCESS = 'TASK_ACTION_SUCCESS'
+TASK_ACTION_INFO = 'TASK_ACTION_INFO'
+TASK_ACTION_ERROR = 'TASK_ACTION_ERROR'
+
+
+TASK_WIDTH = 50
+
 log = Log()
 
 
 def status_handler(data, runner_config):
     """Handles ansible runner status data with user-friendly messages."""
+
     status = data.get('status')
+  
     status_messages = {
-        'starting': '🚀 Starting Ansible execution...',
-        'running': '⚡ Ansible is running...',
-        'failed': '❌ Ansible execution failed',
-        'successful': '🎉 Ansible execution completed successfully!',
-        'timeout': '⏰ Ansible execution timed out',
-        'canceled': '🚫 Ansible execution was canceled'
+        'starting': '▶  Starting Ansible execution...',
+        'running': '▶  Ansible is running...',
+        'failed': '✗  Ansible execution failed',
+        'successful': 'Ansible execution completed successfully!',
+        'timeout': '⋯  Ansible execution timed out',
+        'canceled': '—  Ansible execution was canceled'
     }
 
     user_message = status_messages.get(status, f"Status: {status}")
+
     if status in ['starting', 'running', 'successful']:
         log.log(user_message, SUCCESS)
     elif status in ['failed', 'timeout', 'canceled']:
@@ -32,87 +43,248 @@ def status_handler(data, runner_config):
         log.log(user_message, INFO)
 
 
-def event_handler(data):
-    """Handles ansible runner event data with user-friendly messages."""
-    event_type = data.get('event', 'unknown_event')
+class AnsibleEventHandler:
+    """Produces concise, hierarchical Ansible event messages."""
 
-    # Skip verbose and noisy events
-    skip_events = ['verbose', 'runner_on_start', 'playbook_on_task_start']
-    if event_type in skip_events:
-        return
-
-    # User-friendly event mapping
-    event_messages = {
-        'playbook_on_start': '📋 Starting playbook execution...',
-        'playbook_on_play_start': '🎭 Starting play...',
-        'playbook_on_task_start': '⚡ Starting task...',
-        'runner_on_start': '🔄 Running...',
-        'runner_on_ok': '✅ Complete!',
-        'runner_on_failed': '❌ Failed!',
-        'runner_on_skipped': '⏭️  Skipped',
-        'runner_on_unreachable': '🚫 Unreachable',
-        'playbook_on_stats': '📊 Playbook completed',
-        'playbook_on_play_end': '🎭 Play completed',
-        'playbook_on_task_end': '⚡ Task completed'
+    IGNORE_EVENTS = {
+        'verbose',
+        'runner_on_start',
+        'playbook_on_task_end',
     }
 
-    # Get user-friendly message or use event type as fallback
-    user_message = event_messages.get(event_type, f"Event: {event_type}")
+    QUIET_ACTIONS = {
+        'debug',
+        'set_fact',
+        'include_tasks',
+        'include_role',
+        'import_tasks',
+        'import_role',
+        'gather_facts'
+    }
 
-    # Get task name for context
-    task_name = data.get('event_data', {}).get('name', '')
-    task_action = data.get('event_data', {}).get('task_action', '')
+    def __init__(self, log):
+        self.log = log
+        self.current_play = None
+        self.current_task = None
+        self.current_action = None
 
-    # Build context string
-    context = ''
-    if task_name:
-        context = f" - {task_name}"
-    elif task_action:
-        context = f" - {task_action}"
+    def __call__(self, data):
+        """Allow the instance to be used directly as Ansible's event_handler."""
 
-    # Handle special cases
-    if event_type == 'runner_on_failed':
-        log.log(f"❌ Task failed{context}", ERROR)
-        # Show error details if available
-        result = data.get('event_data', {}).get('res', {})
-        if result and 'msg' in result:
-            log.log(f"   Error: {result['msg']}", ERROR)
-        return
-    elif event_type == 'runner_on_ok':
-        # Only show completion for tasks that actually do something
-        task_action = data.get('event_data', {}).get('task_action', '')
-        if task_action and task_action not in ['debug', 'set_fact']:
-            log.log(f"✅ Task completed{context}", SUCCESS)
-        return
-    elif event_type == 'runner_on_skipped':
-        log.log(f"⏭️  Task skipped{context}", INFO)
-        return
-    elif event_type == 'playbook_on_stats':
-        # Show playbook summary
-        stats = data.get('event_data', {}).get('stats', {})
-        if stats:
+        self.handle(data)
+
+    def handle(self, data):
+        event_type = data.get('event', 'unknown_event')
+        #print(event_type);
+        event_data = data.get('event_data', {}) or {}
+
+        if event_type in self.IGNORE_EVENTS:
+            return
+
+        # ---------------------------------------------------------
+        # Playbook started
+        # ---------------------------------------------------------
+
+        if event_type == 'playbook_on_start':
+            self.current_play = None
+            self.current_task = None
+            self.current_action = None
+
+            self.log.log(
+                "\n── Playbook started ─────────────────────────\n",
+                HEADING
+            )
+            return
+
+        # ---------------------------------------------------------
+        # Play started
+        # ---------------------------------------------------------
+
+        if event_type == 'playbook_on_play_start':
+            play_name = (
+                event_data.get('name')
+                or event_data.get('play')
+                or 'Unnamed play'
+            )
+
+            self.current_play = play_name
+            self.current_task = None
+            self.current_action = None
+
+            self.log.log(
+                f"{play_name}",
+                HEADING
+            )
+            return
+
+        # ---------------------------------------------------------
+        # Task started
+        # ---------------------------------------------------------
+
+        if event_type == 'playbook_on_task_start':
+            task_name = event_data.get('name', 'Unnamed task')
+            task_action = event_data.get('task_action', '')
+            
+            #print(task_name)
+            #print(task_action)
+
+            self.current_task = task_name
+            self.current_action = task_action
+
+            if task_action in self.QUIET_ACTIONS:
+                return
+
+            self.log.log(
+                f"        {task_name:<{TASK_WIDTH}}",
+                TASK_NAME
+            )
+            return
+
+        # ---------------------------------------------------------
+        # Task OK
+        # ---------------------------------------------------------
+
+        if event_type == 'runner_on_ok':
+            task_action = event_data.get(
+                'task_action',
+                self.current_action
+            )
+
+            if task_action in self.QUIET_ACTIONS:
+                return
+
+            result = event_data.get('res', {}) or {}
+
+            if result.get('changed', False):
+                message = "● Changed"
+            else:
+                message = "● OK"
+
+            self.log.log(message, TASK_ACTION_SUCCESS)
+            return
+
+        # ---------------------------------------------------------
+        # Task skipped
+        # ---------------------------------------------------------
+
+        if event_type == 'runner_on_skipped':
+            self.log.log(
+                "● Skipped",
+                TASK_ACTION_INFO
+            )
+            return
+
+        # ---------------------------------------------------------
+        # Task failed
+        # ---------------------------------------------------------
+
+        if event_type == 'runner_on_failed':
+            task_name = event_data.get(
+                'name',
+                self.current_task
+            )
+
+            result = event_data.get('res', {}) or {}
+
+            self.log.log(
+                f"● FAILED: {task_name}",
+                TASK_ACTION_ERROR
+            )
+
+            error = result.get('msg')
+
+            if error:
+                self.log.log(
+                    f"● {error}",
+                    TASK_ACTION_ERROR
+                )
+            elif result.get('stderr'):
+                self.log.log(
+                    f"● {result['stderr'].strip()}",
+                    TASK_ACTION_ERROR
+                )
+
+            return
+
+        # ---------------------------------------------------------
+        # Host unreachable
+        # ---------------------------------------------------------
+
+        if event_type == 'runner_on_unreachable':
+            task_name = event_data.get(
+                'name',
+                self.current_task
+            )
+
+            result = event_data.get('res', {}) or {}
+
+            message = result.get(
+                'msg',
+                'Host unreachable'
+            )
+
+            self.log.log(
+                f"● UNREACHABLE: {task_name}",
+                TASK_ACTION_ERROR
+            )
+
+            self.log.log(
+                f"● {message}",
+                TASK_ACTION_ERROR
+            )
+
+            return
+
+        # ---------------------------------------------------------
+        # Playbook summary
+        # ---------------------------------------------------------
+
+        if event_type == 'playbook_on_stats':
+            stats = event_data.get('stats', {}) or {}
+
+            self.log.log(
+                "\n── Playbook completed ───────────────────────\n",
+                HEADING
+            )
+
             for host, host_stats in stats.items():
+
                 ok_count = host_stats.get('ok', 0)
                 changed_count = host_stats.get('changed', 0)
                 failed_count = host_stats.get('failed', 0)
                 skipped_count = host_stats.get('skipped', 0)
-                log.log(
-                    f"📊 {host}: {ok_count} ok, {changed_count} changed, "
-                    f"{failed_count} failed, {skipped_count} skipped",
-                    INFO)
-        return
-    elif 'PLAY RECAP' in data.get('stdout', ''):
-        # Show play recap
-        log.log("📊 Playbook Summary:", INFO)
-        log.log(data.get('stdout', ''), INFO)
-        return
+                unreachable_count = host_stats.get(
+                    'unreachable',
+                    0
+                )
 
-    # Log the user-friendly message
-    log.log(f"{user_message}{context}", INFO)
+                if failed_count or unreachable_count:
+                    level = ERROR
+                elif changed_count:
+                    level = SUCCESS
+                else:
+                    level = INFO
+
+                self.log.log(
+                    f"   {host}: "
+                    f"{ok_count} ok, "
+                    f"{changed_count} changed, "
+                    f"{failed_count} failed, "
+                    f"{unreachable_count} unreachable, "
+                    f"{skipped_count} skipped",
+                    level
+                )
+
+            return
 
 
 def run_playbook(playbook_path, inventory_path, verbose=False):
-    """Runs playbook using ansible and custom handlers."""
+    """Runs playbook using Ansible Runner and custom handlers."""
+
+    # One handler instance for this execution.
+    # It maintains current_play/current_task state.
+    event_handler = AnsibleEventHandler(log)
+
     r = ansible_runner.run(
         private_data_dir="./",
         playbook=playbook_path,
@@ -124,4 +296,5 @@ def run_playbook(playbook_path, inventory_path, verbose=False):
             'ANSIBLE_VAULT_PASSWORD_FILE': '.vault_password'
         }
     )
+
     return r.rc
