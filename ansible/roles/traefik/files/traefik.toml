@@ -10,10 +10,11 @@
 
 [entryPoints.web]
   address = ":80"
-  [entryPoints.web.http.redirections.entryPoint]
-    to = "websecure"
-    scheme = "https"
-
+  [entryPoints.web.http]  # Ensure this table is present
+      [entryPoints.web.http.redirections]
+        [entryPoints.web.http.redirections.entryPoint]
+          to = "websecure"
+          scheme = "https"
 
 
 [entryPoints.websecure]

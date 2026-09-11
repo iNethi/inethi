@@ -42,7 +42,7 @@
 - name: Start Radiusdesk Docker Container
   docker_container:
     name: radiusdesk
-    image: keegan337/radiusdesk:4.0.2
+    image: dirkvanderwalt/radiusdesk:latest
     restart_policy: unless-stopped
     state: started
     env:

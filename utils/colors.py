@@ -42,7 +42,7 @@ class Colors:
     RESET = '\033[0m'
     CLEAR = '\033[2J'
     CLEAR_LINE = '\033[K'
-      
+
 
 # Color functions for different message types
 
@@ -135,20 +135,23 @@ def box(text: str, title: str = "") -> str:
 
     box_text += f"{Colors.CYAN}└{'─' * (max_length + 2)}┘{Colors.RESET}"
     return box_text
-    
-    
+
+
 def task_name(text: str) -> str:
     return f"{Colors.GREY}{text}{Colors.RESET}"
-    
+
+
 def task_action_success(text: str) -> str:
     return f"{Colors.GREEN}{text}{Colors.RESET}"
-    
+
+
 def task_action_info(text: str) -> str:
     return f"{Colors.GREY}{text}{Colors.RESET}"
-    
+
+
 def task_action_error(text: str) -> str:
     return f"{Colors.RED}{text}{Colors.RESET}"
-    
+
 
 def print_header(title: str, subtitle: str = ""):
     """Print a beautiful header"""
