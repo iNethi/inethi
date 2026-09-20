@@ -1,0 +1,5 @@
+---
+- name: Install MongoDB
+  import_tasks: mongodb.yml
+- name: Install Open5GS
+  import_tasks: open5gs.yml

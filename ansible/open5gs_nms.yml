@@ -1,0 +1,8 @@
+---
+- name: Set up Open5GS NMS
+  hosts: localserver
+  become: true
+  vars_files:
+    - vault/production.yml
+  roles:
+    - open5gs_nms

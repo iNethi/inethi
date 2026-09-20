@@ -1,0 +1,16 @@
+---
+- name: Build Docker images
+  community.docker.docker_compose_v2:
+    project_src: "{{ nms_dir }}"
+    build: always
+    state: present
+    recreate: never
+  become_user: "{{ nms_user }}"
+
+- name: Start Open5GS NMS stack
+  community.docker.docker_compose_v2:
+    project_src: "{{ nms_dir }}"
+    state: present
+    pull: missing
+  become_user: "{{ nms_user }}"
+  register: nms_up

@@ -1,0 +1,8 @@
+---
+- name: Set up Hello iNethi
+  hosts: localserver
+  become: true
+  vars_files:
+    - vault/production.yml
+  roles:
+    - hello_inethi

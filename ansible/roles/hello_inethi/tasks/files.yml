@@ -1,0 +1,17 @@
+---
+- name: Copy files to Server
+  copy:
+    src: files/
+    dest: "{{ DATA_MOUNT }}/hello_inethi"
+
+- name: Copy Hello iNethi files to Nginx
+  copy:
+    src: "{{ DATA_MOUNT }}/hello_inethi/generic-hello_inethi"
+    dest: "{{ DATA_MOUNT }}/hello_inethi/html/"
+    remote_src: yes
+
+- name: Set permissions on Nginx volume
+  file:
+    path: "{{ DATA_MOUNT }}/hello_inethi"
+    mode: '0745'
+    recurse: yes

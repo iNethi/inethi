@@ -49,7 +49,10 @@ SERVICES = {
     'nextcloud': 'Nextcloud - File sharing, backups and collaboration',
     'radiusdesk': 'RADIUSdesk - Network management',
     'splash': 'Splash - Captive portal',
-    'wordpress': 'WordPress - build your own website'
+    'wordpress': 'WordPress - build your own website',
+    'open5gs': 'Open5GS - building and managing your own NR/LTE mobile network',
+    'open5gs_nms': 'NMS for Open5GS',
+    'hello_inethi': 'Hello iNethi sample app'  # Add our sample app
 }
 
 # Playbook paths

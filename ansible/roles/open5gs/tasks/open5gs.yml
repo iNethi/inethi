@@ -1,0 +1,26 @@
+---
+- name: Install prerequisite packages for PPA management
+  ansible.builtin.apt:
+    name:
+      - software-properties-common
+      - python3-apt
+      - gpg
+      - curl
+    state: present
+    update_cache: yes
+
+- name: Add Open5GS PPA using add-apt-repository
+  ansible.builtin.command:
+    cmd: add-apt-repository --yes ppa:open5gs/latest
+  register: open5gs_ppa_add
+  changed_when: "'Adding repository' in open5gs_ppa_add.stdout or open5gs_ppa_add.rc == 0"
+
+- name: Update apt cache after adding Open5GS PPA
+  ansible.builtin.apt:
+    update_cache: yes
+  when: open5gs_ppa_add.changed
+
+- name: Install Open5GS
+  ansible.builtin.apt:
+    name: open5gs
+    state: present

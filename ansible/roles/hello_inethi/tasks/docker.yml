@@ -1,0 +1,14 @@
+- name: Start Hello iNethi Docker Container
+  docker_container:
+    name: inethi-hello
+    image: nginx:latest
+    restart_policy: unless-stopped
+    state: started
+    volumes:
+      - "{{ DATA_MOUNT }}/hello_inethi/html/generic-hello_inethi:/usr/share/nginx/html"
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.hello_inethi.rule: "Host(`hello.{{ INETHI_LOCAL_DOMAIN }}`)"
+      traefik.http.routers.hello_inethi.entrypoints: "websecure"
+    networks:
+      - name: "{{ BRIDGE }}"

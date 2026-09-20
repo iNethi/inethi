@@ -1,0 +1,35 @@
+---
+- name: Install required system packages
+  apt:
+    name:
+      - iptables-persistent
+      - conntrack
+      - tshark
+      - python3
+      - python3-pip
+      - chrony
+      - frr
+      - frr-pythontools
+    state: present
+    update_cache: true
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+
+- name: Install Docker (official script)
+  ansible.builtin.shell: |
+    curl -fsSL https://get.docker.com -o /tmp/get-docker.sh
+    sh /tmp/get-docker.sh
+  args:
+    creates: /usr/bin/docker
+
+- name: Install docker-compose-plugin
+  apt:
+    name: docker-compose-plugin
+    state: present
+    update_cache: true
+
+- name: Add user to docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: true

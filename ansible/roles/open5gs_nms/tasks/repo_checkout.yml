@@ -1,0 +1,47 @@
+---
+- name: Clone open5gs-nms repository
+  git:
+    repo: "{{ nms_repo }}"
+    dest: "{{ nms_dir }}"
+    version: main
+    force: true
+
+- name: Set repo ownership
+  file:
+    path: "{{ nms_dir }}"
+    owner: "{{ nms_user }}"
+    group: "{{ nms_user }}"
+    recurse: true
+
+- name: Copy .env.example to .env
+  copy:
+    src: "{{ nms_dir }}/.env.example"
+    dest: "{{ nms_dir }}/.env"
+    remote_src: true
+    owner: "{{ nms_user }}"
+    group: "{{ nms_user }}"
+    mode: '0600'
+    force: false
+
+- name: Set FIRST_RUN_PASSWORD in .env
+  lineinfile:
+    path: "{{ nms_dir }}/.env"
+    regexp: '^FIRST_RUN_PASSWORD='
+    line: "FIRST_RUN_PASSWORD={{ nms_first_run_password }}"
+  when: nms_first_run_password | length > 0
+  no_log: true
+
+- name: Set COOKIE_SECURE in .env
+  lineinfile:
+    path: "{{ nms_dir }}/.env"
+    regexp: '^COOKIE_SECURE='
+    line: "COOKIE_SECURE={{ nms_cookie_secure }}"
+
+- name: Create Open5GS backup directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - /etc/open5gs/backups/config
+    - /etc/open5gs/backups/mongodb

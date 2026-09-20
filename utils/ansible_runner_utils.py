@@ -23,7 +23,7 @@ def status_handler(data, runner_config):
     """Handles ansible runner status data with user-friendly messages."""
 
     status = data.get('status')
-  
+
     status_messages = {
         'starting': '▶  Starting Ansible execution...',
         'running': '▶  Ansible is running...',
@@ -75,7 +75,7 @@ class AnsibleEventHandler:
 
     def handle(self, data):
         event_type = data.get('event', 'unknown_event')
-        #print(event_type);
+        # print(event_type);
         event_data = data.get('event_data', {}) or {}
 
         if event_type in self.IGNORE_EVENTS:
@@ -124,9 +124,9 @@ class AnsibleEventHandler:
         if event_type == 'playbook_on_task_start':
             task_name = event_data.get('name', 'Unnamed task')
             task_action = event_data.get('task_action', '')
-            
-            #print(task_name)
-            #print(task_action)
+
+            # print(task_name)
+            # print(task_action)
 
             self.current_task = task_name
             self.current_action = task_action

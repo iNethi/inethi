@@ -1,0 +1,54 @@
+---
+- name: Install prerequisite packages for MongoDB repo
+  ansible.builtin.apt:
+    name:
+      - gnupg
+      - curl
+      - python3-apt
+    state: present
+    update_cache: yes
+
+- name: Add MongoDB GPG key to keyring
+  ansible.builtin.shell: |
+    curl -fsSL https://pgp.mongodb.com/server-8.0.asc | gpg --dearmor -o /usr/share/keyrings/mongodb-server-8.0.gpg
+  args:
+    creates: /usr/share/keyrings/mongodb-server-8.0.gpg
+
+- name: Add MongoDB repository (using Noble codename for 26.04 compatibility)
+  ansible.builtin.apt_repository:
+    repo: "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse"
+    state: present
+    filename: mongodb-org-8.0
+    update_cache: yes
+
+- name: Install MongoDB packages
+  ansible.builtin.apt:
+    name:
+      - mongodb-org
+      - mongodb-mongosh
+    state: present
+
+- name: Ensure MongoDB service is enabled and started
+  ansible.builtin.systemd:
+    name: mongod
+    state: started
+    enabled: yes
+
+- name: Ensure systemd drop-in directory for MongoDB exists
+  ansible.builtin.file:
+    path: /etc/systemd/system/mongod.service.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Add systemd drop-in to disable Shadow Stack for MongoDB
+  ansible.builtin.copy:
+    dest: /etc/systemd/system/mongod.service.d/override.conf
+    content: |
+      [Service]
+      Environment="GLIBC_TUNABLES=glibc.cpu.hwcaps=-SHSTK"
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Reload systemd and restart MongoDB
