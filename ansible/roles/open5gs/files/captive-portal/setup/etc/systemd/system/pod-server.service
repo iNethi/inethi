@@ -1,0 +1,30 @@
+[Unit]
+Description=POD Server for Captive Portal (PyRad)
+After=network.target
+Wants=network.target
+Documentation=https://github.com/your-project/pod-server
+
+[Service]
+Type=simple
+User=captive-portal
+Group=captive-portal
+WorkingDirectory=/opt/captive-portal
+ExecStart=/usr/bin/python3 /opt/captive-portal/pod_server.py
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=pod-server
+
+# Security hardening
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/var/log/captive-portal /var/lib/captive-portal/re-auth
+ReadOnlyPaths=/etc/captive-portal
+
+# Resource limits
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

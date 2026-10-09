@@ -1,0 +1,58 @@
+sudo useradd -r -s /usr/sbin/nologin captive-portal
+
+sudo mkdir -p /opt/captive-portal
+sudo cp pod_server.py /opt/captive-portal/
+sudo cp dictionary /opt/captive-portal/ 
+sudo chown -R captive-portal:captive-portal /opt/captive-portal
+sudo chmod 755 /opt/captive-portal/pod_server.py
+
+# Config directory (read-only for service)
+sudo mkdir -p /etc/captive-portal
+sudo cp pod_server.conf /etc/captive-portal/
+
+sudo chown root:captive-portal /etc/captive-portal/pod_server.conf
+
+
+sudo touch  /var/log/captive-portal/pod_server.log
+sudo chown captive-portal:captive-portal /var/log/captive-portal/pod_server.log
+sudo mkdir -p /var/lib/captive-portal/re-auth
+sudo chown captive-portal:captive-portal /tmp/re-auth
+
+sudo systemctl daemon-reload
+sudo systemctl enable pod-server.service   # start at boot
+sudo systemctl start pod-server.service
+
+
+sudo systemctl status pod-server.service
+sudo journalctl -u pod-server.service -f   # follow logs
+sudo journalctl -u pod-server.service --since "10 minutes ago"
+
+
+# Create persistent state directory
+sudo mkdir -p /var/lib/captive-portal/re-auth
+sudo chown captive-portal:captive-portal /var/lib/captive-portal/re-auth
+
+# Create log directory
+sudo mkdir -p /var/log/captive-portal
+sudo chown captive-portal:captive-portal /var/log/captive-portal
+
+
+sudo systemctl status pod-server.service
+sudo journalctl -u pod-server.service -f   # follow logs
+sudo journalctl -u pod-server.service --since "10 minutes ago"
+
+
+/etc/systemd/system
+
+sudo systemctl edit --full accounting-updates.service
+
+sudo systemctl daemon-reload
+sudo systemctl enable accounting-updates.service   # start at boot
+sudo systemctl start accounting-updates.service
+
+
+sudo journalctl -u accounting-updates.service --since "10 minutes ago"
+
+sudo chown captive-portal:captive-portal /var/log/captive-portal/accounting_updates.log
+
+sudo -u captive-portal /usr/bin/python3 /opt/captive-portal/accounting_updates_main.py 

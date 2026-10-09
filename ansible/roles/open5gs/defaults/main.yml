@@ -1,0 +1,7 @@
+---
+# Open5GS-NAS defaults
+open5gs_nas_user: captive-portal
+open5gs_nas_install_root: /opt/captive-portal
+open5gs_nas_config_root: /etc/captive-portal
+open5gs_nas_state_root: /var/lib/captive-portal
+open5gs_nas_log_root: /var/log/captive-portal

@@ -12,6 +12,7 @@
       - "{{ DATA_MOUNT }}/traefik/letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "{{ DATA_MOUNT }}/traefik/traefik.toml:/etc/traefik/traefik.toml"
+      - "{{ DATA_MOUNT }}/traefik/dynamic:/etc/traefik/dynamic:ro"
     labels:
       traefik.enable: "true"
       traefik.http.routers.traefik.rule: "Host(`{{ HOST_NAME }}.{{ INETHI_LOCAL_DOMAIN }}`)"

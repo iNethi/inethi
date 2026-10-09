@@ -1,0 +1,128 @@
+---
+# Open5GS-NAS installation tasks
+# Files are sourced from roles/open5gs/files/captive-portal/
+
+- name: Open5GS-NAS | Update apt cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Open5GS-NAS | Install required packages
+  ansible.builtin.apt:
+    name:
+      - conntrack
+      - python3-pyrad
+      - python3-flask
+      - nfacct
+      - ipset
+      - git
+    state: present
+
+# ---------------------------------------------------------------
+# Dedicated user
+# ---------------------------------------------------------------
+- name: Open5GS-NAS | Create captive-portal system user
+  ansible.builtin.user:
+    name: "{{ open5gs_nas_user }}"
+    system: true
+    shell: /usr/sbin/nologin
+    create_home: false
+    state: present
+
+# ---------------------------------------------------------------
+# Deploy app files to /opt/captive-portal
+# ---------------------------------------------------------------
+- name: Open5GS-NAS | Ensure /opt/captive-portal exists
+  ansible.builtin.file:
+    path: "{{ open5gs_nas_install_root }}"
+    state: directory
+    owner: "{{ open5gs_nas_user }}"
+    group: "{{ open5gs_nas_user }}"
+    mode: "0755"
+
+- name: Open5GS-NAS | Deploy captive-portal application files to /opt
+  ansible.builtin.copy:
+    src: captive-portal/
+    dest: "{{ open5gs_nas_install_root }}/"
+    owner: "{{ open5gs_nas_user }}"
+    group: "{{ open5gs_nas_user }}"
+    mode: preserve
+  notify: Reload systemd
+
+- name: Open5GS-NAS | Ensure ownership of /opt/captive-portal
+  ansible.builtin.file:
+    path: "{{ open5gs_nas_install_root }}"
+    state: directory
+    owner: "{{ open5gs_nas_user }}"
+    group: "{{ open5gs_nas_user }}"
+    recurse: true
+
+# ---------------------------------------------------------------
+# Config files to /etc/captive-portal
+# ---------------------------------------------------------------
+- name: Open5GS-NAS | Ensure /etc/captive-portal exists
+  ansible.builtin.file:
+    path: "{{ open5gs_nas_config_root }}"
+    state: directory
+    owner: root
+    group: "{{ open5gs_nas_user }}"
+    mode: "0750"
+
+- name: Open5GS-NAS | Copy config files to /etc/captive-portal
+  ansible.builtin.copy:
+    src: "{{ open5gs_nas_install_root }}/setup/etc/captive-portal/"
+    dest: "{{ open5gs_nas_config_root }}/"
+    owner: root
+    group: "{{ open5gs_nas_user }}"
+    mode: preserve
+    remote_src: true
+
+# ---------------------------------------------------------------
+# systemd unit files
+# ---------------------------------------------------------------
+- name: Open5GS-NAS | Copy systemd unit files
+  ansible.builtin.copy:
+    src: "{{ open5gs_nas_install_root }}/setup/etc/systemd/system/"
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+    mode: "0644"
+    remote_src: true
+  notify: Reload systemd
+
+# ---------------------------------------------------------------
+# Persistent directories
+# ---------------------------------------------------------------
+- name: Open5GS-NAS | Create persistent state directory
+  ansible.builtin.file:
+    path: "{{ open5gs_nas_state_root }}/re-auth"
+    state: directory
+    owner: "{{ open5gs_nas_user }}"
+    group: "{{ open5gs_nas_user }}"
+    mode: "0755"
+
+- name: Open5GS-NAS | Create log directory
+  ansible.builtin.file:
+    path: "{{ open5gs_nas_log_root }}"
+    state: directory
+    owner: "{{ open5gs_nas_user }}"
+    group: "{{ open5gs_nas_user }}"
+    mode: "0755"
+    
+# ---------------------------------------------------------------
+# Enable services
+# ---------------------------------------------------------------
+- name: Open5GS-NAS | Flush handlers so daemon-reload runs first
+  ansible.builtin.meta: flush_handlers
+
+- name: Open5GS-NAS | Enable captive-portal services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+    daemon_reload: true
+  loop:
+    - accounting-updates.service
+    - captive-portal.service
+    - pod-server.service
+    - uam-server.service

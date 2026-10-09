@@ -1,0 +1,13 @@
+---
+- name: Get Traefik Docker network information
+  community.docker.docker_network_info:
+    name: "{{ BRIDGE }}"
+  register: traefik_network
+
+- name: Set Docker gateway
+  ansible.builtin.set_fact:
+    traefik_gateway: >-
+      {{ traefik_network.network.IPAM.Config
+         | selectattr('Gateway', 'defined')
+         | map(attribute='Gateway')
+         | first }}

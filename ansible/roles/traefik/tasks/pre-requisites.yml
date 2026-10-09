@@ -1,4 +1,9 @@
 ---
+- name: Create Traefik dynamic configuration directory
+  ansible.builtin.file:
+    path: "{{ DATA_MOUNT }}/traefik/dynamic"
+    state: directory
+    mode: '0755'
 - name: Create directory for treafik volume
   file:
     path: "{{ DATA_MOUNT }}/traefik/letsencrypt"

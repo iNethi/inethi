@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px; /* prevents edge clipping on small screens */
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 85%;
+}
+
+.container {
+    text-align: center;
+}
+
+
+h1 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 0.95rem;
+}
+
+.small {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #888;
+}
+
+.logo {
+    width: 100px;
+    max-width: 40%;
+    height: auto;
+    margin-bottom: 15px;
+}
+

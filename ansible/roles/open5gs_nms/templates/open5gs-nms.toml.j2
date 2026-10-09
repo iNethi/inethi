@@ -1,0 +1,11 @@
+[http.routers.open5gs-nms]
+  rule = "Host(`nms.{{ INETHI_LOCAL_DOMAIN }}`)"
+  entryPoints = ["websecure"]
+  service = "open5gs-nms"
+
+  [http.routers.open5gs-nms.tls]
+    certResolver = "letsencrypt"
+
+[http.services.open5gs-nms.loadBalancer]
+  [[http.services.open5gs-nms.loadBalancer.servers]]
+    url = "http://{{ traefik_gateway }}:8888"

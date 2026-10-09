@@ -1,0 +1,31 @@
+[Unit]
+Description=Accounting Updates For Python based captive portal
+After=network.target
+Wants=network.target
+Documentation=https://github.com/your-project/pod-server
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/captive-portal
+ExecStart=/usr/bin/python3 /opt/captive-portal/accounting_updates_main.py
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=accounting-updates
+
+
+# Security hardening
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/var/log/captive-portal
+ReadOnlyPaths=/etc/captive-portal
+
+# Resource limits
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

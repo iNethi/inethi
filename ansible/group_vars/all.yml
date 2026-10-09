@@ -111,6 +111,15 @@ GRAFANA_PATH: "/mnt/data/grafana"
 INFLUXDB_PATH: "/mnt/data/influxdb"
 TRAEFIK_PATH: "/mnt/data/traefik"
 
+# Open5GS (NAS)
+nas_captive_portal_user: captive-portal
+nas_install_root: /opt/captive-portal
+nas_config_root: /etc/captive-portal
+nas_state_root: /var/lib/captive-portal
+nas_log_root: /var/log/captive-portal
+nas_local_files_root: "{{ playbook_dir }}/files/captive-portal"
+
+
 # Open5GS-NMS
 nms_repo: "https://github.com/paulmataruso/open5gs-nms"
 nms_dir: /opt/open5gs-nms

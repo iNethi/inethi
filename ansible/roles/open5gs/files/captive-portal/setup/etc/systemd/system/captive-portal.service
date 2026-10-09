@@ -1,0 +1,31 @@
+[Unit]
+Description=Python Based Captive Portal with RADIUS Support
+After=network.target
+Wants=network.target
+Documentation=https://github.com/your-project/pod-server
+
+[Service]
+Type=simple
+User=root
+Group=root
+WorkingDirectory=/opt/captive-portal
+ExecStart=/usr/bin/python3 /opt/captive-portal/captive_portal_controller.py
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=captive-portal
+
+
+# Security hardening
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/var/log/captive-portal /var/lib/captive-portal/re-auth /var/lib/captive-portal
+ReadOnlyPaths=/etc/captive-portal
+
+# Resource limits
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target

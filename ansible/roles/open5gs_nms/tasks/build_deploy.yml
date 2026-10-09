@@ -1,4 +1,13 @@
 ---
+- name: Install NMS nginx configuration
+  ansible.builtin.copy:
+    src: nginx.conf
+    dest: "{{ nms_dir }}/nginx/nginx.conf"
+    owner: "{{ nms_user }}"
+    group: "{{ nms_user }}"
+    mode: "0644"
+  become: true
+
 - name: Build Docker images
   community.docker.docker_compose_v2:
     project_src: "{{ nms_dir }}"
@@ -14,3 +23,4 @@
     pull: missing
   become_user: "{{ nms_user }}"
   register: nms_up
+

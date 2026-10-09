@@ -1,0 +1,58 @@
+sudo apt update
+sudo apt-get install conntrack
+sudo apt install python3-pyrad
+sudo apt install python3-flask
+sudo apt install nfacct
+
+sudo useradd -r -s /usr/sbin/nologin captive-portal
+
+#Startup scripts
+sudo cp /opt/captive-portal/setup/etc/systemd/system/* /etc/systemd/system
+sudo systemctl daemon-reload
+
+#Captive Portal
+sudo systemctl enable captive-portal
+sudo systemctl start captive-portal
+sudo systemctl status captive-portal
+
+#Accounting Updates
+sudo systemctl enable accounting-updates
+sudo systemctl start accounting-updates
+sudo systemctl status accounting-updates
+
+#POD Server
+sudo systemctl enable pod-server
+sudo systemctl start pod-server
+sudo systemctl status pod-server
+
+#UAM Server
+sudo systemctl enable uam-server
+sudo systemctl start uam-server
+sudo systemctl status uam-server
+
+
+cd /opt/captive-portal/setup/etc/
+cp -r captive-portal /etc
+
+sudo chown root:captive-portal /etc/captive-portal/pod_server.conf
+
+cp /opt/captive-portal/setup/etc/systemd/system/* /etc/systemd/system/
+
+sudo mkdir -p /var/lib/captive-portal/re-auth
+sudo chown -R captive-portal:captive-portal /var/lib/captive-portal
+
+sudo chown captive-portal:captive-portal /var/log/captive-portal/pod_server.log
+
+sudo systemctl daemon-reload
+
+sudo systemctl enable pod-server.service   # start at boot
+sudo systemctl start pod-server.service
+
+
+sudo systemctl status pod-server.service
+sudo journalctl -u pod-server.service -f   # follow logs
+sudo journalctl -u pod-server.service --since "10 minutes ago"
+
+
+
+mkdir /var/log/captive-portal

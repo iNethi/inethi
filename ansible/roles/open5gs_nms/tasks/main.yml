@@ -1,6 +1,10 @@
 ---
 - name: Prerequisites of Open5GS-NMS
   import_tasks: prerequisites.yml
+- name: Get Docker gateway for Traefik
+  import_tasks: get_gateway.yml
+- name: Set Traefik rules
+  import_tasks: set_traefik_rules.yml
 - name: Checkout the Open5GS Repo
   import_tasks: repo_checkout.yml
 - name: Build & Deploy Docker Images

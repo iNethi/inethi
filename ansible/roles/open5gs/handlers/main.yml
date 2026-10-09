@@ -3,3 +3,7 @@
     name: mongod
     state: restarted
     daemon_reload: yes
+    
+- name: Reload systemd
+  ansible.builtin.systemd:
+    daemon_reload: true

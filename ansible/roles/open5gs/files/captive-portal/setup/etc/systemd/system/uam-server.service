@@ -1,0 +1,18 @@
+[Unit]
+Description=Captive Portal UAM Server
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/captive-portal
+ExecStart=/usr/bin/python3 /opt/captive-portal/uam_server.py
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=5
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=uam-server
+
+[Install]
+WantedBy=multi-user.target
