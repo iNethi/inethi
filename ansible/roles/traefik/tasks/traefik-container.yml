@@ -19,7 +19,7 @@
       traefik.http.routers.traefik.service: "api@internal"
       traefik.http.routers.traefik.entrypoints: "websecure"
       traefik.http.routers.traefik.tls.certresolver: "letsencrypt"
-      traefik.http.routers.traefik.middlewares: "myauth"
-      traefik.http.middlewares.myauth.basicauth.users: "{{ AUTH_COMBINATION }}"
+      #traefik.http.routers.traefik.middlewares: "myauth"
+      #traefik.http.middlewares.myauth.basicauth.users: "{{ AUTH_COMBINATION }}"
     networks:
       - name: "{{ BRIDGE }}"

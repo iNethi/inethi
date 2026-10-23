@@ -30,9 +30,6 @@
     env:
       KEYCLOAK_ADMIN: "{{ KEYCLOAK_ADMIN_USER }}"
       KEYCLOAK_ADMIN_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
-      KEYCLOAK_USER: "{{ KEYCLOAK_USER }}"
-
-      KEYCLOAK_PASSWORD: "{{ CONF_MASTER_PASSWORD }}"
       KEYCLOAK_DATABASE_VENDOR: "postgresql"
       KC_DB_URL: "jdbc:postgresql://inethi-keycloak-postgres/keycloak"
       KEYCLOAK_DATABASE_NAME: "keycloak"

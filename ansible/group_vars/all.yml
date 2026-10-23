@@ -54,7 +54,8 @@ MYSQL_PASS: "{{ vault_mysql_password }}"
 KEYSTORE_PASS: "{{ vault_keystore_password }}"
 KEYCLOAK_ADMIN_USER: "admin"
 CONF_MASTER_PASSWORD: "{{ vault_conf_master_password }}"
-KEYCLOAK_USER: "inethi"
+# Dirk 2026 - Not needed with the latest Keycloaks
+#KEYCLOAK_USER: "inethi"
 
 # Moodle Configuration
 MOODLE_USERNAME: "inethi"

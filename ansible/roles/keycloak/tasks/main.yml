@@ -7,3 +7,5 @@
   import_tasks: generate-keystore.yml
 - name: Start Keycloak Docker stack
   import_tasks: docker.yml
+- name: Pre-Populate Keycloak server
+  import_tasks: create-items.yml

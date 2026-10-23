@@ -1,0 +1,115 @@
+- name: Get Keycloak Admin Token
+  ansible.builtin.uri:
+    url: "https://keycloak.{{ INETHI_LOCAL_DOMAIN }}/realms/master/protocol/openid-connect/token"
+    method: POST
+    body_format: form-urlencoded
+    body:
+      client_id: admin-cli
+      username: "{{ KEYCLOAK_ADMIN_USER }}"
+      password: "{{ CONF_MASTER_PASSWORD }}"
+      grant_type: password
+    validate_certs: no # Only if using a self-signed cert
+  register: keycloak_token
+  no_log: true # Prevents the token from being printed in logs
+   
+# ---------- 1. Create Realm ----------
+- name: Create inethi-services realm
+  ansible.builtin.uri:
+    url: "https://keycloak.{{ INETHI_LOCAL_DOMAIN }}/admin/realms"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+    body_format: json
+    body:
+      realm: "inethi-services"
+      enabled: true
+    status_code: [201, 409]
+    validate_certs: no
+
+
+# ---------- 2. Create User (Email Verification Enabled) ----------
+- name: Create user inethi in inethi-services realm
+  ansible.builtin.uri:
+    url: "https://keycloak.{{ INETHI_LOCAL_DOMAIN }}/admin/realms/inethi-services/users"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+    body_format: json
+    body:
+      username: "inethi"
+      enabled: true
+      email: "inethi@inethi.com"
+      firstName: "iNethi"
+      lastName: "Official"
+      emailVerified: false
+      credentials:
+        - type: "password"
+          value: "iNethi2023#"
+          temporary: false
+    status_code: [201, 409]
+    validate_certs: no
+
+# ---------- 3. Get User ID (for subsequent role assignment) ----------
+- name: Get inethi user ID
+  ansible.builtin.uri:
+    url: "https://keycloak.{{ INETHI_LOCAL_DOMAIN }}/admin/realms/inethi-services/users?username=inethi&exact=true"
+    method: GET
+    headers:
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+    validate_certs: no
+  register: inethi_user
+
+# ---------- 4. Get realm-management Client ID ----------
+- name: Get realm-management client ID
+  ansible.builtin.uri:
+    url: "https://keycloak.{{ INETHI_LOCAL_DOMAIN }}/admin/realms/inethi-services/clients?clientId=realm-management"
+    method: GET
+    headers:
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+    validate_certs: no
+  register: realm_mgmt_client
+
+# ---------- 5. Get Role IDs for the Four Target Roles ----------
+- name: Get realm-management roles (create-client, manage-clients, view-clients, manage-users)
+  ansible.builtin.uri:
+    url: "https://keycloak.{{ INETHI_LOCAL_DOMAIN }}/admin/realms/inethi-services/clients/{{ realm_mgmt_client.json[0].id }}/roles"
+    method: GET
+    headers:
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+    validate_certs: no
+  register: realm_mgmt_roles
+
+# ---------- 6. Assign Roles to User ----------
+- name: Assign realm-management roles to inethi user
+  ansible.builtin.uri:
+    url: "https://keycloak.{{ INETHI_LOCAL_DOMAIN }}/admin/realms/inethi-services/users/{{ inethi_user.json[0].id }}/role-mappings/clients/{{ realm_mgmt_client.json[0].id }}"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+    body_format: json
+    body: "{{ realm_mgmt_roles.json | selectattr('name', 'in', ['create-client', 'manage-clients', 'view-clients', 'manage-users']) | list }}"
+    status_code: [204, 409]
+    validate_certs: no
+
+# ---------- 7. Create inethi-backend-client ----------
+- name: Create inethi-backend-client OIDC client
+  ansible.builtin.uri:
+    url: "https://keycloak.{{ INETHI_LOCAL_DOMAIN }}/admin/realms/inethi-services/clients"
+    method: POST
+    headers:
+      Authorization: "Bearer {{ keycloak_token.json.access_token }}"
+    body_format: json
+    body:
+      clientId: "inethi-backend-client"
+      name: "inethi-backend-client"
+      protocol: "openid-connect"
+      publicClient: false
+      authorizationServicesEnabled: true
+      standardFlowEnabled: true
+      directAccessGrantsEnabled: true
+      serviceAccountsEnabled: true
+      rootUrl: "http://localhost:8000"
+      redirectUris:
+        - "http://localhost:8000/*"
+    status_code: [201, 409]
+    validate_certs: no
