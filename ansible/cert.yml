@@ -4,5 +4,8 @@
   become: true
   vars_files:
     - vault/production.yml
-  roles:
-    - cert
+  tasks:
+    - name: Install cert role (local servers only)
+      include_role:
+        name: cert
+      when: not (INETHI_ONLINE | bool)

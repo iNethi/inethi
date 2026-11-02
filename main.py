@@ -365,11 +365,14 @@ class INethiBuilder:
             self.log.log("❌ Traefik setup failed", 'ERROR')
             return False
 
+        # Read domain AFTER config setup so an auto-created .env is picked up
+        domain = config.get_environment_config().domain
+
         self.log.log("✅ System setup completed successfully", 'SUCCESS')
         self.log.log("🌐 Access points:", 'INFO')
-        self.log.log("   • Grafana: grafana.inethilocal.net", 'INFO')
-        self.log.log("   • Prometheus: prometheus.inethilocal.net", 'INFO')
-        self.log.log("   • Traefik: traefik.inethilocal.net", 'INFO')
+        self.log.log(f"   • Grafana: grafana.{domain}", 'INFO')
+        self.log.log(f"   • Prometheus: prometheus.{domain}", 'INFO')
+        self.log.log(f"   • Traefik: traefik.{domain}", 'INFO')
 
         return True
 

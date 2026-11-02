@@ -1,11 +1,24 @@
 ---
-- name: Create folders and download ACME
-  import_tasks: pre-requisites.yml
-- name: Create Traefik Docker container
-  import_tasks: traefik-container.yml
-- name: Create Grafana Docker container
-  import_tasks: grafana.yml
-- name: Create Prometheus Docker container
-  import_tasks: prometheus.yml
-- name: Create InfluxDB container
-  import_tasks: influxdb.yml
+# ---- ONLINE-only tasks ----
+- name: Online-server setup
+  when: INETHI_ONLINE | bool
+  block:
+    - import_tasks: pre-requisites-online.yml
+    - import_tasks: traefik-container-online.yml
+
+# ---- LOCAL-only tasks ----
+- name: Local-server setup
+  when: not (INETHI_ONLINE | bool)
+  block:
+    - import_tasks: pre-requisites.yml
+    - import_tasks: traefik-container.yml
+
+# ---- COMMON tasks ----
+- name: Common services
+  block:
+    - import_tasks: grafana.yml
+    - import_tasks: prometheus.yml
+    - import_tasks: influxdb.yml
+    
+     
+

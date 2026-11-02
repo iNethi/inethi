@@ -6,7 +6,7 @@ ENVIRONMENT: "production"
 
 # Network Configuration
 BRIDGE: "inethi-bridge-traefik"
-INETHI_LOCAL_DOMAIN: "inethilocal.net"
+INETHI_LOCAL_DOMAIN: "inethi-test.online"
 
 # Data Storage Configuration
 DATA_MOUNT: "/mnt/data"
@@ -127,4 +127,13 @@ nms_dir: /opt/open5gs-nms
 nms_user: "{{ ansible_user }}"
 nms_cookie_secure: "false"
 nms_first_run_password: "testing123"
+
+# Set this to true when it is an online server (instead of local)
+# Set this to false when it is a local server
+INETHI_ONLINE: true
+
+# HETZNER_API_TOKEN
+LETSENCRYPT_DNS_01_PROVIDER : "hetzner"
+LETSENCRYPT_DNS_01_EMAIL    : "dirkvanderwalt@gmail.com"
+LETSENCRYPT_DNS_01_API_TOKEN: "YBJQejIUPOGivLQYQ6zvSZ96OSnUHWG1PxOzUhwDTl9Ws7pJxfAsmNULIkrzkFmC"
 
