@@ -6,7 +6,7 @@
 - name: Start Radiusdesk database Docker Container
   docker_container:
     name: rdmariadb
-    #We had to pin to thie version since newer versions has 'to_date' as a reserved word :-(
+    #We had to pin to the version since newer versions has 'to_date' as a reserved word :-(
     image: docker.io/bitnamilegacy/mariadb:11.8.3
     restart_policy: unless-stopped
     state: started
