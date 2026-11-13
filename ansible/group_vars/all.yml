@@ -6,7 +6,9 @@ ENVIRONMENT: "production"
 
 # Network Configuration
 BRIDGE: "inethi-bridge-traefik"
-INETHI_LOCAL_DOMAIN: "inethi-test.online"
+# Change this to a valid domain if the iNethi platform is on a public server
+#INETHI_LOCAL_DOMAIN: "inethi-test.online"
+INETHI_LOCAL_DOMAIN: "inethilocal.net"
 
 # Data Storage Configuration
 DATA_MOUNT: "/mnt/data"
@@ -130,7 +132,7 @@ nms_first_run_password: "testing123"
 
 # Set this to true when it is an online server (instead of local)
 # Set this to false when it is a local server
-INETHI_ONLINE: true
+INETHI_ONLINE: false
 
 # HETZNER_API_TOKEN
 LETSENCRYPT_DNS_01_PROVIDER : "hetzner"

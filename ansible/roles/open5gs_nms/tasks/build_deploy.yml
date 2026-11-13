@@ -1,8 +1,8 @@
 ---
 - name: Install NMS nginx configuration
   ansible.builtin.copy:
-    src: nginx.conf
-    dest: "{{ nms_dir }}/nginx/nginx.conf"
+    src: nms.conf
+    dest: "{{ nms_dir }}/nginx/conf.d/nms.conf"
     owner: "{{ nms_user }}"
     group: "{{ nms_user }}"
     mode: "0644"
