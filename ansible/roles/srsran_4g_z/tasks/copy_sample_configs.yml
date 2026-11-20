@@ -1,0 +1,11 @@
+---
+- name: Create srsRAN iNethi sample directory
+  ansible.builtin.file:
+    path: "/opt/srsran_4g/samples/"
+    state: directory
+    mode: '0755'
+
+- name: Copy files to Server
+  copy:
+    src: files/
+    dest: "/opt/srsran_4g/samples/"

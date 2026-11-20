@@ -1,0 +1,8 @@
+---
+- name: Install srsRAN 4G with ZMQ Virtual Radios
+  hosts: localserver
+  become: true
+  vars_files:
+    - vault/production.yml
+  roles:
+    - srsran_4g_z

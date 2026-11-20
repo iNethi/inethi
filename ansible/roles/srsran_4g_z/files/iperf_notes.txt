@@ -1,0 +1,10 @@
+# 3. Test external IP reachability & iperf3
+sudo ip netns exec ue1 ping -c 4 -I tun_srsue 8.8.8.8
+sudo ip netns exec ue1 iperf3 -c <EXTERNAL_IPERF_SERVER_IP> -B 10.45.0.2
+
+
+# Uplink throughput (UE -> External Server)
+sudo ip netns exec ue1 iperf3 -c 164.160.89.129 -B 10.45.0.2
+
+# Downlink throughput (External Server -> UE)
+sudo ip netns exec ue1 iperf3 -c 164.160.89.129 -B 10.45.0.2 -R

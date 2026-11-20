@@ -1,0 +1,5 @@
+---
+- name: Compile and Install
+  import_tasks: compile_install.yml
+- name: Copy sample configs
+  import_tasks: copy_sample_configs.yml 

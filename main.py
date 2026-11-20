@@ -52,6 +52,7 @@ SERVICES = {
     'wordpress': 'WordPress - build your own website',
     'open5gs': 'Open5GS - building and managing your own NR/LTE mobile network',
     'open5gs_nms': 'NMS for Open5GS',
+    'srsran_4g_z' : 'srsRAN 4G with ZMQ Virtual Radios',
     'hello_inethi': 'Hello iNethi sample app'  # Add our sample app
 }
 

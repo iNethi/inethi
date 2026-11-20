@@ -1,0 +1,77 @@
+- name: Install build dependencies
+  ansible.builtin.apt:
+    name:
+      - libzmq3-dev
+      - cmake
+      - make
+      - g++
+      - git
+      - build-essential
+      - libfftw3-dev
+      - libmbedtls-dev
+      - libboost-program-options-dev
+      - libconfig++-dev
+      - libsctp-dev
+    state: present
+    update_cache: yes
+
+- name: Check if srsRAN binaries are already installed
+  ansible.builtin.stat:
+    path: "{{ item }}"
+  loop: "{{ srsran_binaries }}"
+  register: srsran_bin_stats
+
+- name: Determine whether a rebuild is needed
+  ansible.builtin.set_fact:
+    srsran_needs_build: "{{ srsran_bin_stats.results | selectattr('stat.exists', 'equalto', false) | list | length > 0 }}"
+ 
+- name: Create temporary build directory
+  ansible.builtin.tempfile:
+    state: directory
+    prefix: srsran_build_
+  register: srsran_build_dir
+  when: srsran_needs_build        
+  
+- name: Build and install srsRAN 4G
+  when: srsran_needs_build
+  block:
+    - name: Clone srsRAN_4G at release 23_11
+      ansible.builtin.git:
+        repo: "{{ srsran_repo }}"
+        dest: "{{ srsran_build_dir.path }}/srsRAN_4G"
+        version: "{{ srsran_version }}"
+        force: true
+
+    - name: Create build directory
+      ansible.builtin.file:
+        path: "{{ srsran_build_dir.path }}/srsRAN_4G/build"
+        state: directory
+        mode: "0755"
+
+    - name: Run cmake
+      ansible.builtin.command:
+        cmd: cmake -DENABLE_TESTING=False -DENABLE_WERROR=False ../
+        chdir: "{{ srsran_build_dir.path }}/srsRAN_4G/build"
+
+    - name: Compile srsRAN
+      ansible.builtin.shell:
+        cmd: make -j"$(nproc)"
+        chdir: "{{ srsran_build_dir.path }}/srsRAN_4G/build"
+      args:
+        executable: /bin/bash
+
+    - name: Install srsRAN
+      community.general.make:
+        chdir: "{{ srsran_build_dir.path }}/srsRAN_4G/build"
+        target: install
+
+    - name: Refresh linker cache
+      ansible.builtin.command: ldconfig
+      changed_when: false
+
+  always:
+    - name: Remove temporary build directory
+      ansible.builtin.file:
+        path: "{{ srsran_build_dir.path }}"
+        state: absent
+      when: srsran_build_dir.path is defined

@@ -136,6 +136,14 @@ INETHI_ONLINE: false
 
 # HETZNER_API_TOKEN
 LETSENCRYPT_DNS_01_PROVIDER : "hetzner"
-LETSENCRYPT_DNS_01_EMAIL    : "dirkvanderwalt@gmail.com"
-LETSENCRYPT_DNS_01_API_TOKEN: "YBJQejIUPOGivLQYQ6zvSZ96OSnUHWG1PxOzUhwDTl9Ws7pJxfAsmNULIkrzkFmC"
+LETSENCRYPT_DNS_01_EMAIL    : "your_email_here@email.com"
+LETSENCRYPT_DNS_01_API_TOKEN: "YOUR_HETZNER_TOKEN_HERE"
+
+# srsRAN veriables
+srsran_repo: https://github.com/srsRAN/srsRAN_4G.git
+srsran_version: release_23_11
+srsran_binaries:
+    - /usr/local/bin/srsue
+    - /usr/local/bin/srsenb
+    - /usr/local/bin/srsepc
 
